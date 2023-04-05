@@ -10,7 +10,6 @@
 		FA5AA99029DC91E70092143B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA98F29DC91E70092143B /* AppDelegate.swift */; };
 		FA5AA99229DC91E70092143B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA99129DC91E70092143B /* SceneDelegate.swift */; };
 		FA5AA99429DC91E70092143B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA99329DC91E70092143B /* ViewController.swift */; };
-		FA5AA99729DC91E70092143B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA5AA99529DC91E70092143B /* Main.storyboard */; };
 		FA5AA99929DC91EA0092143B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA5AA99829DC91EA0092143B /* Assets.xcassets */; };
 		FA5AA99C29DC91EA0092143B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA5AA99A29DC91EA0092143B /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -20,7 +19,6 @@
 		FA5AA98F29DC91E70092143B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA5AA99129DC91E70092143B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		FA5AA99329DC91E70092143B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		FA5AA99629DC91E70092143B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FA5AA99829DC91EA0092143B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FA5AA99B29DC91EA0092143B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FA5AA99D29DC91EA0092143B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -56,15 +54,30 @@
 		FA5AA98E29DC91E70092143B /* LetMeCode_test */ = {
 			isa = PBXGroup;
 			children = (
+				FA5AA9A629DDCBFE0092143B /* Application */,
+				FA5AA99329DC91E70092143B /* ViewController.swift */,
+				FA5AA9A829DDCC240092143B /* SupportingFiles */,
+			);
+			path = LetMeCode_test;
+			sourceTree = "<group>";
+		};
+		FA5AA9A629DDCBFE0092143B /* Application */ = {
+			isa = PBXGroup;
+			children = (
 				FA5AA98F29DC91E70092143B /* AppDelegate.swift */,
 				FA5AA99129DC91E70092143B /* SceneDelegate.swift */,
-				FA5AA99329DC91E70092143B /* ViewController.swift */,
-				FA5AA99529DC91E70092143B /* Main.storyboard */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		FA5AA9A829DDCC240092143B /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
 				FA5AA99829DC91EA0092143B /* Assets.xcassets */,
 				FA5AA99A29DC91EA0092143B /* LaunchScreen.storyboard */,
 				FA5AA99D29DC91EA0092143B /* Info.plist */,
 			);
-			path = LetMeCode_test;
+			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -126,7 +139,6 @@
 			files = (
 				FA5AA99C29DC91EA0092143B /* LaunchScreen.storyboard in Resources */,
 				FA5AA99929DC91EA0092143B /* Assets.xcassets in Resources */,
-				FA5AA99729DC91E70092143B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,14 +158,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		FA5AA99529DC91E70092143B /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FA5AA99629DC91E70092143B /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		FA5AA99A29DC91EA0092143B /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -288,7 +292,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6K8TWM2B86;
-				INFOPLIST_FILE = LetMeCode_test/Info.plist;
+				INFOPLIST_FILE = LetMeCode_test/SupportingFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -296,7 +300,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "chaykin.LetMeCode-test";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -307,7 +311,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6K8TWM2B86;
-				INFOPLIST_FILE = LetMeCode_test/Info.plist;
+				INFOPLIST_FILE = LetMeCode_test/SupportingFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -315,7 +319,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "chaykin.LetMeCode-test";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
