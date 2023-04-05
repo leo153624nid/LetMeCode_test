@@ -9,17 +9,17 @@ import Foundation
 
 final class UrlInfo: UrlInfoProtocol {
     var currentURL: URL?
-    var pageSize = 6
+    var pageSize = 10
     var page = 1
     var apiKey: String
     
     init(apiKey: String) {
-        self.currentURL = URL(string: "https://newsapi.org/v2/everything?q=Apple&pageSize=\(pageSize)&page=\(page)&apiKey=\(apiKey)")
+        self.currentURL = URL(string: "https://api.nytimes.com/svc/movies/v2/reviews/search.json?query=godfather&api-key=\(apiKey)")
         self.apiKey = apiKey
     }
     
     func getNextPageURL() -> URL? {
-        guard let url = URL(string: "https://newsapi.org/v2/everything?q=Apple&pageSize=\(pageSize)&page=\(page)&apiKey=\(apiKey)") else { return nil }
+        guard let url = URL(string: /* TODO */ "https://newsapi.org/v2/everything?q=Apple&pageSize=\(pageSize)&page=\(page)&apiKey=\(apiKey)") else { return nil }
         self.currentURL = url
         self.page += 1
         return self.currentURL
@@ -28,7 +28,7 @@ final class UrlInfo: UrlInfoProtocol {
 
 final class APICaller: APICallerProtocol {
     static let shared: APICallerProtocol = APICaller()
-    let urlInfo: UrlInfoProtocol = UrlInfo(apiKey: "b505953bf7614254a430c1a8bdea8e6a")
+    let urlInfo: UrlInfoProtocol = UrlInfo(apiKey: "2hdD7Tro9byozENHGHJ8YukOw7W5lZCt")
     var isPaginating = false
     
     private init() {}
