@@ -21,6 +21,6 @@ class CriticsModuleBuilder {
 //        router.viewController = viewController
         
 //        return viewController
-        return UIViewController()
+        return UIViewController() // to delete
     }
 }
