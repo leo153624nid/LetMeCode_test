@@ -29,7 +29,7 @@ extension ReviewesPresenter: ReviewesPresenterProtocol {
         interactor.loadReviewes()
     }
     
-    func didLoad(reviewes: String?) {
-        
+    func didLoad(reviewes: String?) { // todo
+        view?.showReviewes(reviewes: reviewes ?? "no data")
     }
 }

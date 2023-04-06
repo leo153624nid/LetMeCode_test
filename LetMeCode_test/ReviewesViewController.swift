@@ -8,7 +8,7 @@
 import UIKit
 
 protocol ReviewesViewProtocol: AnyObject {
-    
+    func showReviewes(reviewes: String) // todo
 }
 
 class ReviewesViewController: UIViewController {
@@ -19,13 +19,16 @@ class ReviewesViewController: UIViewController {
         title = "ok"
         presenter?.viewDidLoaded()
    
-    }
-    
-
-    
+    } 
 
 }
 
 extension ReviewesViewController: ReviewesViewProtocol {
+    func showReviewes(reviewes: String) {
+        DispatchQueue.main.async {
+            // show data
+        }
+    }
+    
     
 }
