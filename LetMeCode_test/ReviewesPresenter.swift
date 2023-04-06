@@ -10,6 +10,7 @@ import Foundation
 protocol ReviewesPresenterProtocol: AnyObject {
     func viewDidLoaded()
     func didLoad(reviewes: String?) // todo
+    func criticsButtonTapped()
 }
 
 class ReviewesPresenter {
@@ -31,5 +32,9 @@ extension ReviewesPresenter: ReviewesPresenterProtocol {
     
     func didLoad(reviewes: String?) { // todo
         view?.showReviewes(reviewes: reviewes ?? "no data")
+    }
+    
+    func criticsButtonTapped() {
+        router.openCritics()
     }
 }
