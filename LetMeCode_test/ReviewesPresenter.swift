@@ -9,6 +9,7 @@ import Foundation
 
 protocol ReviewesPresenterProtocol: AnyObject {
     func viewDidLoaded()
+    func didLoad(reviewes: String?) // todo
 }
 
 class ReviewesPresenter {
@@ -28,5 +29,7 @@ extension ReviewesPresenter: ReviewesPresenterProtocol {
         interactor.loadReviewes()
     }
     
-    
+    func didLoad(reviewes: String?) {
+        
+    }
 }
