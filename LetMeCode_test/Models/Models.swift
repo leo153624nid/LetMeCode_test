@@ -24,7 +24,7 @@ struct Source: Codable {
     let name: String
 }
 
-class NewsTableViewCellViewModel {
+class ReviewesTableViewCellViewModel {
     let title: String
     let subtitle: String?
     let imageURL: URL?

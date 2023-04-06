@@ -15,7 +15,7 @@ class ViewController: UIViewController {
         return table
     }()
     
-    private var viewModels = [NewsTableViewCellViewModel]()
+//    private var viewModels = [NewsTableViewCellViewModel]()
     private var articles = [Article]()
 
     override func viewDidLoad() {
@@ -27,7 +27,7 @@ class ViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        getAndSetNews()
+//        getAndSetNews()
     }
     
     init(with serviceManager: APICallerProtocol) {
@@ -45,25 +45,25 @@ class ViewController: UIViewController {
         tableView.frame = view.bounds
     }
     
-    private func getAndSetNews(pagination: Bool = false) {
-        apiCaller.getReviewes(pagination: pagination) { [weak self] result in
-            switch result {
-                case .success(let articles):
-                    self?.articles.append(contentsOf: articles)
-                    print("articles: \(String(describing: self?.articles.count))")
-                    self?.viewModels.append(contentsOf: articles.compactMap({
-                        NewsTableViewCellViewModel(title: $0.title,
-                                                   subtitle: $0.description ?? "-",
-                                                   imageURL: URL(string: $0.urlToImage ?? ""))
-                    }))
-                    
-                    DispatchQueue.main.async {
-                        self?.tableView.reloadData()
-                    }
-                case .failure(let error): print(error.localizedDescription)
-            }
-        }
-    }
+//    private func getAndSetNews(pagination: Bool = false) {
+//        apiCaller.getReviewes(pagination: pagination) { [weak self] result in
+//            switch result {
+//                case .success(let articles):
+//                    self?.articles.append(contentsOf: articles)
+//                    print("articles: \(String(describing: self?.articles.count))")
+//                    self?.viewModels.append(contentsOf: articles.compactMap({
+//                        NewsTableViewCellViewModel(title: $0.title,
+//                                                   subtitle: $0.description ?? "-",
+//                                                   imageURL: URL(string: $0.urlToImage ?? ""))
+//                    }))
+//
+//                    DispatchQueue.main.async {
+//                        self?.tableView.reloadData()
+//                    }
+//                case .failure(let error): print(error.localizedDescription)
+//            }
+//        }
+//    }
     
     private func createSpinnerFooter() -> UIView {
         let footerView = UIView(frame: CGRect(x: 0,
@@ -91,7 +91,7 @@ extension ViewController: UITableViewDelegate {
 
 extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModels.count
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -125,7 +125,7 @@ extension ViewController: UIScrollViewDelegate {
             print("fetch more")
             tableView.tableFooterView = createSpinnerFooter()
             DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-                self?.getAndSetNews(pagination: true)
+//                self?.getAndSetNews(pagination: true)
                 DispatchQueue.main.async {
                     self?.tableView.tableFooterView = nil
                 }
