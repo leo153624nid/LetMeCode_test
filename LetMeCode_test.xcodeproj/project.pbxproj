@@ -21,6 +21,10 @@
 		FA5AA9C529DF1F740092143B /* ReviewesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA9C429DF1F740092143B /* ReviewesInteractor.swift */; };
 		FA5AA9C829DF1FF40092143B /* ReviewesModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA9C729DF1FF40092143B /* ReviewesModuleBuilder.swift */; };
 		FA5AA9CC29DF304D0092143B /* CriticsModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA9CB29DF304D0092143B /* CriticsModuleBuilder.swift */; };
+		FA5AA9CF29DF36090092143B /* CriticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA9CE29DF36090092143B /* CriticsViewController.swift */; };
+		FA5AA9D229DF365A0092143B /* CriticsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA9D129DF365A0092143B /* CriticsPresenter.swift */; };
+		FA5AA9D529DF369F0092143B /* CriticsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA9D429DF369F0092143B /* CriticsRouter.swift */; };
+		FA5AA9D829DF36D20092143B /* CriticsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA9D729DF36D20092143B /* CriticsInteractor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +44,10 @@
 		FA5AA9C429DF1F740092143B /* ReviewesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewesInteractor.swift; sourceTree = "<group>"; };
 		FA5AA9C729DF1FF40092143B /* ReviewesModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewesModuleBuilder.swift; sourceTree = "<group>"; };
 		FA5AA9CB29DF304D0092143B /* CriticsModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CriticsModuleBuilder.swift; sourceTree = "<group>"; };
+		FA5AA9CE29DF36090092143B /* CriticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CriticsViewController.swift; sourceTree = "<group>"; };
+		FA5AA9D129DF365A0092143B /* CriticsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CriticsPresenter.swift; sourceTree = "<group>"; };
+		FA5AA9D429DF369F0092143B /* CriticsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CriticsRouter.swift; sourceTree = "<group>"; };
+		FA5AA9D729DF36D20092143B /* CriticsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CriticsInteractor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +151,10 @@
 			isa = PBXGroup;
 			children = (
 				FA5AA9CB29DF304D0092143B /* CriticsModuleBuilder.swift */,
+				FA5AA9CE29DF36090092143B /* CriticsViewController.swift */,
+				FA5AA9D129DF365A0092143B /* CriticsPresenter.swift */,
+				FA5AA9D429DF369F0092143B /* CriticsRouter.swift */,
+				FA5AA9D729DF36D20092143B /* CriticsInteractor.swift */,
 			);
 			name = Critics;
 			sourceTree = "<group>";
@@ -222,12 +234,16 @@
 				FA5AA9CC29DF304D0092143B /* CriticsModuleBuilder.swift in Sources */,
 				FA5AA9C829DF1FF40092143B /* ReviewesModuleBuilder.swift in Sources */,
 				FA5AA99029DC91E70092143B /* AppDelegate.swift in Sources */,
+				FA5AA9D529DF369F0092143B /* CriticsRouter.swift in Sources */,
+				FA5AA9D229DF365A0092143B /* CriticsPresenter.swift in Sources */,
 				FA5AA9BF29DF1D300092143B /* ReviewesPresenter.swift in Sources */,
 				FA5AA9B629DDFD470092143B /* Models.swift in Sources */,
 				FA5AA99229DC91E70092143B /* SceneDelegate.swift in Sources */,
 				FA5AA9AD29DDFC650092143B /* ApiCaller.swift in Sources */,
 				FA5AA9C529DF1F740092143B /* ReviewesInteractor.swift in Sources */,
 				FA5AA9C229DF1EED0092143B /* ReviewesRouter.swift in Sources */,
+				FA5AA9D829DF36D20092143B /* CriticsInteractor.swift in Sources */,
+				FA5AA9CF29DF36090092143B /* CriticsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
