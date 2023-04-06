@@ -46,7 +46,7 @@ class ViewController: UIViewController {
     }
     
     private func getAndSetNews(pagination: Bool = false) {
-        apiCaller.getTopStories(pagination: pagination) { [weak self] result in
+        apiCaller.getReviewes(pagination: pagination) { [weak self] result in
             switch result {
                 case .success(let articles):
                     self?.articles.append(contentsOf: articles)
