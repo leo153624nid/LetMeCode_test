@@ -11,7 +11,7 @@ class ViewController: UIViewController {
     private var apiCaller: APICallerProtocol
     private let tableView: UITableView = {
         let table = UITableView()
-        table.register(NewsTableViewCell.self, forCellReuseIdentifier: NewsTableViewCell.identifier)
+//        table.register(NewsTableViewCell.self, forCellReuseIdentifier: NewsTableViewCell.identifier)
         return table
     }()
     
@@ -84,8 +84,8 @@ extension ViewController: UITableViewDelegate {
         let article = articles[indexPath.row]
         
         guard let url = URL(string: article.url ?? "") else { return }
-        let vc = SFSafariViewController(url: url)
-        present(vc, animated: true, completion: nil)
+//        let vc = SFSafariViewController(url: url)
+//        present(vc, animated: true, completion: nil)
     }
 }
 
@@ -95,11 +95,12 @@ extension ViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: NewsTableViewCell.identifier,
-                                                       for: indexPath)
-                as? NewsTableViewCell else { fatalError() }
-        cell.configure(with: viewModels[indexPath.row])
-        return cell
+//        guard let cell = tableView.dequeueReusableCell(withIdentifier: NewsTableViewCell.identifier,
+//                                                       for: indexPath)
+//                as? NewsTableViewCell else { fatalError() }
+//        cell.configure(with: viewModels[indexPath.row])
+//        return cell
+        return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
