@@ -8,13 +8,18 @@
 import Foundation
 
 protocol ReviewesRouterProtocol: AnyObject {
+    func openCritics()
+}
+
+class ReviewesRouter: ReviewesRouterProtocol {
+    
+    weak var viewController: ReviewesViewController?
+    
+    func openCritics() {
+        let vc = CriticsModuleBuilder.build()
+        viewController?.present(vc, animated: true, completion: nil)
+    }
     
 }
 
-class ReviewesRouter {
-    weak var presenter: ReviewesPresenterProtocol?
-}
 
-extension ReviewesRouter: ReviewesRouterProtocol {
-    
-}
