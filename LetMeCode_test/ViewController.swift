@@ -20,7 +20,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Reviews"
+        title = "111"
         view.backgroundColor = .systemBackground
         
         view.addSubview(tableView)
@@ -81,9 +81,9 @@ class ViewController: UIViewController {
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let article = articles[indexPath.row]
+//        let article = articles[indexPath.row]
         
-        guard let url = URL(string: article.url ?? "") else { return }
+//        guard let url = URL(string: article.url ?? "") else { return }
 //        let vc = SFSafariViewController(url: url)
 //        present(vc, animated: true, completion: nil)
     }
