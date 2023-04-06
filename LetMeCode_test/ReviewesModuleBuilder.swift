@@ -10,7 +10,7 @@ import UIKit
 
 class ReviewesModuleBuilder {
     static func build() -> ReviewesViewController {
-        let interactor = ReviewesInteractor(with: <#T##APICallerProtocol#>)
+        let interactor = ReviewesInteractor(with: APICaller.shared)
         let router = ReviewesRouter()
         let presenter = ReviewesPresenter(router: router, interactor: interactor)
         let viewController = ReviewesViewController()
