@@ -19,7 +19,11 @@ class ReviewesViewController: UIViewController {
         title = "ok"
         presenter?.viewDidLoaded()
    
-    } 
+    }
+    
+    func criticsButtonTapped(_ sender: Any) {
+        presenter?.criticsButtonTapped()
+    }
 
 }
 
