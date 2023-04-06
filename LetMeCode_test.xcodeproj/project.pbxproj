@@ -15,6 +15,7 @@
 		FA5AA9AD29DDFC650092143B /* ApiCaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA9AC29DDFC650092143B /* ApiCaller.swift */; };
 		FA5AA9B229DDFCCC0092143B /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA9B129DDFCCC0092143B /* Protocols.swift */; };
 		FA5AA9B629DDFD470092143B /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA9B529DDFD470092143B /* Models.swift */; };
+		FA5AA9BB29DF1B1B0092143B /* ReviewesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA9BA29DF1B1B0092143B /* ReviewesViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		FA5AA9AC29DDFC650092143B /* ApiCaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiCaller.swift; sourceTree = "<group>"; };
 		FA5AA9B129DDFCCC0092143B /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		FA5AA9B529DDFD470092143B /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		FA5AA9BA29DF1B1B0092143B /* ReviewesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewesViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,10 +62,12 @@
 		FA5AA98E29DC91E70092143B /* LetMeCode_test */ = {
 			isa = PBXGroup;
 			children = (
+				FA5AA9B929DF1AFD0092143B /* Critics */,
+				FA5AA9B829DF1ACE0092143B /* Reviewes */,
+				FA5AA9A629DDCBFE0092143B /* Application */,
 				FA5AA9B429DDFD390092143B /* Models */,
 				FA5AA9B029DDFCB10092143B /* Protocols */,
 				FA5AA9AB29DDFC3D0092143B /* ApiCaller */,
-				FA5AA9A629DDCBFE0092143B /* Application */,
 				FA5AA99329DC91E70092143B /* ViewController.swift */,
 				FA5AA9A829DDCC240092143B /* SupportingFiles */,
 			);
@@ -111,6 +115,21 @@
 				FA5AA9B529DDFD470092143B /* Models.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		FA5AA9B829DF1ACE0092143B /* Reviewes */ = {
+			isa = PBXGroup;
+			children = (
+				FA5AA9BA29DF1B1B0092143B /* ReviewesViewController.swift */,
+			);
+			name = Reviewes;
+			sourceTree = "<group>";
+		};
+		FA5AA9B929DF1AFD0092143B /* Critics */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Critics;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -183,6 +202,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA5AA9B229DDFCCC0092143B /* Protocols.swift in Sources */,
+				FA5AA9BB29DF1B1B0092143B /* ReviewesViewController.swift in Sources */,
 				FA5AA99429DC91E70092143B /* ViewController.swift in Sources */,
 				FA5AA99029DC91E70092143B /* AppDelegate.swift in Sources */,
 				FA5AA9B629DDFD470092143B /* Models.swift in Sources */,
