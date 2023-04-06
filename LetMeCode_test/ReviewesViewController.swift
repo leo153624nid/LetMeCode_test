@@ -7,15 +7,17 @@
 
 import UIKit
 
-protocol ReviewesViewProtocol {
+protocol ReviewesViewProtocol: AnyObject {
     
 }
 
 class ReviewesViewController: UIViewController {
+    var presenter: ReviewesPresenterProtocol?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        title = "ok"
+        presenter?.viewDidLoaded()
    
     }
     
