@@ -16,7 +16,7 @@ class ReviewesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "ok"
+        title = "Reviewes"
         presenter?.viewDidLoaded()
    
     }
