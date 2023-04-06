@@ -33,7 +33,7 @@ final class APICaller: APICallerProtocol {
     
     private init() {}
     
-    public func getTopStories(pagination: Bool = false,
+    public func getReviewes(pagination: Bool = false,
                               completion: @escaping (Result<[Article], Error>) -> Void) {
         if pagination {
             isPaginating = true
