@@ -18,7 +18,7 @@ class ReviewesModuleBuilder {
         viewController.presenter = presenter
         presenter.view = viewController
         interactor.presenter = presenter
-        router.presenter = presenter // todo
+        router.viewController = viewController
         
         return viewController
     }
