@@ -16,6 +16,10 @@
 		FA5AA9B229DDFCCC0092143B /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA9B129DDFCCC0092143B /* Protocols.swift */; };
 		FA5AA9B629DDFD470092143B /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA9B529DDFD470092143B /* Models.swift */; };
 		FA5AA9BB29DF1B1B0092143B /* ReviewesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA9BA29DF1B1B0092143B /* ReviewesViewController.swift */; };
+		FA5AA9BF29DF1D300092143B /* ReviewesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA9BE29DF1D300092143B /* ReviewesPresenter.swift */; };
+		FA5AA9C229DF1EED0092143B /* ReviewesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA9C129DF1EED0092143B /* ReviewesRouter.swift */; };
+		FA5AA9C529DF1F740092143B /* ReviewesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA9C429DF1F740092143B /* ReviewesInteractor.swift */; };
+		FA5AA9C829DF1FF40092143B /* ReviewesModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA9C729DF1FF40092143B /* ReviewesModuleBuilder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +34,10 @@
 		FA5AA9B129DDFCCC0092143B /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		FA5AA9B529DDFD470092143B /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		FA5AA9BA29DF1B1B0092143B /* ReviewesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewesViewController.swift; sourceTree = "<group>"; };
+		FA5AA9BE29DF1D300092143B /* ReviewesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewesPresenter.swift; sourceTree = "<group>"; };
+		FA5AA9C129DF1EED0092143B /* ReviewesRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewesRouter.swift; sourceTree = "<group>"; };
+		FA5AA9C429DF1F740092143B /* ReviewesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewesInteractor.swift; sourceTree = "<group>"; };
+		FA5AA9C729DF1FF40092143B /* ReviewesModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewesModuleBuilder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +129,10 @@
 			isa = PBXGroup;
 			children = (
 				FA5AA9BA29DF1B1B0092143B /* ReviewesViewController.swift */,
+				FA5AA9BE29DF1D300092143B /* ReviewesPresenter.swift */,
+				FA5AA9C129DF1EED0092143B /* ReviewesRouter.swift */,
+				FA5AA9C429DF1F740092143B /* ReviewesInteractor.swift */,
+				FA5AA9C729DF1FF40092143B /* ReviewesModuleBuilder.swift */,
 			);
 			name = Reviewes;
 			sourceTree = "<group>";
@@ -204,10 +216,14 @@
 				FA5AA9B229DDFCCC0092143B /* Protocols.swift in Sources */,
 				FA5AA9BB29DF1B1B0092143B /* ReviewesViewController.swift in Sources */,
 				FA5AA99429DC91E70092143B /* ViewController.swift in Sources */,
+				FA5AA9C829DF1FF40092143B /* ReviewesModuleBuilder.swift in Sources */,
 				FA5AA99029DC91E70092143B /* AppDelegate.swift in Sources */,
+				FA5AA9BF29DF1D300092143B /* ReviewesPresenter.swift in Sources */,
 				FA5AA9B629DDFD470092143B /* Models.swift in Sources */,
 				FA5AA99229DC91E70092143B /* SceneDelegate.swift in Sources */,
 				FA5AA9AD29DDFC650092143B /* ApiCaller.swift in Sources */,
+				FA5AA9C529DF1F740092143B /* ReviewesInteractor.swift in Sources */,
+				FA5AA9C229DF1EED0092143B /* ReviewesRouter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
