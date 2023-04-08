@@ -8,7 +8,7 @@
 import Foundation
 
 protocol ReviewesInteractorProtocol: AnyObject {
-    func loadReviewes()
+    func loadReviewes(pagination: Bool)
 }
 
 class ReviewesInteractor: ReviewesInteractorProtocol {
@@ -22,14 +22,20 @@ class ReviewesInteractor: ReviewesInteractorProtocol {
         self.apiCaller = service
     }
     
-    func loadReviewes() {
-        apiCaller.getReviewes(pagination: false) { [weak self] result in
+    func loadReviewes(pagination: Bool) {
+        apiCaller.getReviewes(pagination: pagination) { [weak self] result in
             switch result {
                 case .success(let data):
-                    self?.reviewes.append(contentsOf: data)
-                    self?.presenter?.didLoad(reviewes: data)
+                    if pagination {
+                        self?.reviewes.append(contentsOf: data)
+                    } else {
+                        self?.reviewes = data
+                    }
+                    self?.presenter?.isPaginating = false
+                    self?.presenter?.didLoad(reviewes: self?.reviewes ?? [Review]())
                 case .failure(let error):
                     print(error.localizedDescription)
+                    self?.presenter?.isPaginating = false
                     self?.presenter?.didLoad(reviewes: self?.reviewes ?? [Review]())
             }
         }

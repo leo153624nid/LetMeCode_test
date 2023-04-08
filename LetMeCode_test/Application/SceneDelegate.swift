@@ -23,7 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         self.window?.windowScene = windowScene
         self.window?.rootViewController = navController
-        self.window?.backgroundColor = .orange
+//        self.window?.backgroundColor = .orange
         self.window?.makeKeyAndVisible()
         
     }

@@ -8,7 +8,9 @@
 import Foundation
 
 protocol ReviewesPresenterProtocol: AnyObject {
+    var isPaginating: Bool { get set }
     func viewDidLoaded()
+    func loadMore()
     func didLoad(reviewes: [Review])
     func criticsButtonTapped()
 }
@@ -17,6 +19,8 @@ class ReviewesPresenter {
     weak var view: ReviewesViewProtocol?
     var router: ReviewesRouterProtocol
     var interactor: ReviewesInteractorProtocol
+    
+    var isPaginating = false
     
     init(router: ReviewesRouterProtocol, interactor: ReviewesInteractorProtocol) {
         self.router = router
@@ -27,7 +31,7 @@ class ReviewesPresenter {
 extension ReviewesPresenter: ReviewesPresenterProtocol {
     func viewDidLoaded() {
         // start loading data
-        interactor.loadReviewes()
+        interactor.loadReviewes(pagination: false)
     }
     
     func didLoad(reviewes: [Review]) {
@@ -42,6 +46,11 @@ extension ReviewesPresenter: ReviewesPresenterProtocol {
                                            updatedDate: $0.dateUpdated)
         }))
         view?.showReviewes(articles: articles)
+    }
+    
+    func loadMore() {
+        isPaginating = true
+        interactor.loadReviewes(pagination: isPaginating) 
     }
     
     func criticsButtonTapped() {

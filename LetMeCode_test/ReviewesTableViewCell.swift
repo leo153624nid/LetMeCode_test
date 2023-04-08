@@ -86,6 +86,7 @@ class ReviewesTableViewCell: UITableViewCell {
             y: 5,
             width: 140,
             height: contentView.frame.size.height - 10)
+        contentView.backgroundColor = .white
     }
     
     override func prepareForReuse() {

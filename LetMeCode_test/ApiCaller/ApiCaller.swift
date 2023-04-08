@@ -38,7 +38,7 @@ final class UrlInfo: UrlInfoProtocol {
     }
     
     func getReviewesNextPageURL() -> URL? {
-        guard let url = URL(string: /* TODO */ "https://api.nytimes.com/svc/movies/v2/reviews/picks.json?api-key=\(apiKey)&offset=\(offset)&limit=\(limit)") else { return nil }
+        guard let url = URL(string:  "https://api.nytimes.com/svc/movies/v2/reviews/picks.json?api-key=\(apiKey)&offset=\(offset)&limit=\(limit)") else { return nil }
         self.currentURL = url
         self.page += 1
         self.offset = page * limit
