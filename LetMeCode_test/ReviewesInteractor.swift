@@ -16,6 +16,8 @@ class ReviewesInteractor: ReviewesInteractorProtocol {
     weak var presenter: ReviewesPresenterProtocol?
     private var apiCaller: APICallerProtocol
     
+    private var reviewes = [Review]()
+    
     init(with service: APICallerProtocol) {
         self.apiCaller = service
     }
@@ -24,19 +26,11 @@ class ReviewesInteractor: ReviewesInteractorProtocol {
         apiCaller.getReviewes(pagination: false) { [weak self] result in
             switch result {
                 case .success(let data):
-                    self?.presenter?.didLoad(reviewes: data.description) // todo
-//                    self?.articles.append(contentsOf: articles)
-//                    print("articles: \(String(describing: self?.articles.count))")
-//                    self?.viewModels.append(contentsOf: articles.compactMap({
-//                        NewsTableViewCellViewModel(title: $0.title,
-//                                                   subtitle: $0.description ?? "-",
-//                                                   imageURL: URL(string: $0.urlToImage ?? ""))
-//                    }))
-//
-//                    DispatchQueue.main.async {
-//                        self?.tableView.reloadData()
-//                    }
-                case .failure(let error): print(error.localizedDescription)
+                    self?.reviewes.append(contentsOf: data)
+                    self?.presenter?.didLoad(reviewes: data)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    self?.presenter?.didLoad(reviewes: self?.reviewes ?? [Review]())
             }
         }
     }

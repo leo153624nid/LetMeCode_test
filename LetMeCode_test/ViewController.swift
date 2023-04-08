@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     }()
     
 //    private var viewModels = [NewsTableViewCellViewModel]()
-    private var articles = [Article]()
+    private var articles = [Review]()
 
     override func viewDidLoad() {
         super.viewDidLoad()

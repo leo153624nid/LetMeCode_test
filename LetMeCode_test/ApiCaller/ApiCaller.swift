@@ -12,7 +12,7 @@ protocol APICallerProtocol {
     var isPaginating: Bool { get set }
     
     func getReviewes(pagination: Bool,
-                     completion: @escaping (Result<[Article], Error>) -> Void)
+                     completion: @escaping (Result<[Review], Error>) -> Void)
 }
 
 protocol UrlInfoProtocol {
@@ -27,7 +27,7 @@ protocol UrlInfoProtocol {
 
 final class UrlInfo: UrlInfoProtocol {
     var currentURL: URL?
-    var limit = 10
+    var limit = 20 // do you need it??
     var offset = 0
     var page = 1
     var apiKey: String
@@ -55,7 +55,7 @@ final class APICaller: APICallerProtocol {
     private init() {}
     
     public func getReviewes(pagination: Bool = false,
-                              completion: @escaping (Result<[Article], Error>) -> Void) {
+                            completion: @escaping (Result<[Review], Error>) -> Void) {
         if pagination {
             isPaginating = true
         }
@@ -70,8 +70,8 @@ final class APICaller: APICallerProtocol {
             }
             else if let data = data {
                 do {
-                    let result = try JSONDecoder().decode(APIResponse.self, from: data)
-                    completion(.success(result.articles))
+                    let result = try JSONDecoder().decode(ReviewesAPIResponse.self, from: data)
+                    completion(.success(result.results))
                     if pagination {
                         self.isPaginating = false
                     }

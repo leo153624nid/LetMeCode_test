@@ -9,7 +9,7 @@ import Foundation
 
 protocol ReviewesPresenterProtocol: AnyObject {
     func viewDidLoaded()
-    func didLoad(reviewes: String?) // todo
+    func didLoad(reviewes: [Review])
     func criticsButtonTapped()
 }
 
@@ -30,8 +30,15 @@ extension ReviewesPresenter: ReviewesPresenterProtocol {
         interactor.loadReviewes()
     }
     
-    func didLoad(reviewes: String?) { // todo
-        view?.showReviewes(reviewes: reviewes ?? "no data")
+    func didLoad(reviewes: [Review]) {
+        var articles = [ReviewesTableViewCellViewModel]()
+        
+        articles.append(contentsOf: reviewes.compactMap({
+            ReviewesTableViewCellViewModel(title: $0.displayTitle,
+                                           subtitle: $0.summaryShort ,
+                                           imageURL: URL(string: $0.multimedia.src ))
+        }))
+        view?.showReviewes(articles: articles)
     }
     
     func criticsButtonTapped() {
