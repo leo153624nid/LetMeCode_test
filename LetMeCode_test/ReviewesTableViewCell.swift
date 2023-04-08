@@ -11,19 +11,20 @@ class ReviewesTableViewCell: UITableViewCell {
 
     static let identifier = "ReviewesTableViewCell"
     
-    private let newsTitleLabel: UILabel = {
+    private let reviewesTitleLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.font = .systemFont(ofSize: 22, weight: .semibold)
+        label.font = .systemFont(ofSize: 18, weight: .semibold)
         return label
     }()
-    private let newsSubTitleLabel: UILabel = {
+    private let reviewesSubTitleLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.font = .systemFont(ofSize: 17, weight: .light)
+        label.font = .systemFont(ofSize: 13, weight: .light)
+        label.textAlignment = .left
         return label
     }()
-    private let newsImageView: UIImageView = {
+    private let reviewesImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 6
         imageView.layer.masksToBounds = true
@@ -32,12 +33,26 @@ class ReviewesTableViewCell: UITableViewCell {
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
+    private let reviewesBylineLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.font = .systemFont(ofSize: 13, weight: .semibold)
+        return label
+    }()
+    private let reviewesDateLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.font = .systemFont(ofSize: 13, weight: .light)
+        return label
+    }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.addSubview(newsTitleLabel)
-        contentView.addSubview(newsSubTitleLabel)
-        contentView.addSubview(newsImageView)
+        contentView.addSubview(reviewesTitleLabel)
+        contentView.addSubview(reviewesSubTitleLabel)
+        contentView.addSubview(reviewesImageView)
+        contentView.addSubview(reviewesBylineLabel)
+        contentView.addSubview(reviewesDateLabel)
     }
     
     required init?(coder: NSCoder) {
@@ -46,17 +61,27 @@ class ReviewesTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        newsTitleLabel.frame = CGRect(
+        reviewesTitleLabel.frame = CGRect(
             x: 10,
             y: 0,
             width: contentView.frame.size.width - 170,
-            height: 70)
-        newsSubTitleLabel.frame = CGRect(
+            height: 30)
+        reviewesSubTitleLabel.frame = CGRect(
             x: 10,
-            y: 70,
+            y: 30,
             width: contentView.frame.size.width - 170,
-            height: contentView.frame.size.height / 2)
-        newsImageView.frame = CGRect(
+            height: contentView.frame.size.height - 80)
+        reviewesBylineLabel.frame = CGRect(
+            x: 10,
+            y: contentView.frame.size.height - 50,
+            width: contentView.frame.size.width - 170,
+            height: 30)
+        reviewesDateLabel.frame = CGRect(
+            x: 10,
+            y: contentView.frame.size.height - 20,
+            width: contentView.frame.size.width - 170,
+            height: 20)
+        reviewesImageView.frame = CGRect(
             x: contentView.frame.size.width - 150,
             y: 5,
             width: 140,
@@ -65,18 +90,22 @@ class ReviewesTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        newsTitleLabel.text = nil
-        newsSubTitleLabel.text = nil
-        newsImageView.image = nil
+        reviewesTitleLabel.text = nil
+        reviewesSubTitleLabel.text = nil
+        reviewesBylineLabel.text = nil
+        reviewesImageView.image = nil
+        reviewesDateLabel.text = nil
     }
     
     func configure(with viewModel: ReviewesTableViewCellViewModel) {
-        newsTitleLabel.text = viewModel.title
-        newsSubTitleLabel.text = viewModel.subtitle
+        reviewesTitleLabel.text = viewModel.title
+        reviewesSubTitleLabel.text = viewModel.subtitle
+        reviewesBylineLabel.text = viewModel.byline
+        reviewesDateLabel.text = viewModel.updatedDate
         
         // image from cache
         if let data = viewModel.imageData {
-            newsImageView.image = UIImage(data: data)
+            reviewesImageView.image = UIImage(data: data)
         }
         else if let url = viewModel.imageURL {
             // fetching image
@@ -84,7 +113,7 @@ class ReviewesTableViewCell: UITableViewCell {
                 if let data = try? Data(contentsOf: url) {
                     viewModel.imageData = data
                     DispatchQueue.main.async {
-                        self?.newsImageView.image = UIImage(data: data)
+                        self?.reviewesImageView.image = UIImage(data: data)
                     }
                 }
                 else {
@@ -93,5 +122,4 @@ class ReviewesTableViewCell: UITableViewCell {
             }
         }
     }
-
 }
