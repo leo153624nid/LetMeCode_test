@@ -32,15 +32,44 @@ class ReviewesViewController: UIViewController {
         textField.borderStyle = .roundedRect
         textField.contentVerticalAlignment = .center
         textField.textAlignment = .center
+        textField.tintColor = .lightGray
+        
+        // add icon
+        let imgView = UIImageView(frame: CGRect(x: 8, y: 0, width: 20, height: 20))
+        let img = UIImage(systemName: "magnifyingglass")
+        imgView.image = img
+        imgView.contentMode = .scaleAspectFit
+        imgView.tintColor = .lightGray
+        imgView.backgroundColor = .clear
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        view.addSubview(imgView)
+        view.backgroundColor = .clear
+        textField.leftViewMode = .always
+        textField.leftView = view
+        
         return textField
     }()
     private let dateField: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .white
-        textField.placeholder = "filter by date" // todo
+        textField.placeholder = "filter by date"
         textField.borderStyle = .roundedRect
         textField.contentVerticalAlignment = .center
         textField.textAlignment = .center
+        textField.tintColor = .lightGray
+        
+        // add icon
+        let imgView = UIImageView(frame: CGRect(x: 8, y: 0, width: 20, height: 20))
+        let img = UIImage(systemName: "calendar")
+        imgView.image = img
+        imgView.contentMode = .scaleAspectFit
+        imgView.tintColor = .lightGray
+        imgView.backgroundColor = .clear
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        view.addSubview(imgView)
+        view.backgroundColor = .clear
+        textField.leftViewMode = .always
+        textField.leftView = view
         return textField
     }()
     private let datePicker = UIDatePicker()
