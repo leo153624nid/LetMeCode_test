@@ -43,7 +43,6 @@ class ReviewesViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-//        tableView.frame = view.bounds
         tableView.frame = CGRect(x: 10, y: 200, width: view.bounds.width - 20, height: view.bounds.height - 200)
     }
     
@@ -118,8 +117,8 @@ extension ReviewesViewController: UIScrollViewDelegate {
         let position = scrollView.contentOffset.y
         let barrier = tableView.contentSize.height - 100 - scrollView.frame.size.height
         
-        if position > barrier {
-            guard !(presenter?.isPaginating ?? false) else { return }
+        if position > barrier && position > 0 {
+            guard !(presenter?.isPaginating ?? true) else { return }
             print("fetch more")
             tableView.tableFooterView = createSpinnerFooter()
             presenter?.loadMore()  

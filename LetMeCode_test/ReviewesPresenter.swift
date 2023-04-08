@@ -20,7 +20,7 @@ class ReviewesPresenter {
     var router: ReviewesRouterProtocol
     var interactor: ReviewesInteractorProtocol
     
-    var isPaginating = false
+    var isPaginating = true
     
     init(router: ReviewesRouterProtocol, interactor: ReviewesInteractorProtocol) {
         self.router = router
@@ -31,7 +31,7 @@ class ReviewesPresenter {
 extension ReviewesPresenter: ReviewesPresenterProtocol {
     func viewDidLoaded() {
         // start loading data
-        interactor.loadReviewes(pagination: false)
+        interactor.loadReviewes(pagination: isPaginating)
     }
     
     func didLoad(reviewes: [Review]) {
