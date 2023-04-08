@@ -35,7 +35,8 @@ class ReviewesViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        tableView.frame = view.bounds
+//        tableView.frame = view.bounds
+        tableView.frame = CGRect(x: 0, y: 200, width: view.bounds.width, height: view.bounds.height)
     }
     
     func criticsButtonTapped(_ sender: Any) {
