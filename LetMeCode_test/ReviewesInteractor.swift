@@ -9,6 +9,7 @@ import Foundation
 
 protocol ReviewesInteractorProtocol: AnyObject {
     func loadReviewes(pagination: Bool)
+    func searchReviewes(with query: String)
 }
 
 class ReviewesInteractor: ReviewesInteractorProtocol {
@@ -17,13 +18,14 @@ class ReviewesInteractor: ReviewesInteractorProtocol {
     private var apiCaller: APICallerProtocol
     
     private var reviewes = [Review]()
+    private var query = ""
     
     init(with service: APICallerProtocol) {
         self.apiCaller = service
     }
     
     func loadReviewes(pagination: Bool) {
-        apiCaller.getReviewes(pagination: pagination) { [weak self] result in
+        apiCaller.getReviewes() { [weak self] result in
             switch result {
                 case .success(let data):
                     if pagination {
@@ -37,6 +39,20 @@ class ReviewesInteractor: ReviewesInteractorProtocol {
                     print(error.localizedDescription)
                     self?.presenter?.isPaginating = false
                     self?.presenter?.didLoad(reviewes: self?.reviewes ?? [Review]())
+            }
+        }
+    }
+    
+    func searchReviewes(with query: String) {
+        apiCaller.searchReviewes(with: query) { [weak self] result in
+            self?.query = query
+            switch result {
+                case .success(let data):
+                    self?.reviewes = data
+                    self?.presenter?.didLoad(reviewes: self?.reviewes ?? [Review]())
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    self?.presenter?.didLoad(reviewes: [Review]())
             }
         }
     }

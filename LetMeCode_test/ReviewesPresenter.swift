@@ -13,6 +13,7 @@ protocol ReviewesPresenterProtocol: AnyObject {
     func loadMore()
     func didLoad(reviewes: [Review])
     func criticsButtonTapped()
+    func search(with query: String)
 }
 
 class ReviewesPresenter {
@@ -55,5 +56,9 @@ extension ReviewesPresenter: ReviewesPresenterProtocol {
     
     func criticsButtonTapped() {
         router.openCritics()
+    }
+    
+    func search(with query: String) {
+        interactor.searchReviewes(with: query)
     }
 }

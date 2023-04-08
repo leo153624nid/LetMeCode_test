@@ -121,7 +121,7 @@ extension ViewController: UIScrollViewDelegate {
             
             print("contentSize: \(tableView.contentSize.height), scrollViewSize: \(scrollView.frame.size.height)")
             
-            guard !apiCaller.isPaginating else { return }
+//            guard !apiCaller.isPaginating else { return }
             print("fetch more")
             tableView.tableFooterView = createSpinnerFooter()
             DispatchQueue.global(qos: .userInitiated).async { [weak self] in

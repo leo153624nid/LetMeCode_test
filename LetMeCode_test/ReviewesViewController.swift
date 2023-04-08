@@ -29,6 +29,9 @@ class ReviewesViewController: UIViewController {
         let textField = UITextField()
         textField.backgroundColor = .white
         textField.placeholder = " search"
+        textField.borderStyle = .roundedRect
+        textField.contentVerticalAlignment = .center
+        textField.textAlignment = .center
         return textField
     }()
     
@@ -43,6 +46,7 @@ class ReviewesViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.refreshControl = self.refreshControl
+        searchField.delegate = self
         
         presenter?.viewDidLoaded()
         tableView.refreshControl?.beginRefreshing()
@@ -134,9 +138,15 @@ extension ReviewesViewController: UIScrollViewDelegate {
     }
 }
 
-//extension ReviewesViewController: UISearchBarDelegate {
-//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-//        guard let text = searchBar.text, !text.isEmpty else { return }
-//        print (text)
-//    }
-//}
+extension ReviewesViewController: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        guard let text = textField.text, !text.isEmpty else { return }
+        print (text.lowercased())
+        presenter?.search(with: text.lowercased())
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}

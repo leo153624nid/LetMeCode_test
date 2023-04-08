@@ -9,10 +9,8 @@ import Foundation
 
 protocol APICallerProtocol {
     var urlInfo: UrlInfoProtocol { get }
-    var isPaginating: Bool { get set }
     
-    func getReviewes(pagination: Bool,
-                     completion: @escaping (Result<[Review], Error>) -> Void)
+    func getReviewes(completion: @escaping (Result<[Review], Error>) -> Void)
     func searchReviewes(with query: String,
                      completion: @escaping (Result<[Review], Error>) -> Void)
 }
@@ -52,7 +50,7 @@ final class UrlInfo: UrlInfoProtocol {
         return self.currentURL
     }
     func getReviewesSearchURL(with query: String) -> URL? {
-        guard let url = URL(string:  "\(UrlInfo.searchReviewes)\(query)?api-key=\(apiKey)") else { return nil }
+        guard let url = URL(string: "\(UrlInfo.searchReviewes)\(query)&api-key=\(apiKey)") else { return nil }
         self.searchURL = url
         
         return self.searchURL
@@ -62,36 +60,23 @@ final class UrlInfo: UrlInfoProtocol {
 final class APICaller: APICallerProtocol {
     static let shared: APICallerProtocol = APICaller()
     let urlInfo: UrlInfoProtocol = UrlInfo(apiKey: "2hdD7Tro9byozENHGHJ8YukOw7W5lZCt")
-    var isPaginating = false // возможно это свойство уже не нужно
     
     private init() {}
     
-    public func getReviewes(pagination: Bool = false,
-                            completion: @escaping (Result<[Review], Error>) -> Void) {
-        if pagination {
-            isPaginating = true
-        }
+    public func getReviewes(completion: @escaping (Result<[Review], Error>) -> Void) {
+
         guard let url = urlInfo.getReviewesNextPageURL() else { return }
         
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let error = error {
                 completion(.failure(error))
-                if pagination {
-                    self.isPaginating = false
-                }
             }
             else if let data = data {
                 do {
                     let result = try JSONDecoder().decode(ReviewesAPIResponse.self, from: data)
                     completion(.success(result.results))
-                    if pagination {
-                        self.isPaginating = false
-                    }
                 } catch {
                     completion(.failure(error))
-                    if pagination {
-                        self.isPaginating = false
-                    }
                 }
             }
         }
@@ -100,31 +85,19 @@ final class APICaller: APICallerProtocol {
     
     public func searchReviewes(with query: String,
                             completion: @escaping (Result<[Review], Error>) -> Void) {
-//        if pagination {
-//            isPaginating = true
-//        }
         guard !query.trimmingCharacters(in: .whitespaces).isEmpty else { return }
         guard let url = urlInfo.getReviewesSearchURL(with: query) else { return }
         
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let error = error {
                 completion(.failure(error))
-//                if pagination {
-//                    self.isPaginating = false
-//                }
             }
             else if let data = data {
                 do {
                     let result = try JSONDecoder().decode(ReviewesAPIResponse.self, from: data)
                     completion(.success(result.results))
-//                    if pagination {
-//                        self.isPaginating = false
-//                    }
                 } catch {
                     completion(.failure(error))
-//                    if pagination {
-//                        self.isPaginating = false
-//                    }
                 }
             }
         }
