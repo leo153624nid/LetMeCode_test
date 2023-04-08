@@ -63,7 +63,7 @@ class ReviewesTableViewCell: UITableViewCell {
         super.layoutSubviews()
         reviewesTitleLabel.frame = CGRect(
             x: 10,
-            y: 0,
+            y: 10,
             width: contentView.frame.size.width - 170,
             height: 30)
         reviewesSubTitleLabel.frame = CGRect(
@@ -73,12 +73,12 @@ class ReviewesTableViewCell: UITableViewCell {
             height: contentView.frame.size.height - 80)
         reviewesBylineLabel.frame = CGRect(
             x: 10,
-            y: contentView.frame.size.height - 50,
+            y: contentView.frame.size.height - 60,
             width: contentView.frame.size.width - 170,
             height: 30)
         reviewesDateLabel.frame = CGRect(
             x: 10,
-            y: contentView.frame.size.height - 20,
+            y: contentView.frame.size.height - 30,
             width: contentView.frame.size.width - 170,
             height: 20)
         reviewesImageView.frame = CGRect(
@@ -102,7 +102,9 @@ class ReviewesTableViewCell: UITableViewCell {
         reviewesTitleLabel.text = viewModel.title
         reviewesSubTitleLabel.text = viewModel.subtitle
         reviewesBylineLabel.text = viewModel.byline
-        reviewesDateLabel.text = viewModel.publicationDate
+        
+        let date = dateFromApiString(viewModel.publicationDate ?? "")
+        reviewesDateLabel.text = date?.toMyFormat
         
         // image from cache
         if let data = viewModel.imageData {
