@@ -60,6 +60,10 @@ class ReviewesViewController: UIViewController {
     
     @objc private func refresh(sender: UIRefreshControl) {
         // refresh data == load data
+        // Костыль, чтобы не писать однотипную цепочку функций c единственным отличием:
+        // В ApiCaller происходит изменение следующего урла для пагинации (меняется offset),
+        // т.к. пагинация на сервере через offset
+        // Исправить, если будет время
         presenter?.viewDidLoaded()
     }
     
