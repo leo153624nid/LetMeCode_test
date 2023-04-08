@@ -39,7 +39,6 @@ class ReviewesPresenter {
 
 extension ReviewesPresenter: ReviewesPresenterProtocol {
     func viewDidLoaded() {
-        // start loading data
         interactor.loadReviewes(pagination: isPaginating)
     }
     
@@ -50,8 +49,9 @@ extension ReviewesPresenter: ReviewesPresenterProtocol {
     }
     
     func didLoad(reviewes: [Review]) {
-        articles = [ReviewesTableViewCellViewModel]() // !!!!! обнуление данных
-        
+        if !isPaginating {
+            articles = [ReviewesTableViewCellViewModel]() // !!!!! обнуление данных
+        }
         articles.append(contentsOf: reviewes.compactMap({
             ReviewesTableViewCellViewModel(title: $0.displayTitle,
                                            subtitle: $0.summaryShort,
@@ -65,6 +65,7 @@ extension ReviewesPresenter: ReviewesPresenterProtocol {
     
     func loadMore() {
         isPaginating = true
+        isFilter = false
         interactor.loadReviewes(pagination: isPaginating) 
     }
     
@@ -73,13 +74,14 @@ extension ReviewesPresenter: ReviewesPresenterProtocol {
     }
     
     func search(with query: String) {
+        isPaginating = false
+        isFilter = false
         interactor.searchReviewes(with: query)
     }
     
     func filter(by textDate: String) {
         isFilter = true
         let filterArray = articles.filter { $0.publicationDate == textDate } 
-        print("filterArray: \(filterArray.count)")
         view?.showReviewes(articles: filterArray)
     }
 }

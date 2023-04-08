@@ -74,11 +74,6 @@ class ReviewesViewController: UIViewController {
     }
     
     @objc private func refresh(sender: UIRefreshControl) {
-        // refresh data == load data
-        // Костыль, чтобы не писать однотипную цепочку функций c единственным отличием:
-        // В ApiCaller происходит изменение следующего урла для пагинации (меняется offset),
-        // т.к. пагинация на сервере через offset
-        // Исправить, если будет время
         presenter?.refresh()
         searchField.text = nil
         dateField.text = nil
@@ -170,6 +165,7 @@ extension ReviewesViewController: UITableViewDataSource {
 extension ReviewesViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard !(presenter?.isFilter ?? true) else { return }
+        
         let position = scrollView.contentOffset.y
         let barrier = tableView.contentSize.height - 100 - scrollView.frame.size.height
         
@@ -185,6 +181,7 @@ extension ReviewesViewController: UIScrollViewDelegate {
 extension ReviewesViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == searchField {
+            dateField.text = nil
             guard let text = textField.text, !text.isEmpty else { return }
             print (text.lowercased())
             tableView.refreshControl?.beginRefreshing()
@@ -195,9 +192,8 @@ extension ReviewesViewController: UITextFieldDelegate {
         }
         
         if textField == dateField {
-            
+            searchField.text = nil
             guard let text = textField.text else { return }
-            
             print(text)
             presenter?.filter(by: dateFromMyFormatString(text)?.toApiString ?? "")
         }
