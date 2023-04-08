@@ -147,6 +147,9 @@ extension ReviewesViewController: UITextFieldDelegate {
         guard let text = textField.text, !text.isEmpty else { return }
         print (text.lowercased())
         presenter?.search(with: text.lowercased())
+        DispatchQueue.main.async {
+            self.tableView.contentOffset = .zero
+        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
