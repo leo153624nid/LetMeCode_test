@@ -14,6 +14,12 @@ func dateFromApiString(_ eventDate: String) -> Date? {
     return formatter.date(from: eventDate)
 }
 
+func dateFromMyFormatString(_ eventDate: String) -> Date? {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "YYYY/MM/dd"
+    return formatter.date(from: eventDate)
+}
+
 extension Date {
     var toMyFormat: String {
         let formatter = DateFormatter()

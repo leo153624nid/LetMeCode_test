@@ -8,7 +8,7 @@
 import Foundation
 
 protocol APICallerProtocol {
-    var urlInfo: UrlInfoProtocol { get }
+    var urlInfo: UrlInfoProtocol { get set }
     
     func getReviewes(completion: @escaping (Result<[Review], Error>) -> Void)
     func searchReviewes(with query: String,
@@ -59,13 +59,13 @@ final class UrlInfo: UrlInfoProtocol {
 
 final class APICaller: APICallerProtocol {
     static let shared: APICallerProtocol = APICaller()
-    let urlInfo: UrlInfoProtocol = UrlInfo(apiKey: "2hdD7Tro9byozENHGHJ8YukOw7W5lZCt")
+    var urlInfo: UrlInfoProtocol = UrlInfo(apiKey: "2hdD7Tro9byozENHGHJ8YukOw7W5lZCt")
     
     private init() {}
     
     public func getReviewes(completion: @escaping (Result<[Review], Error>) -> Void) {
-
         guard let url = urlInfo.getReviewesNextPageURL() else { return }
+        print("next page = \(urlInfo.page)")
         
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let error = error {

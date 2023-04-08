@@ -9,11 +9,11 @@ import Foundation
 
 protocol ReviewesInteractorProtocol: AnyObject {
     func loadReviewes(pagination: Bool)
+    func refreshReviewes()
     func searchReviewes(with query: String)
 }
 
 class ReviewesInteractor: ReviewesInteractorProtocol {
-
     weak var presenter: ReviewesPresenterProtocol?
     private var apiCaller: APICallerProtocol
     
@@ -41,6 +41,12 @@ class ReviewesInteractor: ReviewesInteractorProtocol {
                     self?.presenter?.didLoad(reviewes: self?.reviewes ?? [Review]())
             }
         }
+    }
+    
+    func refreshReviewes() {
+        apiCaller.urlInfo.offset = 0
+        apiCaller.urlInfo.page = 1
+        loadReviewes(pagination: false)
     }
     
     func searchReviewes(with query: String) {

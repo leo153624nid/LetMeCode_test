@@ -102,7 +102,7 @@ class ReviewesTableViewCell: UITableViewCell {
         reviewesTitleLabel.text = viewModel.title
         reviewesSubTitleLabel.text = viewModel.subtitle
         reviewesBylineLabel.text = viewModel.byline
-        reviewesDateLabel.text = viewModel.updatedDate
+        reviewesDateLabel.text = viewModel.publicationDate
         
         // image from cache
         if let data = viewModel.imageData {

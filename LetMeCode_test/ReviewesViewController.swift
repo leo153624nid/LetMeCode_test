@@ -79,7 +79,9 @@ class ReviewesViewController: UIViewController {
         // В ApiCaller происходит изменение следующего урла для пагинации (меняется offset),
         // т.к. пагинация на сервере через offset
         // Исправить, если будет время
-        presenter?.viewDidLoaded()
+        presenter?.refresh()
+        searchField.text = nil
+        dateField.text = nil
     }
     
     private func createSpinnerFooter() -> UIView {
@@ -167,6 +169,7 @@ extension ReviewesViewController: UITableViewDataSource {
 
 extension ReviewesViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard !(presenter?.isFilter ?? true) else { return }
         let position = scrollView.contentOffset.y
         let barrier = tableView.contentSize.height - 100 - scrollView.frame.size.height
         
@@ -192,7 +195,11 @@ extension ReviewesViewController: UITextFieldDelegate {
         }
         
         if textField == dateField {
-            print(textField.text ?? "nil")
+            
+            guard let text = textField.text else { return }
+            
+            print(text)
+            presenter?.filter(by: dateFromMyFormatString(text)?.toApiString ?? "")
         }
     }
     

@@ -9,11 +9,17 @@ import Foundation
 
 protocol ReviewesPresenterProtocol: AnyObject {
     var isPaginating: Bool { get set }
+    var isFilter: Bool { get set }
+    
     func viewDidLoaded()
+    func refresh()
     func loadMore()
+    
     func didLoad(reviewes: [Review])
     func criticsButtonTapped()
+    
     func search(with query: String)
+    func filter(by textDate: String)
 }
 
 class ReviewesPresenter {
@@ -21,7 +27,9 @@ class ReviewesPresenter {
     var router: ReviewesRouterProtocol
     var interactor: ReviewesInteractorProtocol
     
-    var isPaginating = true
+    var articles = [ReviewesTableViewCellViewModel]()
+    var isPaginating = false
+    var isFilter = false
     
     init(router: ReviewesRouterProtocol, interactor: ReviewesInteractorProtocol) {
         self.router = router
@@ -35,8 +43,14 @@ extension ReviewesPresenter: ReviewesPresenterProtocol {
         interactor.loadReviewes(pagination: isPaginating)
     }
     
+    func refresh() {
+        isPaginating = false
+        isFilter = false
+        interactor.refreshReviewes()
+    }
+    
     func didLoad(reviewes: [Review]) {
-        var articles = [ReviewesTableViewCellViewModel]()
+        articles = [ReviewesTableViewCellViewModel]() // !!!!! обнуление данных
         
         articles.append(contentsOf: reviewes.compactMap({
             ReviewesTableViewCellViewModel(title: $0.displayTitle,
@@ -44,7 +58,7 @@ extension ReviewesPresenter: ReviewesPresenterProtocol {
                                            imageURL: URL(string: $0.multimedia.src),
                                            linkURL: URL(string: $0.link.url),
                                            byline: $0.byline,
-                                           updatedDate: $0.dateUpdated)
+                                           publicationDate: $0.publicationDate)
         }))
         view?.showReviewes(articles: articles)
     }
@@ -60,5 +74,12 @@ extension ReviewesPresenter: ReviewesPresenterProtocol {
     
     func search(with query: String) {
         interactor.searchReviewes(with: query)
+    }
+    
+    func filter(by textDate: String) {
+        isFilter = true
+        let filterArray = articles.filter { $0.publicationDate == textDate } 
+        print("filterArray: \(filterArray.count)")
+        view?.showReviewes(articles: filterArray)
     }
 }

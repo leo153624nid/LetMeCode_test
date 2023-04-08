@@ -80,21 +80,21 @@ class ReviewesTableViewCellViewModel {
     var imageData: Data? = nil
     let linkURL: URL?
     let byline: String?
-    let updatedDate: String?
+    let publicationDate: String?
     
     init(title: String,
          subtitle: String?,
          imageURL: URL?,
          linkURL: URL?,
          byline: String?,
-         updatedDate: String?
+         publicationDate: String?
     ) {
         self.title = title
         self.subtitle = subtitle
         self.imageURL = imageURL
         self.linkURL = linkURL
         self.byline = byline
-        self.updatedDate = updatedDate
+        self.publicationDate = publicationDate
     }
 }
 
