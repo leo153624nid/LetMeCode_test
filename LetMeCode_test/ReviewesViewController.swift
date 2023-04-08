@@ -25,6 +25,12 @@ class ReviewesViewController: UIViewController {
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         return refreshControl
     }()
+    private let searchField: UITextField = {
+        let textField = UITextField()
+        textField.backgroundColor = .white
+        textField.placeholder = " search"
+        return textField
+    }()
     
     private var articles = [ReviewesTableViewCellViewModel]()
 
@@ -32,6 +38,7 @@ class ReviewesViewController: UIViewController {
         super.viewDidLoad()
         title = "Reviewes"
         view.backgroundColor = .lightGray
+        view.addSubview(searchField)
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
@@ -43,6 +50,7 @@ class ReviewesViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        searchField.frame = CGRect(x: 10, y: 80, width: view.bounds.width - 20, height: 40)
         tableView.frame = CGRect(x: 10, y: 200, width: view.bounds.width - 20, height: view.bounds.height - 200)
     }
     
@@ -125,3 +133,10 @@ extension ReviewesViewController: UIScrollViewDelegate {
         }
     }
 }
+
+//extension ReviewesViewController: UISearchBarDelegate {
+//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+//        guard let text = searchBar.text, !text.isEmpty else { return }
+//        print (text)
+//    }
+//}
