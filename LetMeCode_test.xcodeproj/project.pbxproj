@@ -82,12 +82,12 @@
 		FA5AA98E29DC91E70092143B /* LetMeCode_test */ = {
 			isa = PBXGroup;
 			children = (
-				FA5AA9DF29E1C9420092143B /* Utils + Extensions */,
 				FA5AA9A629DDCBFE0092143B /* Application */,
-				FA5AA9B829DF1ACE0092143B /* Reviewes */,
-				FA5AA9B929DF1AFD0092143B /* Critics */,
-				FA5AA9B429DDFD390092143B /* Models */,
 				FA5AA9AB29DDFC3D0092143B /* ApiCaller */,
+				FA5AA9B929DF1AFD0092143B /* Critics */,
+				FA5AA9B829DF1ACE0092143B /* Reviewes */,
+				FA5AA9DF29E1C9420092143B /* Utils + Extensions */,
+				FA5AA9B429DDFD390092143B /* Models */,
 				FA5AA99329DC91E70092143B /* ViewController.swift */,
 				FA5AA9A829DDCC240092143B /* SupportingFiles */,
 			);
