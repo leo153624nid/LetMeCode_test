@@ -25,6 +25,7 @@
 		FA5AA9D529DF369F0092143B /* CriticsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA9D429DF369F0092143B /* CriticsRouter.swift */; };
 		FA5AA9D829DF36D20092143B /* CriticsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA9D729DF36D20092143B /* CriticsInteractor.swift */; };
 		FA5AA9DD29DF3F1D0092143B /* ReviewesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA9DC29DF3F1D0092143B /* ReviewesTableViewCell.swift */; };
+		FA5AA9E129E1C97E0092143B /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA9E029E1C97E0092143B /* DateExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		FA5AA9D429DF369F0092143B /* CriticsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CriticsRouter.swift; sourceTree = "<group>"; };
 		FA5AA9D729DF36D20092143B /* CriticsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CriticsInteractor.swift; sourceTree = "<group>"; };
 		FA5AA9DC29DF3F1D0092143B /* ReviewesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewesTableViewCell.swift; sourceTree = "<group>"; };
+		FA5AA9E029E1C97E0092143B /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 		FA5AA98E29DC91E70092143B /* LetMeCode_test */ = {
 			isa = PBXGroup;
 			children = (
+				FA5AA9DF29E1C9420092143B /* Utils + Extensions */,
 				FA5AA9A629DDCBFE0092143B /* Application */,
 				FA5AA9B829DF1ACE0092143B /* Reviewes */,
 				FA5AA9B929DF1AFD0092143B /* Critics */,
@@ -149,6 +152,14 @@
 				FA5AA9D729DF36D20092143B /* CriticsInteractor.swift */,
 			);
 			name = Critics;
+			sourceTree = "<group>";
+		};
+		FA5AA9DF29E1C9420092143B /* Utils + Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				FA5AA9E029E1C97E0092143B /* DateExtension.swift */,
+			);
+			path = "Utils + Extensions";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,6 +245,7 @@
 				FA5AA9AD29DDFC650092143B /* ApiCaller.swift in Sources */,
 				FA5AA9C529DF1F740092143B /* ReviewesInteractor.swift in Sources */,
 				FA5AA9C229DF1EED0092143B /* ReviewesRouter.swift in Sources */,
+				FA5AA9E129E1C97E0092143B /* DateExtension.swift in Sources */,
 				FA5AA9D829DF36D20092143B /* CriticsInteractor.swift in Sources */,
 				FA5AA9CF29DF36090092143B /* CriticsViewController.swift in Sources */,
 			);

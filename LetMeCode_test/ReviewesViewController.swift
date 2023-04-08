@@ -28,12 +28,22 @@ class ReviewesViewController: UIViewController {
     private let searchField: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .white
-        textField.placeholder = " search"
+        textField.placeholder = "search"
         textField.borderStyle = .roundedRect
         textField.contentVerticalAlignment = .center
         textField.textAlignment = .center
         return textField
     }()
+    private let dateField: UITextField = {
+        let textField = UITextField()
+        textField.backgroundColor = .white
+        textField.placeholder = "filter by date" // todo
+        textField.borderStyle = .roundedRect
+        textField.contentVerticalAlignment = .center
+        textField.textAlignment = .center
+        return textField
+    }()
+    private let datePicker = UIDatePicker()
     
     private var articles = [ReviewesTableViewCellViewModel]()
 
@@ -42,11 +52,15 @@ class ReviewesViewController: UIViewController {
         title = "Reviewes"
         view.backgroundColor = .lightGray
         view.addSubview(searchField)
+        view.addSubview(dateField)
         view.addSubview(tableView)
+        createDatePicker()
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.refreshControl = self.refreshControl
         searchField.delegate = self
+        dateField.delegate = self
         
         presenter?.viewDidLoaded()
         tableView.refreshControl?.beginRefreshing()
@@ -55,6 +69,7 @@ class ReviewesViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         searchField.frame = CGRect(x: 10, y: 80, width: view.bounds.width - 20, height: 40)
+        dateField.frame = CGRect(x: 10, y: 140, width: view.bounds.width - 20, height: 40)
         tableView.frame = CGRect(x: 10, y: 200, width: view.bounds.width - 20, height: view.bounds.height - 200)
     }
     
@@ -79,10 +94,32 @@ class ReviewesViewController: UIViewController {
         return footerView
     }
     
+    private func createDatePicker() {
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done,
+                                         target: nil,
+                                         action: #selector(doneButtonPressed))
+        toolbar.setItems([doneButton], animated: true)
+        
+        dateField.inputAccessoryView = toolbar
+        dateField.inputView = datePicker
+        datePicker.datePickerMode = .date
+    }
+    
+    @objc private func doneButtonPressed() {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        
+        dateField.text = datePicker.date.toMyFormat
+        self.view.endEditing(true)
+    }
+    
     func criticsButtonTapped(_ sender: Any) {
         presenter?.criticsButtonTapped()
     }
-
 }
 
 extension ReviewesViewController: ReviewesViewProtocol {
@@ -137,18 +174,25 @@ extension ReviewesViewController: UIScrollViewDelegate {
             guard !(presenter?.isPaginating ?? true) else { return }
             print("fetch more")
             tableView.tableFooterView = createSpinnerFooter()
-            presenter?.loadMore()  
+            presenter?.loadMore()
         }
     }
 }
 
 extension ReviewesViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
-        guard let text = textField.text, !text.isEmpty else { return }
-        print (text.lowercased())
-        presenter?.search(with: text.lowercased())
-        DispatchQueue.main.async {
-            self.tableView.contentOffset = .zero
+        if textField == searchField {
+            guard let text = textField.text, !text.isEmpty else { return }
+            print (text.lowercased())
+            tableView.refreshControl?.beginRefreshing()
+            presenter?.search(with: text.lowercased())
+            DispatchQueue.main.async {
+                self.tableView.contentOffset = .zero
+            }
+        }
+        
+        if textField == dateField {
+            print(textField.text ?? "nil")
         }
     }
     
@@ -157,3 +201,5 @@ extension ReviewesViewController: UITextFieldDelegate {
         return true
     }
 }
+
+
