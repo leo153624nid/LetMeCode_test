@@ -17,28 +17,32 @@ protocol APICallerProtocol {
 
 protocol UrlInfoProtocol {
     var currentURL: URL? { get set }
-    var pageSize: Int { get set }
+    var limit: Int { get set }
+    var offset: Int { get set }
     var page: Int { get set }
     var apiKey: String { get set }
     
-    func getNextPageURL() -> URL?
+    func getReviewesNextPageURL() -> URL?
 }
 
 final class UrlInfo: UrlInfoProtocol {
     var currentURL: URL?
-    var pageSize = 10
+    var limit = 10
+    var offset = 0
     var page = 1
     var apiKey: String
     
     init(apiKey: String) {
-        self.currentURL = URL(string: "https://api.nytimes.com/svc/movies/v2/reviews/search.json?query=godfather&api-key=\(apiKey)")
+        self.currentURL = URL(string: "https://api.nytimes.com/svc/movies/v2/reviews/picks.json?api-key=\(apiKey)")
         self.apiKey = apiKey
     }
     
-    func getNextPageURL() -> URL? {
-        guard let url = URL(string: /* TODO */ "https://newsapi.org/v2/everything?q=Apple&pageSize=\(pageSize)&page=\(page)&apiKey=\(apiKey)") else { return nil }
+    func getReviewesNextPageURL() -> URL? {
+        guard let url = URL(string: /* TODO */ "https://api.nytimes.com/svc/movies/v2/reviews/picks.json?api-key=\(apiKey)&offset=\(offset)&limit=\(limit)") else { return nil }
         self.currentURL = url
         self.page += 1
+        self.offset = page * limit
+        
         return self.currentURL
     }
 }
@@ -55,7 +59,7 @@ final class APICaller: APICallerProtocol {
         if pagination {
             isPaginating = true
         }
-        guard let url = urlInfo.getNextPageURL() else { return }
+        guard let url = urlInfo.getReviewesNextPageURL() else { return }
         
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let error = error {
