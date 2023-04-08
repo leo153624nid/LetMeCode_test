@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 
 protocol ReviewesViewProtocol: AnyObject {
     func showReviewes(articles: [ReviewesTableViewCellViewModel])
@@ -46,8 +47,8 @@ class ReviewesViewController: UIViewController {
 
 extension ReviewesViewController: ReviewesViewProtocol {
     func showReviewes(articles: [ReviewesTableViewCellViewModel]) {
-        print("reviewes: \(String(describing: self.articles.count))")
         self.articles = articles
+        print("reviewes: \(String(describing: self.articles.count))")
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
@@ -57,11 +58,11 @@ extension ReviewesViewController: ReviewesViewProtocol {
 extension ReviewesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-//        let article = articles[indexPath.row]
+        let article = articles[indexPath.row]
         
-//        guard let url = URL(string: article.url ?? "") else { return }
-//        let vc = SFSafariViewController(url: url)
-//        present(vc, animated: true, completion: nil)
+        guard let url = article.linkURL else { return }
+        let vc = SFSafariViewController(url: url)
+        present(vc, animated: true, completion: nil)
     }
 }
 

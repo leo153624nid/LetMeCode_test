@@ -78,14 +78,17 @@ class ReviewesTableViewCellViewModel {
     let subtitle: String?
     let imageURL: URL?
     var imageData: Data? = nil
+    let linkURL: URL?
     
     init(title: String,
          subtitle: String?,
-         imageURL: URL?
+         imageURL: URL?,
+         linkURL: URL?
     ) {
         self.title = title
         self.subtitle = subtitle
         self.imageURL = imageURL
+        self.linkURL = linkURL
     }
 }
 

@@ -88,7 +88,7 @@ class ReviewesTableViewCell: UITableViewCell {
                     }
                 }
                 else {
-                    print("error fetching")
+                    print("error fetching image")
                 }
             }
         }

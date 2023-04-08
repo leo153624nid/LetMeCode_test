@@ -35,8 +35,9 @@ extension ReviewesPresenter: ReviewesPresenterProtocol {
         
         articles.append(contentsOf: reviewes.compactMap({
             ReviewesTableViewCellViewModel(title: $0.displayTitle,
-                                           subtitle: $0.summaryShort ,
-                                           imageURL: URL(string: $0.multimedia.src ))
+                                           subtitle: $0.summaryShort,
+                                           imageURL: URL(string: $0.multimedia.src),
+                                           linkURL: URL(string: $0.link.url))
         }))
         view?.showReviewes(articles: articles)
     }
