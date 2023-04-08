@@ -37,7 +37,9 @@ extension ReviewesPresenter: ReviewesPresenterProtocol {
             ReviewesTableViewCellViewModel(title: $0.displayTitle,
                                            subtitle: $0.summaryShort,
                                            imageURL: URL(string: $0.multimedia.src),
-                                           linkURL: URL(string: $0.link.url))
+                                           linkURL: URL(string: $0.link.url),
+                                           byline: $0.byline,
+                                           updatedDate: $0.dateUpdated)
         }))
         view?.showReviewes(articles: articles)
     }
