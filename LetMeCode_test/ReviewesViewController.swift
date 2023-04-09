@@ -114,11 +114,13 @@ class ReviewesViewController: UIViewController {
         searchField.text = nil
         dateField.text = nil
     }
+    
     private func setupNavigationBar() {
         let navBar = self.navigationController?.navigationBar
-        navBar?.barStyle = .black
+        navBar?.isTranslucent = false
+        navBar?.barTintColor = .orange
+        navBar?.titleTextAttributes = [.foregroundColor: UIColor.white]
         navBar?.tintColor = .white
-        navBar?.backgroundColor = .orange
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Reviewes", style: .plain, target: self, action: #selector(reviewesButtonTapped))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Critics", style: .plain, target: self, action: #selector(criticsButtonTapped))
