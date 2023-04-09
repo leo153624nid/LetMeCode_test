@@ -14,11 +14,6 @@ protocol CriticsViewProtocol: AnyObject {
 class CriticsViewController: UIViewController {
     var presenter: CriticsPresenterProtocol?
     
-//    private let collectionView: UICollectionView = {
-//        let collection = UICollectionView(frame: <#T##CGRect#>, collectionViewLayout: <#T##UICollectionViewLayout#>)
-//        collection.register(CriticsCollectionViewCell.self, forCellWithReuseIdentifier: CriticsCollectionViewCell.identifier)
-//        return collection
-//    }()
     private var collectionView: UICollectionView!
     private let refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -63,8 +58,8 @@ class CriticsViewController: UIViewController {
                                                 height: 30))
             button.addTarget(self, action: #selector(reviewesButtonTapped), for: .touchUpInside)
             button.setTitle("Reviewes", for: .normal)
-            button.setTitleColor(.orange, for: .normal)
-            button.backgroundColor = .white
+            button.setTitleColor(.white, for: .normal)
+            button.backgroundColor = .orange
             button.layer.borderWidth = 1
             button.layer.borderColor = CGColor(red: 255, green: 255, blue: 255, alpha: 1)
             
@@ -77,8 +72,8 @@ class CriticsViewController: UIViewController {
                                                 height: 30))
             button.addTarget(self, action: #selector(criticsButtonTapped), for: .touchUpInside)
             button.setTitle("Critics", for: .normal)
-            button.setTitleColor(.white, for: .normal)
-            button.backgroundColor = .orange
+            button.setTitleColor(.orange, for: .normal)
+            button.backgroundColor = .white
             button.layer.borderWidth = 1
             button.layer.borderColor = CGColor(red: 255, green: 255, blue: 255, alpha: 1)
 
@@ -99,10 +94,9 @@ class CriticsViewController: UIViewController {
         view.backgroundColor = .lightGray
         view.addSubview(bar)
         view.addSubview(searchField)
-
         setupCollectionView()
         setupNavigationBar()
-                view.addSubview(collectionView)
+        view.addSubview(collectionView)
         
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -116,7 +110,6 @@ class CriticsViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         searchField.frame = CGRect(x: 10, y: 60, width: view.bounds.width - 20, height: 40)
-        collectionView.frame = CGRect(x: 10, y: 180, width: view.bounds.width - 20, height: view.bounds.height - 180)
     }
     
     @objc private func refresh(sender: UIRefreshControl) {
@@ -126,9 +119,9 @@ class CriticsViewController: UIViewController {
     
     private func setupCollectionView() {
         collectionView = UICollectionView(frame: CGRect(x: 10,
-                                                        y: 180,
+                                                        y: 120,
                                                         width: view.bounds.width - 20,
-                                                        height: view.bounds.height - 180),
+                                                        height: view.bounds.height - 120),
                                           collectionViewLayout: UICollectionViewFlowLayout())
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.backgroundColor = .yellow
