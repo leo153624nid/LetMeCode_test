@@ -119,13 +119,14 @@ class CriticsViewController: UIViewController {
     
     private func setupCollectionView() {
         collectionView = UICollectionView(frame: CGRect(x: 10,
-                                                        y: 120,
+                                                        y: 130,
                                                         width: view.bounds.width - 20,
-                                                        height: view.bounds.height - 120),
+                                                        height: view.bounds.height - 130),
                                           collectionViewLayout: UICollectionViewFlowLayout())
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        collectionView.backgroundColor = .yellow
-        collectionView.register(CriticsCollectionViewCell.self, forCellWithReuseIdentifier: CriticsCollectionViewCell.identifier)
+        collectionView.backgroundColor = .lightGray
+        collectionView.register(CriticsCollectionViewCell.self,
+                                forCellWithReuseIdentifier: CriticsCollectionViewCell.identifier)
     }
     
     private func setupNavigationBar() {
@@ -145,18 +146,6 @@ class CriticsViewController: UIViewController {
     @objc private func criticsButtonTapped(_ sender: Any) {
         
     }
-    
-    private func createSpinnerFooter() -> UIView {
-        let footerView = UIView(frame: CGRect(x: 0,
-                                              y: 0,
-                                              width: view.frame.size.width,
-                                              height: 100))
-        let spinner = UIActivityIndicatorView()
-        spinner.center = footerView.center
-        footerView.addSubview(spinner)
-        spinner.startAnimating()
-        return footerView
-    }
 }
 
 extension CriticsViewController: CriticsViewProtocol {
@@ -165,7 +154,6 @@ extension CriticsViewController: CriticsViewProtocol {
         print("critics: \(String(describing: self.articles.count))")
         DispatchQueue.main.async {
             self.collectionView.refreshControl?.endRefreshing()
-//            self.collectionView.tableFooterView = nil
             self.collectionView.reloadData()
         }
     }
@@ -183,7 +171,8 @@ extension CriticsViewController: UICollectionViewDelegate {
 }
 
 extension CriticsViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView,
+                        numberOfItemsInSection section: Int) -> Int {
         return articles.count
     }
     
@@ -196,10 +185,12 @@ extension CriticsViewController: UICollectionViewDataSource {
         cell.configure(with: articles[indexPath.row])
         return cell
     }
+}
 
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 200
-//    }
+extension CriticsViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize.init(width: view.frame.size.width / 2 - 20, height: 200)
+    }
 }
 
 extension CriticsViewController: UIScrollViewDelegate {
@@ -224,7 +215,7 @@ extension CriticsViewController: UITextFieldDelegate {
 //            tableView.refreshControl?.beginRefreshing()
             presenter?.search(with: text.lowercased())
             DispatchQueue.main.async {
-//                self.tableView.contentOffset = .zero
+                self.collectionView.contentOffset = .zero
             }
         }
     }
