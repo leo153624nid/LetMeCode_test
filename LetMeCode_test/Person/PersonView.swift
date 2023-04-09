@@ -24,7 +24,7 @@ class PersonDetailView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
-        label.font = .systemFont(ofSize: 18, weight: .semibold)
+        label.font = .systemFont(ofSize: 22, weight: .semibold)
         label.text = "Test Title" // todo
         return label
     }()
@@ -35,6 +35,7 @@ class PersonDetailView: UIView {
         label.font = .systemFont(ofSize: 13, weight: .semibold)
         label.backgroundColor = .blue
         label.textColor = .white
+        label.textAlignment = .center
         label.text = "Test status" // todo
         return label
     }()
@@ -45,14 +46,13 @@ class PersonDetailView: UIView {
         label.font = .systemFont(ofSize: 11, weight: .light)
         label.textAlignment = .left
         label.text = "Lorem Ipsum - это текст-рыба, часто используемый в печати ивэб-дизайне. Lorem Ipsum является стандартной рыбой для текстов налатинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов,используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только "
-        label.textColor = .brown
         return label
     }()
 
     init() {
         super.init(frame: .zero)
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.backgroundColor = .green
+        self.backgroundColor = .white
         
         self.addSubview(imageView)
         self.addSubview(title)
@@ -81,15 +81,15 @@ class PersonDetailView: UIView {
         
         // setup status
         status.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 10).isActive = true
-        status.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: -20).isActive = true
+        status.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 20).isActive = true
         status.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10).isActive = true
         status.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
         // setup bio
         bio.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10).isActive = true
-        bio.leadingAnchor.constraint(equalTo: self.trailingAnchor, constant: 10).isActive = true
-        bio.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.95).isActive = true
-//        bio.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        bio.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
+        bio.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10).isActive = true
+        bio.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10).isActive = true
     }
 }
 
