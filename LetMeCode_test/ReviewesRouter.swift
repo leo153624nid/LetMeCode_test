@@ -17,7 +17,8 @@ class ReviewesRouter: ReviewesRouterProtocol {
     
     func openCritics() {
         let vc = CriticsModuleBuilder.build()
-        viewController?.present(vc, animated: true, completion: nil)
+//        viewController?.present(vc, animated: true, completion: nil)
+        viewController?.navigationController?.pushViewController(vc, animated: true)
     }
     
 }
