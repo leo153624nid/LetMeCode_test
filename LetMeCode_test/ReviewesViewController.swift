@@ -82,13 +82,13 @@ class ReviewesViewController: UIViewController {
         let view = UIView()
         view.backgroundColor = .orange
         
-        let buttonReviewes = UIButton()
+        let buttonReviewes = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 30))
         buttonReviewes.addTarget(self, action: #selector(reviewesButtonTapped), for: .touchUpInside)
         buttonReviewes.setTitle("Re", for: .normal)
         buttonReviewes.setTitleColor(.white, for: .normal)
-        buttonReviewes.backgroundColor = .red
+        buttonReviewes.backgroundColor = .green
         
-        let buttonCritics = UIButton()
+        let buttonCritics = UIButton(frame: CGRect(x: 50, y: 0, width: 50, height: 30))
         buttonCritics.addTarget(self, action: #selector(criticsButtonTapped), for: .touchUpInside)
         buttonCritics.setTitle("Cr", for: .normal)
         buttonCritics.setTitleColor(.white, for: .normal)
@@ -98,7 +98,7 @@ class ReviewesViewController: UIViewController {
         view.addSubview(buttonCritics)
 //        buttonReviewes.frame(forAlignmentRect: CGRect(x: 0, y: 0, width: view.bounds.width / 2 - 20, height: 30))
 //        buttonCritics.frame(forAlignmentRect: CGRect(x: 0, y: 0, width: view.bounds.width / 2 - 20, height: 30))
-//
+
         return view
     }()
     
