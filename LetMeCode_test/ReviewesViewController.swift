@@ -78,24 +78,6 @@ class ReviewesViewController: UIViewController {
         return textField
     }()
     private let datePicker = UIDatePicker()
-//    private let buttonReviewes: UIButton = {
-//        let button = UIButton()
-//        button.addTarget(self, action: #selector(reviewesButtonTapped), for: .touchUpInside)
-//        button.setTitle("Reviewes", for: .normal)
-//        button.setTitleColor(.white, for: .normal)
-//        button.backgroundColor = .green
-//
-//        return button
-//    }()
-//    private let buttonCritics: UIButton = {
-//        let button = UIButton()
-//        button.addTarget(self, action: #selector(criticsButtonTapped), for: .touchUpInside)
-//        button.setTitle("Critics", for: .normal)
-//        button.setTitleColor(.white, for: .normal)
-//        button.backgroundColor = .red
-//
-//        return button
-//    }()
     private let bar: UIView = {
         let bar = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 40))
         bar.backgroundColor = .orange
@@ -107,8 +89,10 @@ class ReviewesViewController: UIViewController {
                                                 height: 30))
             button.addTarget(self, action: #selector(reviewesButtonTapped), for: .touchUpInside)
             button.setTitle("Reviewes", for: .normal)
-            button.setTitleColor(.white, for: .normal)
-            button.backgroundColor = .green
+            button.setTitleColor(.orange, for: .normal)
+            button.backgroundColor = .white
+            button.layer.borderWidth = 1
+            button.layer.borderColor = CGColor(red: 255, green: 255, blue: 255, alpha: 1)
             
             return button
         }()
@@ -120,7 +104,9 @@ class ReviewesViewController: UIViewController {
             button.addTarget(self, action: #selector(criticsButtonTapped), for: .touchUpInside)
             button.setTitle("Critics", for: .normal)
             button.setTitleColor(.white, for: .normal)
-            button.backgroundColor = .red
+            button.backgroundColor = .orange
+            button.layer.borderWidth = 1
+            button.layer.borderColor = CGColor(red: 255, green: 255, blue: 255, alpha: 1)
 
             return button
         }()
@@ -138,8 +124,6 @@ class ReviewesViewController: UIViewController {
         title = "Reviewes"
         view.backgroundColor = .lightGray
         view.addSubview(bar)
-//        view.addSubview(buttonReviewes)
-//        view.addSubview(buttonCritics)
         view.addSubview(searchField)
         view.addSubview(dateField)
         view.addSubview(tableView)
@@ -158,15 +142,6 @@ class ReviewesViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-//        buttonReviewes.frame = CGRect(x: 10,
-//                                      y: 0,
-//                                      width: view.bounds.width / 2 - 10,
-//                                      height: 30)
-//        buttonCritics.frame = CGRect(x: view.bounds.width / 2,
-//                                     y: 0,
-//                                     width: view.bounds.width / 2 - 10,
-//                                     height: 30)
-//        bar.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 40)
         searchField.frame = CGRect(x: 10, y: 60, width: view.bounds.width - 20, height: 40)
         dateField.frame = CGRect(x: 10, y: 120, width: view.bounds.width - 20, height: 40)
         tableView.frame = CGRect(x: 10, y: 180, width: view.bounds.width - 20, height: view.bounds.height - 180)
@@ -187,8 +162,8 @@ class ReviewesViewController: UIViewController {
         navBar?.setBackgroundImage(UIImage(), for: .default)
         navBar?.shadowImage = UIImage()
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Reviewes", style: .plain, target: self, action: #selector(reviewesButtonTapped))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Critics", style: .plain, target: self, action: #selector(criticsButtonTapped))
+//        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Reviewes", style: .plain, target: self, action: #selector(reviewesButtonTapped))
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Critics", style: .plain, target: self, action: #selector(criticsButtonTapped))
     }
     
     @objc private func reviewesButtonTapped(_ sender: Any) {
@@ -233,7 +208,6 @@ class ReviewesViewController: UIViewController {
         dateField.text = datePicker.date.toMyFormat
         self.view.endEditing(true)
     }
-    
     
 }
 

@@ -26,6 +26,8 @@
 		FA5AA9D829DF36D20092143B /* CriticsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA9D729DF36D20092143B /* CriticsInteractor.swift */; };
 		FA5AA9DD29DF3F1D0092143B /* ReviewesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA9DC29DF3F1D0092143B /* ReviewesTableViewCell.swift */; };
 		FA5AA9E129E1C97E0092143B /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA9E029E1C97E0092143B /* DateExtension.swift */; };
+		FA5AA9E729E2B9CE0092143B /* ReviewesEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA9E629E2B9CE0092143B /* ReviewesEntity.swift */; };
+		FA5AA9EA29E2BA2E0092143B /* CriticsEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA9E929E2BA2E0092143B /* CriticsEntity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +52,8 @@
 		FA5AA9D729DF36D20092143B /* CriticsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CriticsInteractor.swift; sourceTree = "<group>"; };
 		FA5AA9DC29DF3F1D0092143B /* ReviewesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewesTableViewCell.swift; sourceTree = "<group>"; };
 		FA5AA9E029E1C97E0092143B /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
+		FA5AA9E629E2B9CE0092143B /* ReviewesEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewesEntity.swift; sourceTree = "<group>"; };
+		FA5AA9E929E2BA2E0092143B /* CriticsEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CriticsEntity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,12 +136,13 @@
 		FA5AA9B829DF1ACE0092143B /* Reviewes */ = {
 			isa = PBXGroup;
 			children = (
-				FA5AA9BA29DF1B1B0092143B /* ReviewesViewController.swift */,
-				FA5AA9BE29DF1D300092143B /* ReviewesPresenter.swift */,
-				FA5AA9C129DF1EED0092143B /* ReviewesRouter.swift */,
 				FA5AA9C429DF1F740092143B /* ReviewesInteractor.swift */,
-				FA5AA9C729DF1FF40092143B /* ReviewesModuleBuilder.swift */,
+				FA5AA9BE29DF1D300092143B /* ReviewesPresenter.swift */,
+				FA5AA9BA29DF1B1B0092143B /* ReviewesViewController.swift */,
 				FA5AA9DC29DF3F1D0092143B /* ReviewesTableViewCell.swift */,
+				FA5AA9C129DF1EED0092143B /* ReviewesRouter.swift */,
+				FA5AA9C729DF1FF40092143B /* ReviewesModuleBuilder.swift */,
+				FA5AA9E629E2B9CE0092143B /* ReviewesEntity.swift */,
 			);
 			name = Reviewes;
 			sourceTree = "<group>";
@@ -145,11 +150,12 @@
 		FA5AA9B929DF1AFD0092143B /* Critics */ = {
 			isa = PBXGroup;
 			children = (
-				FA5AA9CB29DF304D0092143B /* CriticsModuleBuilder.swift */,
-				FA5AA9CE29DF36090092143B /* CriticsViewController.swift */,
-				FA5AA9D129DF365A0092143B /* CriticsPresenter.swift */,
-				FA5AA9D429DF369F0092143B /* CriticsRouter.swift */,
 				FA5AA9D729DF36D20092143B /* CriticsInteractor.swift */,
+				FA5AA9D129DF365A0092143B /* CriticsPresenter.swift */,
+				FA5AA9CE29DF36090092143B /* CriticsViewController.swift */,
+				FA5AA9D429DF369F0092143B /* CriticsRouter.swift */,
+				FA5AA9CB29DF304D0092143B /* CriticsModuleBuilder.swift */,
+				FA5AA9E929E2BA2E0092143B /* CriticsEntity.swift */,
 			);
 			name = Critics;
 			sourceTree = "<group>";
@@ -231,8 +237,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA5AA9E729E2B9CE0092143B /* ReviewesEntity.swift in Sources */,
 				FA5AA9BB29DF1B1B0092143B /* ReviewesViewController.swift in Sources */,
 				FA5AA99429DC91E70092143B /* ViewController.swift in Sources */,
+				FA5AA9EA29E2BA2E0092143B /* CriticsEntity.swift in Sources */,
 				FA5AA9CC29DF304D0092143B /* CriticsModuleBuilder.swift in Sources */,
 				FA5AA9DD29DF3F1D0092143B /* ReviewesTableViewCell.swift in Sources */,
 				FA5AA9C829DF1FF40092143B /* ReviewesModuleBuilder.swift in Sources */,

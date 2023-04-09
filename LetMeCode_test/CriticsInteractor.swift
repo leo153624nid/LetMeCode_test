@@ -8,18 +8,31 @@
 import Foundation
 
 protocol CriticsInteractorProtocol: AnyObject {
-    func loadCritics()
+    func loadCritics(pagination: Bool)
+    func refreshCritics()
+    func searchCritics(with query: String)
 }
 
 class CriticsInteractor: CriticsInteractorProtocol {
     weak var presenter: CriticsPresenterProtocol?
     private var apiCaller: APICallerProtocol
     
+    private var critics = [Critic]() 
+    private var query = ""
+    
     init(with service: APICallerProtocol) {
         self.apiCaller = service
     }
     
-    func loadCritics() {
+    func loadCritics(pagination: Bool) {
+        
+    }
+    
+    func refreshCritics() {
+        
+    }
+    
+    func searchCritics(with query: String) {
         
     }
 }

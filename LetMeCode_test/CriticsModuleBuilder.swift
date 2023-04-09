@@ -9,18 +9,17 @@ import Foundation
 import UIKit
 
 class CriticsModuleBuilder {
-    static func build() -> UIViewController { // change to CriticsViewController
-//        let interactor = ReviewesInteractor(with: APICaller.shared)
-//        let router = ReviewesRouter()
-//        let presenter = ReviewesPresenter(router: router, interactor: interactor)
-//        let viewController = ReviewesViewController()
-//
-//        viewController.presenter = presenter
-//        presenter.view = viewController
-//        interactor.presenter = presenter
-//        router.viewController = viewController
+    static func build() -> UIViewController {
+        let interactor = CriticsInteractor(with: APICaller.shared)
+        let router = CriticsRouter()
+        let presenter = CriticsPresenter(router: router, interactor: interactor)
+        let viewController = CriticsViewController()
+
+        viewController.presenter = presenter
+        presenter.view = viewController
+        interactor.presenter = presenter
+        router.viewController = viewController
         
-//        return viewController
-        return UIViewController() // to delete
+        return viewController
     }
 }
