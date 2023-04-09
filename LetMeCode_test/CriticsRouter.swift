@@ -18,5 +18,6 @@ class CriticsRouter: CriticsRouterProtocol {
         // вернуться на прошлый экран, а не создавать новый
 //        let vc = ReviewesModuleBuilder.build()
 //        viewController?.present(vc, animated: true, completion: nil)
+        viewController?.navigationController?.popViewController(animated: true)
     }
 }
