@@ -18,7 +18,8 @@ class PersonViewController: UIViewController {
     var person: CriticsCollectionViewCellViewModel?
     
     private let tableView: UITableView = {
-        let table = UITableView()
+        let table = UITableView(frame: .zero)
+        table.translatesAutoresizingMaskIntoConstraints = false
         table.register(ReviewesTableViewCell.self, forCellReuseIdentifier: ReviewesTableViewCell.identifier)
         return table
     }()
@@ -27,50 +28,7 @@ class PersonViewController: UIViewController {
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         return refreshControl
     }()
-    private let personView: UIView = {
-        let bar = UIView(frame: CGRect(x: 5, y: 0, width: UIScreen.main.bounds.width - 10, height: 200)) // todo
-        bar.backgroundColor = .green
-        
-        let imageView: UIImageView = {
-            let imageView = UIImageView()
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            imageView.layer.cornerRadius = 6
-            imageView.layer.masksToBounds = true
-            imageView.clipsToBounds = true
-            imageView.backgroundColor = .secondarySystemBackground
-            imageView.contentMode = .scaleAspectFill
-            return imageView
-        }()
-        let title: UILabel = {
-            let label = UILabel()
-            label.translatesAutoresizingMaskIntoConstraints = false
-            label.numberOfLines = 0
-            label.font = .systemFont(ofSize: 18, weight: .semibold)
-            return label
-        }()
-        let status: UILabel = {
-            let label = UILabel()
-            label.translatesAutoresizingMaskIntoConstraints = false
-            label.numberOfLines = 0
-            label.font = .systemFont(ofSize: 13, weight: .semibold)
-            return label
-        }()
-        let bio: UILabel = {
-            let label = UILabel()
-            label.translatesAutoresizingMaskIntoConstraints = false
-            label.numberOfLines = 0
-            label.font = .systemFont(ofSize: 13, weight: .light)
-            label.textAlignment = .left
-            return label
-        }()
-        
-        bar.addSubview(imageView)
-        bar.addSubview(title)
-        bar.addSubview(status)
-        bar.addSubview(bio)
-
-        return bar
-    }()
+    private let personView = PersonDetailView()
 
     private var articles = [ReviewesTableViewCellViewModel]()
 
@@ -93,9 +51,18 @@ class PersonViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-//        searchField.frame = CGRect(x: 10, y: 60, width: view.bounds.width - 20, height: 40)
-//        dateField.frame = CGRect(x: 10, y: 120, width: view.bounds.width - 20, height: 40)
-        tableView.frame = CGRect(x: 10, y: 180, width: view.bounds.width - 20, height: view.bounds.height - 180)
+        // setup personView
+        personView.topAnchor.constraint(equalTo: view.topAnchor, constant: 24).isActive = true
+        personView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
+        personView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5).isActive = true
+//        personView.heightAnchor.constraint(equalToConstant: 104).isActive = true
+        
+        // setup tableView
+        tableView.topAnchor.constraint(equalTo: personView.bottomAnchor, constant: 24).isActive = true
+        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
+        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+//        tableView.frame = CGRect(x: 10, y: 180, width: view.bounds.width - 20, height: view.bounds.height - 180)
     }
     
     @objc private func refresh(sender: UIRefreshControl) {
