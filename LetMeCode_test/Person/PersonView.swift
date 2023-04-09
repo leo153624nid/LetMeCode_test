@@ -17,7 +17,6 @@ class PersonDetailView: UIView {
         imageView.clipsToBounds = true
         imageView.backgroundColor = .secondarySystemBackground
         imageView.contentMode = .scaleAspectFill
-        imageView.image = UIImage(named: "no photo.png") // todo
         return imageView
     }()
     let title: UILabel = {
@@ -25,7 +24,6 @@ class PersonDetailView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.font = .systemFont(ofSize: 22, weight: .semibold)
-        label.text = "Test Title" // todo
         return label
     }()
     let status: UILabel = {
@@ -36,16 +34,14 @@ class PersonDetailView: UIView {
         label.backgroundColor = .blue
         label.textColor = .white
         label.textAlignment = .center
-        label.text = "Test status" // todo
         return label
     }()
     let bio: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
+        label.numberOfLines = 6 // todo
         label.font = .systemFont(ofSize: 11, weight: .light)
         label.textAlignment = .left
-        label.text = "Lorem Ipsum - это текст-рыба, часто используемый в печати ивэб-дизайне. Lorem Ipsum является стандартной рыбой для текстов налатинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов,используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только "
         return label
     }()
 
@@ -69,14 +65,14 @@ class PersonDetailView: UIView {
     func setup() {
         // setup imageView
         imageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10).isActive = true
-        imageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.33).isActive = true
+        imageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.5).isActive = true
         imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
 //        imageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
         
         // setup title
         title.topAnchor.constraint(equalTo: self.topAnchor, constant: 10).isActive = true
         title.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 20).isActive = true
-        title.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.66).isActive = true
+        title.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.5).isActive = true
         title.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
         // setup status

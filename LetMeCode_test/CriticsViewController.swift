@@ -49,7 +49,7 @@ class CriticsViewController: UIViewController {
     }()
     private let bar: UIView = {
         let bar = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 40))
-        bar.backgroundColor = .orange
+        bar.backgroundColor = .blue
         
         let buttonReviewes: UIButton = {
             let button = UIButton(frame: CGRect(x: 10,
@@ -59,7 +59,7 @@ class CriticsViewController: UIViewController {
             button.addTarget(self, action: #selector(reviewesButtonTapped), for: .touchUpInside)
             button.setTitle("Reviewes", for: .normal)
             button.setTitleColor(.white, for: .normal)
-            button.backgroundColor = .orange
+            button.backgroundColor = .blue
             button.layer.borderWidth = 1
             button.layer.borderColor = CGColor(red: 255, green: 255, blue: 255, alpha: 1)
             
@@ -72,7 +72,7 @@ class CriticsViewController: UIViewController {
                                                 height: 30))
             button.addTarget(self, action: #selector(criticsButtonTapped), for: .touchUpInside)
             button.setTitle("Critics", for: .normal)
-            button.setTitleColor(.orange, for: .normal)
+            button.setTitleColor(.blue, for: .normal)
             button.backgroundColor = .white
             button.layer.borderWidth = 1
             button.layer.borderColor = CGColor(red: 255, green: 255, blue: 255, alpha: 1)
@@ -109,7 +109,10 @@ class CriticsViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        searchField.frame = CGRect(x: 10, y: 60, width: view.bounds.width - 20, height: 40)
+        searchField.frame = CGRect(x: 10,
+                                   y: 60,
+                                   width: view.bounds.width - 20,
+                                   height: 40)
     }
     
     @objc private func refresh(sender: UIRefreshControl) {
@@ -131,7 +134,7 @@ class CriticsViewController: UIViewController {
     private func setupNavigationBar() {
         let navBar = self.navigationController?.navigationBar
         navBar?.isTranslucent = false
-        navBar?.barTintColor = .orange
+        navBar?.barTintColor = .blue
         navBar?.titleTextAttributes = [.foregroundColor: UIColor.white]
         navBar?.tintColor = .white
         navBar?.setBackgroundImage(UIImage(), for: .default)

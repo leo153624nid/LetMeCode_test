@@ -17,6 +17,8 @@ class PersonViewController: UIViewController {
     var presenter: PersonPresenterProtocol?
     var person: CriticsCollectionViewCellViewModel?
     
+    private let scrollView = UIScrollView()
+    private let contentView = UIView()
     private let tableView: UITableView = {
         let table = UITableView(frame: .zero)
         table.translatesAutoresizingMaskIntoConstraints = false
@@ -32,9 +34,43 @@ class PersonViewController: UIViewController {
 
     private var articles = [ReviewesTableViewCellViewModel]()
 
+//    private func setupScrollView() {
+//        scrollView.translatesAutoresizingMaskIntoConstraints = false
+//        contentView.translatesAutoresizingMaskIntoConstraints = false
+//        view.addSubview(scrollView)
+//        scrollView.addSubview(contentView)
+//        scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+//        scrollView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+//        scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+//        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+//
+//        contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
+//        contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
+//        contentView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+//        contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+//    }
+//    private func setupViews() {
+//        contentView.addSubview(personView)
+//        // setup personView
+//        personView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
+//        personView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5).isActive = true
+//        personView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5).isActive = true
+//
+//        contentView.addSubview(tableView)
+//        // setup tableView
+//        tableView.topAnchor.constraint(equalTo: personView.bottomAnchor, constant: 10).isActive = true
+//        tableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5).isActive = true
+//        tableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5).isActive = true
+//        tableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+//    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .lightGray
+//        setupScrollView()
+//        setupViews()
+
+//        view.addSubview(scrollView)
         view.addSubview(personView)
         view.addSubview(tableView)
         
@@ -48,14 +84,13 @@ class PersonViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         title = person?.title ?? "Person"
     }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         // setup personView
         personView.topAnchor.constraint(equalTo: view.topAnchor, constant: 10).isActive = true
         personView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
         personView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5).isActive = true
-        
+
         // setup tableView
         tableView.topAnchor.constraint(equalTo: personView.bottomAnchor, constant: 10).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
@@ -88,8 +123,19 @@ extension PersonViewController: PersonViewProtocol {
             self.tableView.refreshControl?.endRefreshing()
             self.tableView.tableFooterView = nil
             self.tableView.reloadData()
-            self.title = self.person?.title ?? "222" // todo
-            // show person data
+            
+            self.title = self.person?.title ?? "Person"
+            self.personView.title.text = self.person?.title
+            self.personView.status.text = self.person?.status == "" ? "no status" : self.person?.status
+            self.personView.bio.text = self.person?.bio
+            
+            var img : UIImage
+            if self.person?.imageData == nil {
+                img = UIImage(named: "no photo.png")!
+            } else {
+                img = UIImage(data: (self.person?.imageData)!)!
+            }
+            self.personView.imageView.image = img
         }
     }
 }
