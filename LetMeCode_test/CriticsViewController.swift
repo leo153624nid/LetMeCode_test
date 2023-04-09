@@ -210,10 +210,10 @@ extension CriticsViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == searchField {
             guard let text = textField.text, !text.isEmpty else { return }
-            print (text.lowercased())
+            print (text)
             
             collectionView.refreshControl?.beginRefreshing()
-            presenter?.search(with: text.lowercased())
+            presenter?.search(with: text)
             
             DispatchQueue.main.async {
                 self.collectionView.contentOffset = .zero

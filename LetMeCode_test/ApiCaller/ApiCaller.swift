@@ -39,7 +39,6 @@ final class UrlInfo: UrlInfoProtocol {
     static let searchReviewes = "https://api.nytimes.com/svc/movies/v2/reviews/search.json?query="
     
     static let criticsAll = "https://api.nytimes.com/svc/movies/v2/critics/all.json"
-//    static let criticsAll = "https://"
     static let searchCritics = "https://api.nytimes.com/svc/movies/v2/critics/"
     
     var currentURL: URL?
@@ -76,7 +75,7 @@ final class UrlInfo: UrlInfoProtocol {
         return self.currentURL
     }
     func getCriticsSearchURL(with query: String) -> URL? {
-        guard let url = URL(string: "\(UrlInfo.searchCritics)/\(query).json&api-key=\(apiKey)") else { return nil }
+        guard let url = URL(string: "\(UrlInfo.searchCritics)\(query).json?api-key=\(apiKey)") else { return nil }
         self.searchURL = url
         
         return self.searchURL
