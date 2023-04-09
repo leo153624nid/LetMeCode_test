@@ -34,6 +34,7 @@
 		FA5AAA0329E3100C0092143B /* PersonRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AAA0229E3100C0092143B /* PersonRouter.swift */; };
 		FA5AAA0629E3102B0092143B /* PersonEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AAA0529E3102B0092143B /* PersonEntity.swift */; };
 		FA5AAA0929E310530092143B /* PersonModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AAA0829E310530092143B /* PersonModuleBuilder.swift */; };
+		FA5AAA0C29E3337A0092143B /* PersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AAA0B29E3337A0092143B /* PersonView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +67,7 @@
 		FA5AAA0229E3100C0092143B /* PersonRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonRouter.swift; sourceTree = "<group>"; };
 		FA5AAA0529E3102B0092143B /* PersonEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonEntity.swift; sourceTree = "<group>"; };
 		FA5AAA0829E310530092143B /* PersonModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonModuleBuilder.swift; sourceTree = "<group>"; };
+		FA5AAA0B29E3337A0092143B /* PersonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +184,7 @@
 				FA5AAA0229E3100C0092143B /* PersonRouter.swift */,
 				FA5AAA0529E3102B0092143B /* PersonEntity.swift */,
 				FA5AAA0829E310530092143B /* PersonModuleBuilder.swift */,
+				FA5AAA0B29E3337A0092143B /* PersonView.swift */,
 			);
 			path = Person;
 			sourceTree = "<group>";
@@ -256,6 +259,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA5AAA0C29E3337A0092143B /* PersonView.swift in Sources */,
 				FA5AA9FA29E30FC40092143B /* PersonInteractor.swift in Sources */,
 				FA5AA9E729E2B9CE0092143B /* ReviewesEntity.swift in Sources */,
 				FA5AA9BB29DF1B1B0092143B /* ReviewesViewController.swift in Sources */,
