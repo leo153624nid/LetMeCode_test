@@ -196,14 +196,13 @@ extension CriticsViewController: UICollectionViewDelegateFlowLayout {
 extension CriticsViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let position = scrollView.contentOffset.y
-//        let barrier = tableView.contentSize.height - 100 - scrollView.frame.size.height
+        let barrier = collectionView.contentSize.height - 100 - scrollView.frame.size.height
         
-//        if position > barrier && position > 0 {
-//            guard !(presenter?.isPaginating ?? true) else { return }
-//            print("fetch more")
-//            tableView.tableFooterView = createSpinnerFooter()
-//            presenter?.loadMore()
-//        }
+        if position > barrier && position > 0 {
+            guard !(presenter?.isPaginating ?? true) else { return }
+            print("fetch more")
+            presenter?.loadMore()
+        }
     }
 }
 
@@ -212,8 +211,10 @@ extension CriticsViewController: UITextFieldDelegate {
         if textField == searchField {
             guard let text = textField.text, !text.isEmpty else { return }
             print (text.lowercased())
-//            tableView.refreshControl?.beginRefreshing()
+            
+            collectionView.refreshControl?.beginRefreshing()
             presenter?.search(with: text.lowercased())
+            
             DispatchQueue.main.async {
                 self.collectionView.contentOffset = .zero
             }

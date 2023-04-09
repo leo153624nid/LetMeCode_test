@@ -49,6 +49,7 @@ extension CriticsPresenter: CriticsPresenterProtocol {
         if !isPaginating {
             articles = [CriticsCollectionViewCellViewModel]()
         }
+        isPaginating = false
         articles.append(contentsOf: critics.compactMap({
             CriticsCollectionViewCellViewModel(
                 title: $0.displayName,

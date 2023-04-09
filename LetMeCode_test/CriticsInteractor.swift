@@ -31,7 +31,6 @@ class CriticsInteractor: CriticsInteractorProtocol {
     func loadCritics(pagination: Bool) {
         switch pagination {
             case true:
-                self.presenter?.isPaginating = false
                 let criticsPageArray = self.getSubArray(page: self.page, limit: self.limit)
                 self.presenter?.didLoad(critics: criticsPageArray)
                 self.page += 1
@@ -54,8 +53,8 @@ class CriticsInteractor: CriticsInteractorProtocol {
     }
     
     func refreshCritics() {
-        apiCaller.urlInfo.offset = 0
-        apiCaller.urlInfo.page = 1
+        limit = 10
+        page = 1
         loadCritics(pagination: false)
     }
     
