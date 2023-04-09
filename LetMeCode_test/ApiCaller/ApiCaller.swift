@@ -13,6 +13,10 @@ protocol APICallerProtocol {
     func getReviewes(completion: @escaping (Result<[Review], Error>) -> Void)
     func searchReviewes(with query: String,
                      completion: @escaping (Result<[Review], Error>) -> Void)
+    
+    func getCritics(completion: @escaping (Result<[Critic], Error>) -> Void)
+    func searchCritics(with query: String,
+                     completion: @escaping (Result<[Critic], Error>) -> Void)
 }
 
 protocol UrlInfoProtocol {
@@ -24,12 +28,19 @@ protocol UrlInfoProtocol {
     
     func getReviewesNextPageURL() -> URL?
     func getReviewesSearchURL(with query: String) -> URL?
+    
+    func getCriticsNextPageURL() -> URL?
+    func getCriticsSearchURL(with query: String) -> URL?
 }
 
 final class UrlInfo: UrlInfoProtocol {
 //    static let reviewesPicks = "https://api.nytimes.com/svc/movies/v2/reviews/picks.json"
     static let reviewesPicks = "https://"
     static let searchReviewes = "https://api.nytimes.com/svc/movies/v2/reviews/search.json?query="
+    
+    static let criticsAll = "https://api.nytimes.com/svc/movies/v2/critics/all.json"
+    static let searchCritics = "https://api.nytimes.com/svc/movies/v2/critics/"
+    
     var currentURL: URL?
     var searchURL: URL?
     var limit = 20
@@ -52,6 +63,21 @@ final class UrlInfo: UrlInfoProtocol {
     }
     func getReviewesSearchURL(with query: String) -> URL? {
         guard let url = URL(string: "\(UrlInfo.searchReviewes)\(query)&api-key=\(apiKey)") else { return nil }
+        self.searchURL = url
+        
+        return self.searchURL
+    }
+    
+    func getCriticsNextPageURL() -> URL? {
+        guard let url = URL(string:  "\(UrlInfo.criticsAll)?api-key=\(apiKey)&offset=\(offset)") else { return nil }
+        self.currentURL = url
+        self.page += 1
+        self.offset = page * limit
+        
+        return self.currentURL
+    }
+    func getCriticsSearchURL(with query: String) -> URL? {
+        guard let url = URL(string: "\(UrlInfo.searchCritics)/\(query).json&api-key=\(apiKey)") else { return nil }
         self.searchURL = url
         
         return self.searchURL
@@ -83,7 +109,6 @@ final class APICaller: APICallerProtocol {
         }
         task.resume()
     }
-    
     public func searchReviewes(with query: String,
                             completion: @escaping (Result<[Review], Error>) -> Void) {
         guard !query.trimmingCharacters(in: .whitespaces).isEmpty else { return }
@@ -96,6 +121,46 @@ final class APICaller: APICallerProtocol {
             else if let data = data {
                 do {
                     let result = try JSONDecoder().decode(ReviewesAPIResponse.self, from: data)
+                    completion(.success(result.results))
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+        }
+        task.resume()
+    }
+    
+    public func getCritics(completion: @escaping (Result<[Critic], Error>) -> Void) {
+        guard let url = urlInfo.getCriticsNextPageURL() else { return }
+        print("next page = \(urlInfo.page)")
+        
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if let error = error {
+                completion(.failure(error))
+            }
+            else if let data = data {
+                do {
+                    let result = try JSONDecoder().decode(CriticsAPIResponse.self, from: data)
+                    completion(.success(result.results))
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+        }
+        task.resume()
+    }
+    public func searchCritics(with query: String,
+                            completion: @escaping (Result<[Critic], Error>) -> Void) {
+        guard !query.trimmingCharacters(in: .whitespaces).isEmpty else { return }
+        guard let url = urlInfo.getCriticsSearchURL(with: query) else { return }
+        
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if let error = error {
+                completion(.failure(error))
+            }
+            else if let data = data {
+                do {
+                    let result = try JSONDecoder().decode(CriticsAPIResponse.self, from: data)
                     completion(.success(result.results))
                 } catch {
                     completion(.failure(error))
