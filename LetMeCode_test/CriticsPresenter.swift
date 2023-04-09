@@ -72,16 +72,12 @@ extension CriticsPresenter: CriticsPresenterProtocol {
     
     func search(with query: String) {
         isPaginating = false
+        
         let queryString = toQueryString(query: query)
-        print ("queryString:\(queryString)")
         interactor.searchCritics(with: queryString)
     }
     
     private func toQueryString(query: String) -> String {
-//        var queryString = ""
-        
         return query.replacingOccurrences(of: " ", with: "%20")
-        
     }
-    
 }

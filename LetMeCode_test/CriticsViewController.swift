@@ -128,7 +128,6 @@ class CriticsViewController: UIViewController {
         collectionView.register(CriticsCollectionViewCell.self,
                                 forCellWithReuseIdentifier: CriticsCollectionViewCell.identifier)
     }
-    
     private func setupNavigationBar() {
         let navBar = self.navigationController?.navigationBar
         navBar?.isTranslucent = false
@@ -142,7 +141,6 @@ class CriticsViewController: UIViewController {
     @objc private func reviewesButtonTapped(_ sender: Any) {
         presenter?.reviewesButtonTapped()
     }
-    
     @objc private func criticsButtonTapped(_ sender: Any) {
         
     }

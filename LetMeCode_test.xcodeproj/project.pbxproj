@@ -9,11 +9,9 @@
 /* Begin PBXBuildFile section */
 		FA5AA99029DC91E70092143B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA98F29DC91E70092143B /* AppDelegate.swift */; };
 		FA5AA99229DC91E70092143B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA99129DC91E70092143B /* SceneDelegate.swift */; };
-		FA5AA99429DC91E70092143B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA99329DC91E70092143B /* ViewController.swift */; };
 		FA5AA99929DC91EA0092143B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA5AA99829DC91EA0092143B /* Assets.xcassets */; };
 		FA5AA99C29DC91EA0092143B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA5AA99A29DC91EA0092143B /* LaunchScreen.storyboard */; };
 		FA5AA9AD29DDFC650092143B /* ApiCaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA9AC29DDFC650092143B /* ApiCaller.swift */; };
-		FA5AA9B629DDFD470092143B /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA9B529DDFD470092143B /* Models.swift */; };
 		FA5AA9BB29DF1B1B0092143B /* ReviewesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA9BA29DF1B1B0092143B /* ReviewesViewController.swift */; };
 		FA5AA9BF29DF1D300092143B /* ReviewesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA9BE29DF1D300092143B /* ReviewesPresenter.swift */; };
 		FA5AA9C229DF1EED0092143B /* ReviewesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA9C129DF1EED0092143B /* ReviewesRouter.swift */; };
@@ -29,18 +27,17 @@
 		FA5AA9E729E2B9CE0092143B /* ReviewesEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA9E629E2B9CE0092143B /* ReviewesEntity.swift */; };
 		FA5AA9EA29E2BA2E0092143B /* CriticsEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA9E929E2BA2E0092143B /* CriticsEntity.swift */; };
 		FA5AA9ED29E2CCB60092143B /* CriticsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA9EC29E2CCB60092143B /* CriticsCollectionViewCell.swift */; };
+		FA5AA9F529E30BA40092143B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA5AA9F429E30BA40092143B /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		FA5AA98C29DC91E70092143B /* LetMeCode_test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LetMeCode_test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA5AA98F29DC91E70092143B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA5AA99129DC91E70092143B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		FA5AA99329DC91E70092143B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		FA5AA99829DC91EA0092143B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FA5AA99B29DC91EA0092143B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FA5AA99D29DC91EA0092143B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA5AA9AC29DDFC650092143B /* ApiCaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiCaller.swift; sourceTree = "<group>"; };
-		FA5AA9B529DDFD470092143B /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		FA5AA9BA29DF1B1B0092143B /* ReviewesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewesViewController.swift; sourceTree = "<group>"; };
 		FA5AA9BE29DF1D300092143B /* ReviewesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewesPresenter.swift; sourceTree = "<group>"; };
 		FA5AA9C129DF1EED0092143B /* ReviewesRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewesRouter.swift; sourceTree = "<group>"; };
@@ -56,6 +53,7 @@
 		FA5AA9E629E2B9CE0092143B /* ReviewesEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewesEntity.swift; sourceTree = "<group>"; };
 		FA5AA9E929E2BA2E0092143B /* CriticsEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CriticsEntity.swift; sourceTree = "<group>"; };
 		FA5AA9EC29E2CCB60092143B /* CriticsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CriticsCollectionViewCell.swift; sourceTree = "<group>"; };
+		FA5AA9F429E30BA40092143B /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,8 +91,6 @@
 				FA5AA9B929DF1AFD0092143B /* Critics */,
 				FA5AA9B829DF1ACE0092143B /* Reviewes */,
 				FA5AA9DF29E1C9420092143B /* Utils + Extensions */,
-				FA5AA9B429DDFD390092143B /* Models */,
-				FA5AA99329DC91E70092143B /* ViewController.swift */,
 				FA5AA9A829DDCC240092143B /* SupportingFiles */,
 			);
 			path = LetMeCode_test;
@@ -112,6 +108,7 @@
 		FA5AA9A829DDCC240092143B /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
+				FA5AA9F429E30BA40092143B /* Main.storyboard */,
 				FA5AA99829DC91EA0092143B /* Assets.xcassets */,
 				FA5AA99A29DC91EA0092143B /* LaunchScreen.storyboard */,
 				FA5AA99D29DC91EA0092143B /* Info.plist */,
@@ -125,14 +122,6 @@
 				FA5AA9AC29DDFC650092143B /* ApiCaller.swift */,
 			);
 			path = ApiCaller;
-			sourceTree = "<group>";
-		};
-		FA5AA9B429DDFD390092143B /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				FA5AA9B529DDFD470092143B /* Models.swift */,
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		FA5AA9B829DF1ACE0092143B /* Reviewes */ = {
@@ -228,6 +217,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA5AA9F529E30BA40092143B /* Main.storyboard in Resources */,
 				FA5AA99C29DC91EA0092143B /* LaunchScreen.storyboard in Resources */,
 				FA5AA99929DC91EA0092143B /* Assets.xcassets in Resources */,
 			);
@@ -243,7 +233,6 @@
 				FA5AA9E729E2B9CE0092143B /* ReviewesEntity.swift in Sources */,
 				FA5AA9BB29DF1B1B0092143B /* ReviewesViewController.swift in Sources */,
 				FA5AA9ED29E2CCB60092143B /* CriticsCollectionViewCell.swift in Sources */,
-				FA5AA99429DC91E70092143B /* ViewController.swift in Sources */,
 				FA5AA9EA29E2BA2E0092143B /* CriticsEntity.swift in Sources */,
 				FA5AA9CC29DF304D0092143B /* CriticsModuleBuilder.swift in Sources */,
 				FA5AA9DD29DF3F1D0092143B /* ReviewesTableViewCell.swift in Sources */,
@@ -252,7 +241,6 @@
 				FA5AA9D529DF369F0092143B /* CriticsRouter.swift in Sources */,
 				FA5AA9D229DF365A0092143B /* CriticsPresenter.swift in Sources */,
 				FA5AA9BF29DF1D300092143B /* ReviewesPresenter.swift in Sources */,
-				FA5AA9B629DDFD470092143B /* Models.swift in Sources */,
 				FA5AA99229DC91E70092143B /* SceneDelegate.swift in Sources */,
 				FA5AA9AD29DDFC650092143B /* ApiCaller.swift in Sources */,
 				FA5AA9C529DF1F740092143B /* ReviewesInteractor.swift in Sources */,

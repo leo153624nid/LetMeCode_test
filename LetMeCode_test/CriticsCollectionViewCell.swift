@@ -78,6 +78,8 @@ class CriticsCollectionViewCell: UICollectionViewCell {
                     print("error fetching image")
                 }
             }
+        } else if viewModel.imageURL == nil {
+            imageView.image = UIImage(named: "no photo.png")
         }
     }
 }
