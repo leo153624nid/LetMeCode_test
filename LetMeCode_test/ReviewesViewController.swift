@@ -46,6 +46,8 @@ class ReviewesViewController: UIViewController {
         view.backgroundColor = .clear
         textField.leftViewMode = .always
         textField.leftView = view
+        textField.rightViewMode = .always
+        textField.rightView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
         
         return textField
     }()
@@ -70,6 +72,9 @@ class ReviewesViewController: UIViewController {
         view.backgroundColor = .clear
         textField.leftViewMode = .always
         textField.leftView = view
+        textField.rightViewMode = .always
+        textField.rightView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        
         return textField
     }()
     private let datePicker = UIDatePicker()
@@ -79,11 +84,13 @@ class ReviewesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Reviewes"
+//        view.tintColor = .white
         view.backgroundColor = .lightGray
         view.addSubview(searchField)
         view.addSubview(dateField)
         view.addSubview(tableView)
         createDatePicker()
+        setupNavigationBar()
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -106,6 +113,23 @@ class ReviewesViewController: UIViewController {
         presenter?.refresh()
         searchField.text = nil
         dateField.text = nil
+    }
+    private func setupNavigationBar() {
+        let navBar = self.navigationController?.navigationBar
+        navBar?.barStyle = .black
+        navBar?.tintColor = .white
+        navBar?.backgroundColor = .orange
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Reviewes", style: .plain, target: self, action: #selector(reviewesButtonTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Critics", style: .plain, target: self, action: #selector(criticsButtonTapped))
+    }
+    
+    @objc private func reviewesButtonTapped(_ sender: Any) {
+        
+    }
+    
+    @objc private func criticsButtonTapped(_ sender: Any) {
+        presenter?.criticsButtonTapped()
     }
     
     private func createSpinnerFooter() -> UIView {
@@ -143,9 +167,7 @@ class ReviewesViewController: UIViewController {
         self.view.endEditing(true)
     }
     
-    func criticsButtonTapped(_ sender: Any) {
-        presenter?.criticsButtonTapped()
-    }
+    
 }
 
 extension ReviewesViewController: ReviewesViewProtocol {
