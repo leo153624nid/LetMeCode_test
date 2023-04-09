@@ -17,6 +17,8 @@ protocol APICallerProtocol {
     func getCritics(completion: @escaping (Result<[Critic], Error>) -> Void)
     func searchCritics(with query: String,
                      completion: @escaping (Result<[Critic], Error>) -> Void)
+    
+    func getCriticReviewes(completion: @escaping (Result<[Review], Error>) -> Void)
 }
 
 protocol UrlInfoProtocol {
@@ -31,11 +33,12 @@ protocol UrlInfoProtocol {
     
     func getCriticsURL() -> URL?
     func getCriticsSearchURL(with query: String) -> URL?
+    
+    func getCriticReviewesNextPageURL() -> URL?
 }
 
 final class UrlInfo: UrlInfoProtocol {
-//    static let reviewesPicks = "https://api.nytimes.com/svc/movies/v2/reviews/picks.json"
-    static let reviewesPicks = "https://"
+    static let reviewesPicks = "https://api.nytimes.com/svc/movies/v2/reviews/picks.json"
     static let searchReviewes = "https://api.nytimes.com/svc/movies/v2/reviews/search.json?query="
     
     static let criticsAll = "https://api.nytimes.com/svc/movies/v2/critics/all.json"
@@ -79,6 +82,15 @@ final class UrlInfo: UrlInfoProtocol {
         self.searchURL = url
         
         return self.searchURL
+    }
+    
+    func getCriticReviewesNextPageURL() -> URL? { // todo
+        guard let url = URL(string:  "\(UrlInfo.reviewesPicks)?api-key=\(apiKey)&offset=\(offset)") else { return nil }
+        self.currentURL = url
+        self.page += 1
+        self.offset = page * limit
+        
+        return self.currentURL
     }
 }
 
@@ -158,6 +170,26 @@ final class APICaller: APICallerProtocol {
             else if let data = data {
                 do {
                     let result = try JSONDecoder().decode(CriticsAPIResponse.self, from: data)
+                    completion(.success(result.results))
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+        }
+        task.resume()
+    }
+    
+    public func getCriticReviewes(completion: @escaping (Result<[Review], Error>) -> Void) {
+        guard let url = urlInfo.getCriticReviewesNextPageURL() else { return }
+        print("next page = \(urlInfo.page)")
+        
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if let error = error {
+                completion(.failure(error))
+            }
+            else if let data = data {
+                do {
+                    let result = try JSONDecoder().decode(ReviewesAPIResponse.self, from: data)
                     completion(.success(result.results))
                 } catch {
                     completion(.failure(error))

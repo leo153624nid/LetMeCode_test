@@ -9,6 +9,7 @@ import Foundation
 
 protocol PersonPresenterProtocol: AnyObject {
     var isPaginating: Bool { get set }
+    var person: CriticsCollectionViewCellViewModel? { get set }
     
     func viewDidLoaded()
     func refresh()
@@ -23,7 +24,8 @@ class PersonPresenter {
     var router: PersonRouterProtocol
     var interactor: PersonInteractorProtocol
     
-    var articles = [ReviewesTableViewCellViewModel]() // todo
+    var person: CriticsCollectionViewCellViewModel?
+    var articles = [ReviewesTableViewCellViewModel]() 
     var isPaginating = false
     
     init(router: PersonRouterProtocol, interactor: PersonInteractorProtocol) {
@@ -34,17 +36,17 @@ class PersonPresenter {
 
 extension PersonPresenter: PersonPresenterProtocol {
     func viewDidLoaded() {
-        interactor.loadReviewes(pagination: isPaginating)
+        interactor.loadCriticReviewes(pagination: isPaginating)
     }
     
     func refresh() {
         isPaginating = false
-        interactor.refreshReviewes()
+        interactor.refreshCriticReviewes()
     }
     
     func didLoad(reviewes: [Review]) {
         if !isPaginating {
-            articles = [ReviewesTableViewCellViewModel]() // !!!!! обнуление данных
+            articles = [ReviewesTableViewCellViewModel]() 
         }
         articles.append(contentsOf: reviewes.compactMap({
             ReviewesTableViewCellViewModel(title: $0.displayTitle,
@@ -54,12 +56,13 @@ extension PersonPresenter: PersonPresenterProtocol {
                                            byline: $0.byline,
                                            publicationDate: $0.publicationDate)
         }))
+        view?.person = person
         view?.showReviewes(articles: articles)
     }
     
     func loadMore() {
         isPaginating = true
-        interactor.loadReviewes(pagination: isPaginating)
+        interactor.loadCriticReviewes(pagination: isPaginating)
     }
     
     func criticsButtonTapped() {

@@ -20,8 +20,7 @@ class ReviewesRouter: ReviewesRouterProtocol {
         let criticsVC = CriticsModuleBuilder.build()
         let navController = UINavigationController(rootViewController: criticsVC)
         navController.modalPresentationStyle = .fullScreen
-        viewController?.present(navController, animated: true, completion: nil)
-//        viewController?.navigationController?.pushViewController(navController, animated: true)
+        viewController?.present(navController, animated: false, completion: nil)
     }
     
 }

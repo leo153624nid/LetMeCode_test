@@ -9,11 +9,13 @@ import UIKit
 import SafariServices
 
 protocol PersonViewProtocol: AnyObject {
+    var person: CriticsCollectionViewCellViewModel? { get set }
     func showReviewes(articles: [ReviewesTableViewCellViewModel])
 }
 
 class PersonViewController: UIViewController {
     var presenter: PersonPresenterProtocol?
+    var person: CriticsCollectionViewCellViewModel?
     
     private let tableView: UITableView = {
         let table = UITableView()
@@ -25,21 +27,58 @@ class PersonViewController: UIViewController {
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         return refreshControl
     }()
+    private let personView: UIView = {
+        let bar = UIView(frame: CGRect(x: 5, y: 0, width: UIScreen.main.bounds.width - 10, height: 200)) // todo
+        bar.backgroundColor = .green
+        
+        let imageView: UIImageView = {
+            let imageView = UIImageView()
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            imageView.layer.cornerRadius = 6
+            imageView.layer.masksToBounds = true
+            imageView.clipsToBounds = true
+            imageView.backgroundColor = .secondarySystemBackground
+            imageView.contentMode = .scaleAspectFill
+            return imageView
+        }()
+        let title: UILabel = {
+            let label = UILabel()
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.numberOfLines = 0
+            label.font = .systemFont(ofSize: 18, weight: .semibold)
+            return label
+        }()
+        let status: UILabel = {
+            let label = UILabel()
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.numberOfLines = 0
+            label.font = .systemFont(ofSize: 13, weight: .semibold)
+            return label
+        }()
+        let bio: UILabel = {
+            let label = UILabel()
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.numberOfLines = 0
+            label.font = .systemFont(ofSize: 13, weight: .light)
+            label.textAlignment = .left
+            return label
+        }()
+        
+        bar.addSubview(imageView)
+        bar.addSubview(title)
+        bar.addSubview(status)
+        bar.addSubview(bio)
 
+        return bar
+    }()
 
-
-    
     private var articles = [ReviewesTableViewCellViewModel]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Person" // todo
         view.backgroundColor = .lightGray
-//        view.addSubview(bar)
-//        view.addSubview(searchField)
-//        view.addSubview(dateField)
+        view.addSubview(personView)
         view.addSubview(tableView)
-        setupNavigationBar()
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -47,6 +86,9 @@ class PersonViewController: UIViewController {
         
         presenter?.viewDidLoaded()
         tableView.refreshControl?.beginRefreshing()
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        title = person?.title ?? "Person"
     }
     
     override func viewDidLayoutSubviews() {
@@ -58,27 +100,6 @@ class PersonViewController: UIViewController {
     
     @objc private func refresh(sender: UIRefreshControl) {
         presenter?.refresh()
-    }
-    
-    private func setupNavigationBar() {
-        let navBar = self.navigationController?.navigationBar
-        navBar?.isTranslucent = false
-        navBar?.barTintColor = .orange
-        navBar?.titleTextAttributes = [.foregroundColor: UIColor.white]
-        navBar?.tintColor = .white
-        navBar?.setBackgroundImage(UIImage(), for: .default)
-        navBar?.shadowImage = UIImage()
-        
-//        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Reviewes", style: .plain, target: self, action: #selector(reviewesButtonTapped))
-//        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Critics", style: .plain, target: self, action: #selector(criticsButtonTapped))
-    }
-    
-    @objc private func reviewesButtonTapped(_ sender: Any) { // todo
-        
-    }
-    
-    @objc private func criticsButtonTapped(_ sender: Any) {
-        presenter?.criticsButtonTapped()
     }
     
     private func createSpinnerFooter() -> UIView {
@@ -102,6 +123,8 @@ extension PersonViewController: PersonViewProtocol {
             self.tableView.refreshControl?.endRefreshing()
             self.tableView.tableFooterView = nil
             self.tableView.reloadData()
+            self.title = self.person?.title ?? "222"
+            // show person data
         }
     }
 }

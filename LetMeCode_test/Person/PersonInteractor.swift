@@ -8,22 +8,27 @@
 import Foundation
 
 protocol PersonInteractorProtocol: AnyObject {
-    func loadReviewes(pagination: Bool)
-    func refreshReviewes()
+    func loadCriticReviewes(pagination: Bool)
+    func refreshCriticReviewes()
 }
 
 class PersonInteractor: PersonInteractorProtocol {
     weak var presenter: PersonPresenterProtocol?
     private var apiCaller: APICallerProtocol
     
+    private var person: CriticsCollectionViewCellViewModel!
     private var reviewes = [Review]()
     
-    init(with service: APICallerProtocol) {
+    init(with service: APICallerProtocol, person: CriticsCollectionViewCellViewModel) {
         self.apiCaller = service
+        self.person = person
+        self.apiCaller.urlInfo.offset = 0
+        self.apiCaller.urlInfo.page = 1
     }
     
-    func loadReviewes(pagination: Bool) { // todo
-        apiCaller.getReviewes() { [weak self] result in
+    func loadCriticReviewes(pagination: Bool) {
+        presenter?.person = person
+        apiCaller.getCriticReviewes() { [weak self] result in
             switch result {
                 case .success(let data):
                     if pagination {
@@ -41,9 +46,9 @@ class PersonInteractor: PersonInteractorProtocol {
         }
     }
     
-    func refreshReviewes() { // todo
+    func refreshCriticReviewes() { // todo
         apiCaller.urlInfo.offset = 0
         apiCaller.urlInfo.page = 1
-        loadReviewes(pagination: false)
+        loadCriticReviewes(pagination: false)
     }
 }

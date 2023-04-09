@@ -16,6 +16,7 @@ protocol CriticsPresenterProtocol: AnyObject {
     
     func didLoad(critics: [Critic]) 
     func reviewesButtonTapped()
+    func personButtonTapped(with data: CriticsCollectionViewCellViewModel)
     
     func search(with query: String)
 }
@@ -68,6 +69,9 @@ extension CriticsPresenter: CriticsPresenterProtocol {
     
     func reviewesButtonTapped() {
         router.openReviewes()
+    }
+    func personButtonTapped(with data: CriticsCollectionViewCellViewModel) {
+        router.openPerson(with: data)
     }
     
     func search(with query: String) {

@@ -142,7 +142,7 @@ class CriticsViewController: UIViewController {
         presenter?.reviewesButtonTapped()
     }
     @objc private func criticsButtonTapped(_ sender: Any) {
-        
+        // заглушка (для будущего расширения)
     }
 }
 
@@ -161,9 +161,8 @@ extension CriticsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         let article = articles[indexPath.row]
-        let personVC = PersonModuleBuilder.build()
-        personVC.title = "1111" // todo
-        present(personVC, animated: true, completion: nil)
+        presenter?.personButtonTapped(with: article)
+        
     }
 }
 
