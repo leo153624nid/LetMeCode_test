@@ -22,6 +22,6 @@ class CriticsRouter: CriticsRouterProtocol {
     func openPerson(with data: CriticsCollectionViewCellViewModel) {
         let personVC = PersonModuleBuilder.build(with: data)
 
-        viewController?.navigationController?.pushViewController(personVC, animated: true)
+        viewController?.navigationController?.pushViewController(personVC, animated: false)
     }
 }
