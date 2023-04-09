@@ -8,11 +8,23 @@
 import UIKit
 
 protocol CriticsViewProtocol: AnyObject {
-    func showCritics(articles: [ReviewesTableViewCellViewModel]) // todo
+    func showCritics(articles: [CriticsCollectionViewCellViewModel])
 }
 
 class CriticsViewController: UIViewController {
     var presenter: CriticsPresenterProtocol?
+    
+//    private let collectionView: UICollectionView = {
+//        let collection = UICollectionView(frame: <#T##CGRect#>, collectionViewLayout: <#T##UICollectionViewLayout#>)
+//        collection.register(CriticsCollectionViewCell.self, forCellWithReuseIdentifier: CriticsCollectionViewCell.identifier)
+//        return collection
+//    }()
+    private var collectionView: UICollectionView!
+    private let refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        return refreshControl
+    }()
     
     private let searchField: UITextField = {
         let textField = UITextField()
@@ -79,7 +91,7 @@ class CriticsViewController: UIViewController {
         return bar
     }()
     
-    private var articles = [ReviewesTableViewCellViewModel]()
+    private var articles = [CriticsCollectionViewCellViewModel]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,27 +99,40 @@ class CriticsViewController: UIViewController {
         view.backgroundColor = .lightGray
         view.addSubview(bar)
         view.addSubview(searchField)
-//        view.addSubview(tableView)
+
+        setupCollectionView()
         setupNavigationBar()
+                view.addSubview(collectionView)
         
-//        tableView.delegate = self
-//        tableView.dataSource = self
-//        tableView.refreshControl = self.refreshControl
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.refreshControl = self.refreshControl
         searchField.delegate = self
         
         presenter?.viewDidLoaded()
-//        tableView.refreshControl?.beginRefreshing() 
+        collectionView.refreshControl?.beginRefreshing()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         searchField.frame = CGRect(x: 10, y: 60, width: view.bounds.width - 20, height: 40)
-//        tableView.frame = CGRect(x: 10, y: 180, width: view.bounds.width - 20, height: view.bounds.height - 180)
+        collectionView.frame = CGRect(x: 10, y: 180, width: view.bounds.width - 20, height: view.bounds.height - 180)
     }
     
     @objc private func refresh(sender: UIRefreshControl) {
         presenter?.refresh()
         searchField.text = nil
+    }
+    
+    private func setupCollectionView() {
+        collectionView = UICollectionView(frame: CGRect(x: 10,
+                                                        y: 180,
+                                                        width: view.bounds.width - 20,
+                                                        height: view.bounds.height - 180),
+                                          collectionViewLayout: UICollectionViewFlowLayout())
+        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        collectionView.backgroundColor = .yellow
+        collectionView.register(CriticsCollectionViewCell.self, forCellWithReuseIdentifier: CriticsCollectionViewCell.identifier)
     }
     
     private func setupNavigationBar() {
@@ -128,60 +153,60 @@ class CriticsViewController: UIViewController {
         
     }
     
-//    private func createSpinnerFooter() -> UIView {
-//        let footerView = UIView(frame: CGRect(x: 0,
-//                                              y: 0,
-//                                              width: view.frame.size.width,
-//                                              height: 100))
-//        let spinner = UIActivityIndicatorView()
-//        spinner.center = footerView.center
-//        footerView.addSubview(spinner)
-//        spinner.startAnimating()
-//        return footerView
-//    }
+    private func createSpinnerFooter() -> UIView {
+        let footerView = UIView(frame: CGRect(x: 0,
+                                              y: 0,
+                                              width: view.frame.size.width,
+                                              height: 100))
+        let spinner = UIActivityIndicatorView()
+        spinner.center = footerView.center
+        footerView.addSubview(spinner)
+        spinner.startAnimating()
+        return footerView
+    }
 }
 
 extension CriticsViewController: CriticsViewProtocol {
-    func showCritics(articles: [ReviewesTableViewCellViewModel]) { // todo
+    func showCritics(articles: [CriticsCollectionViewCellViewModel]) {
         self.articles = articles
         print("critics: \(String(describing: self.articles.count))")
         DispatchQueue.main.async {
-//            self.tableView.refreshControl?.endRefreshing()
-//            self.tableView.tableFooterView = nil
-//            self.tableView.reloadData()
+            self.collectionView.refreshControl?.endRefreshing()
+//            self.collectionView.tableFooterView = nil
+            self.collectionView.reloadData()
         }
     }
 }
 
-extension CriticsViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        let article = articles[indexPath.row]
-        
-//        guard let url = article.linkURL else { return }
-        let vc = UIViewController() // todo
-        present(vc, animated: true, completion: nil)
-    }
+extension CriticsViewController: UICollectionViewDelegate {
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        tableView.deselectRow(at: indexPath, animated: true)
+//        let article = articles[indexPath.row]
+//
+////        guard let url = article.linkURL else { return }
+//        let vc = UIViewController() // todo
+//        present(vc, animated: true, completion: nil)
+//    }
 }
 
-extension CriticsViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension CriticsViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return articles.count
     }
     
-    func tableView(_ tableView: UITableView,
-                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: ReviewesTableViewCell.identifier,
-                                                       for: indexPath)
-                as? ReviewesTableViewCell else { fatalError() }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: CriticsCollectionViewCell.identifier,
+                for: indexPath)
+                as? CriticsCollectionViewCell else { fatalError() }
         
         cell.configure(with: articles[indexPath.row])
         return cell
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200
-    }
+
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 200
+//    }
 }
 
 extension CriticsViewController: UIScrollViewDelegate {

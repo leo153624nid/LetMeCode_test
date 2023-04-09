@@ -61,9 +61,7 @@ class ReviewesInteractor: ReviewesInteractorProtocol {
                     self?.presenter?.didLoad(reviewes: [Review]())
             }
         }
-    }
-    
-    
+    } 
 }
 
 

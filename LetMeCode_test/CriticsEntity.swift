@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK: - ReviewesAPIResponse
+// MARK: - CriticsAPIResponse
 struct CriticsAPIResponse: Codable {
     let status, copyright: String
     let numResults: Int
@@ -53,4 +53,24 @@ enum Status: String, Codable {
     case empty = ""
     case fullTime = "full-time"
     case partTime = "part-time"
+}
+
+// MARK: - CriticsCollectionViewCellViewModel
+class CriticsCollectionViewCellViewModel { // todo
+    let title: String
+    let status: String?
+    let imageURL: URL?
+    var imageData: Data? = nil
+    let bio: String?
+    
+    init(title: String,
+         status: String?,
+         imageURL: URL?,
+         bio: String?
+    ) {
+        self.title = title
+        self.status = status
+        self.imageURL = imageURL
+        self.bio = bio
+    }
 }

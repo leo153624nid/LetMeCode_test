@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 protocol ReviewesRouterProtocol: AnyObject {
     func openCritics()
@@ -16,10 +17,11 @@ class ReviewesRouter: ReviewesRouterProtocol {
     weak var viewController: ReviewesViewController?
     
     func openCritics() {
-        let vc = CriticsModuleBuilder.build()
-        vc.modalPresentationStyle = .fullScreen
-        viewController?.present(vc, animated: true, completion: nil)
-//        viewController?.navigationController?.pushViewController(vc, animated: true)
+        let criticsVC = CriticsModuleBuilder.build()
+        let navController = UINavigationController(rootViewController: criticsVC)
+        navController.modalPresentationStyle = .fullScreen
+        viewController?.present(navController, animated: true, completion: nil)
+//        viewController?.navigationController?.pushViewController(navController, animated: true)
     }
     
 }

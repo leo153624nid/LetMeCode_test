@@ -25,10 +25,11 @@ class CriticsPresenter {
     var router: CriticsRouterProtocol
     var interactor: CriticsInteractorProtocol
     
-    var articles = [ReviewesTableViewCellViewModel]() // todo
+    var articles = [CriticsCollectionViewCellViewModel]()
     var isPaginating = false
     
-    init(router: CriticsRouterProtocol, interactor: CriticsInteractorProtocol) {
+    init(router: CriticsRouterProtocol,
+         interactor: CriticsInteractorProtocol) {
         self.router = router
         self.interactor = interactor
     }
@@ -46,15 +47,15 @@ extension CriticsPresenter: CriticsPresenterProtocol {
     
     func didLoad(critics: [Critic]) {
         if !isPaginating {
-            articles = [ReviewesTableViewCellViewModel]() // todo
+            articles = [CriticsCollectionViewCellViewModel]()
         }
         articles.append(contentsOf: critics.compactMap({
-            ReviewesTableViewCellViewModel(title: $0.displayTitle,
-                                           subtitle: $0.summaryShort,
-                                           imageURL: URL(string: $0.multimedia.src),
-                                           linkURL: URL(string: $0.link.url),
-                                           byline: $0.byline,
-                                           publicationDate: $0.publicationDate)
+            CriticsCollectionViewCellViewModel(
+                title: $0.displayName,
+                status: $0.status.rawValue,
+                imageURL: URL(string: ($0.multimedia?.resource.src) ?? ""),
+                bio: $0.bio
+            )
         }))
         view?.showCritics(articles: articles)
     }

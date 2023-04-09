@@ -15,9 +15,6 @@ class CriticsRouter: CriticsRouterProtocol {
     weak var viewController: CriticsViewController?
     
     func openReviewes() {
-        // вернуться на прошлый экран, а не создавать новый
-//        let vc = ReviewesModuleBuilder.build()
-//        viewController?.present(vc, animated: true, completion: nil)
-        viewController?.navigationController?.popViewController(animated: true)
+        viewController?.navigationController?.dismiss(animated: true, completion: nil)
     }
 }

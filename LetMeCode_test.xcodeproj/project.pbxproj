@@ -28,6 +28,7 @@
 		FA5AA9E129E1C97E0092143B /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA9E029E1C97E0092143B /* DateExtension.swift */; };
 		FA5AA9E729E2B9CE0092143B /* ReviewesEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA9E629E2B9CE0092143B /* ReviewesEntity.swift */; };
 		FA5AA9EA29E2BA2E0092143B /* CriticsEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA9E929E2BA2E0092143B /* CriticsEntity.swift */; };
+		FA5AA9ED29E2CCB60092143B /* CriticsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA9EC29E2CCB60092143B /* CriticsCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		FA5AA9E029E1C97E0092143B /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		FA5AA9E629E2B9CE0092143B /* ReviewesEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewesEntity.swift; sourceTree = "<group>"; };
 		FA5AA9E929E2BA2E0092143B /* CriticsEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CriticsEntity.swift; sourceTree = "<group>"; };
+		FA5AA9EC29E2CCB60092143B /* CriticsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CriticsCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +155,7 @@
 				FA5AA9D729DF36D20092143B /* CriticsInteractor.swift */,
 				FA5AA9D129DF365A0092143B /* CriticsPresenter.swift */,
 				FA5AA9CE29DF36090092143B /* CriticsViewController.swift */,
+				FA5AA9EC29E2CCB60092143B /* CriticsCollectionViewCell.swift */,
 				FA5AA9D429DF369F0092143B /* CriticsRouter.swift */,
 				FA5AA9CB29DF304D0092143B /* CriticsModuleBuilder.swift */,
 				FA5AA9E929E2BA2E0092143B /* CriticsEntity.swift */,
@@ -239,6 +242,7 @@
 			files = (
 				FA5AA9E729E2B9CE0092143B /* ReviewesEntity.swift in Sources */,
 				FA5AA9BB29DF1B1B0092143B /* ReviewesViewController.swift in Sources */,
+				FA5AA9ED29E2CCB60092143B /* CriticsCollectionViewCell.swift in Sources */,
 				FA5AA99429DC91E70092143B /* ViewController.swift in Sources */,
 				FA5AA9EA29E2BA2E0092143B /* CriticsEntity.swift in Sources */,
 				FA5AA9CC29DF304D0092143B /* CriticsModuleBuilder.swift in Sources */,
