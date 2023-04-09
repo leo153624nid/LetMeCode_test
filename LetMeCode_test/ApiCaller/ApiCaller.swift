@@ -29,7 +29,7 @@ protocol UrlInfoProtocol {
     func getReviewesNextPageURL() -> URL?
     func getReviewesSearchURL(with query: String) -> URL?
     
-    func getCriticsNextPageURL() -> URL?
+    func getCriticsURL() -> URL?
     func getCriticsSearchURL(with query: String) -> URL?
 }
 
@@ -38,8 +38,8 @@ final class UrlInfo: UrlInfoProtocol {
     static let reviewesPicks = "https://"
     static let searchReviewes = "https://api.nytimes.com/svc/movies/v2/reviews/search.json?query="
     
-//    static let criticsAll = "https://api.nytimes.com/svc/movies/v2/critics/all.json"
-    static let criticsAll = "https://"
+    static let criticsAll = "https://api.nytimes.com/svc/movies/v2/critics/all.json"
+//    static let criticsAll = "https://"
     static let searchCritics = "https://api.nytimes.com/svc/movies/v2/critics/"
     
     var currentURL: URL?
@@ -69,11 +69,9 @@ final class UrlInfo: UrlInfoProtocol {
         return self.searchURL
     }
     
-    func getCriticsNextPageURL() -> URL? {
-        guard let url = URL(string:  "\(UrlInfo.criticsAll)?api-key=\(apiKey)&offset=\(offset)") else { return nil }
+    func getCriticsURL() -> URL? {
+        guard let url = URL(string: "\(UrlInfo.criticsAll)?api-key=\(apiKey)") else { return nil }
         self.currentURL = url
-        self.page += 1
-        self.offset = page * limit
         
         return self.currentURL
     }
@@ -132,8 +130,7 @@ final class APICaller: APICallerProtocol {
     }
     
     public func getCritics(completion: @escaping (Result<[Critic], Error>) -> Void) {
-        guard let url = urlInfo.getCriticsNextPageURL() else { return }
-        print("next page = \(urlInfo.page)")
+        guard let url = urlInfo.getCriticsURL() else { return }
         
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let error = error {
