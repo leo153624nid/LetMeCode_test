@@ -65,14 +65,14 @@ class PersonDetailView: UIView {
     func setup() {
         // setup imageView
         imageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10).isActive = true
-        imageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.5).isActive = true
+        imageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.44).isActive = true
         imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
 //        imageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
         
         // setup title
         title.topAnchor.constraint(equalTo: self.topAnchor, constant: 10).isActive = true
         title.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 20).isActive = true
-        title.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.5).isActive = true
+        title.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10).isActive = true
         title.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
         // setup status
