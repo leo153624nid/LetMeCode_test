@@ -28,6 +28,12 @@
 		FA5AA9EA29E2BA2E0092143B /* CriticsEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA9E929E2BA2E0092143B /* CriticsEntity.swift */; };
 		FA5AA9ED29E2CCB60092143B /* CriticsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA9EC29E2CCB60092143B /* CriticsCollectionViewCell.swift */; };
 		FA5AA9F529E30BA40092143B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA5AA9F429E30BA40092143B /* Main.storyboard */; };
+		FA5AA9FA29E30FC40092143B /* PersonInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA9F929E30FC40092143B /* PersonInteractor.swift */; };
+		FA5AA9FD29E30FD60092143B /* PersonPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA9FC29E30FD60092143B /* PersonPresenter.swift */; };
+		FA5AAA0029E30FFA0092143B /* PersonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AA9FF29E30FFA0092143B /* PersonViewController.swift */; };
+		FA5AAA0329E3100C0092143B /* PersonRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AAA0229E3100C0092143B /* PersonRouter.swift */; };
+		FA5AAA0629E3102B0092143B /* PersonEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AAA0529E3102B0092143B /* PersonEntity.swift */; };
+		FA5AAA0929E310530092143B /* PersonModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AAA0829E310530092143B /* PersonModuleBuilder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +60,12 @@
 		FA5AA9E929E2BA2E0092143B /* CriticsEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CriticsEntity.swift; sourceTree = "<group>"; };
 		FA5AA9EC29E2CCB60092143B /* CriticsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CriticsCollectionViewCell.swift; sourceTree = "<group>"; };
 		FA5AA9F429E30BA40092143B /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		FA5AA9F929E30FC40092143B /* PersonInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonInteractor.swift; sourceTree = "<group>"; };
+		FA5AA9FC29E30FD60092143B /* PersonPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonPresenter.swift; sourceTree = "<group>"; };
+		FA5AA9FF29E30FFA0092143B /* PersonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonViewController.swift; sourceTree = "<group>"; };
+		FA5AAA0229E3100C0092143B /* PersonRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonRouter.swift; sourceTree = "<group>"; };
+		FA5AAA0529E3102B0092143B /* PersonEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonEntity.swift; sourceTree = "<group>"; };
+		FA5AAA0829E310530092143B /* PersonModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonModuleBuilder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +98,7 @@
 		FA5AA98E29DC91E70092143B /* LetMeCode_test */ = {
 			isa = PBXGroup;
 			children = (
+				FA5AA9F829E30FA50092143B /* Person */,
 				FA5AA9A629DDCBFE0092143B /* Application */,
 				FA5AA9AB29DDFC3D0092143B /* ApiCaller */,
 				FA5AA9B929DF1AFD0092143B /* Critics */,
@@ -160,6 +173,19 @@
 			path = "Utils + Extensions";
 			sourceTree = "<group>";
 		};
+		FA5AA9F829E30FA50092143B /* Person */ = {
+			isa = PBXGroup;
+			children = (
+				FA5AA9F929E30FC40092143B /* PersonInteractor.swift */,
+				FA5AA9FC29E30FD60092143B /* PersonPresenter.swift */,
+				FA5AA9FF29E30FFA0092143B /* PersonViewController.swift */,
+				FA5AAA0229E3100C0092143B /* PersonRouter.swift */,
+				FA5AAA0529E3102B0092143B /* PersonEntity.swift */,
+				FA5AAA0829E310530092143B /* PersonModuleBuilder.swift */,
+			);
+			path = Person;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -230,24 +256,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA5AA9FA29E30FC40092143B /* PersonInteractor.swift in Sources */,
 				FA5AA9E729E2B9CE0092143B /* ReviewesEntity.swift in Sources */,
 				FA5AA9BB29DF1B1B0092143B /* ReviewesViewController.swift in Sources */,
 				FA5AA9ED29E2CCB60092143B /* CriticsCollectionViewCell.swift in Sources */,
 				FA5AA9EA29E2BA2E0092143B /* CriticsEntity.swift in Sources */,
 				FA5AA9CC29DF304D0092143B /* CriticsModuleBuilder.swift in Sources */,
 				FA5AA9DD29DF3F1D0092143B /* ReviewesTableViewCell.swift in Sources */,
+				FA5AA9FD29E30FD60092143B /* PersonPresenter.swift in Sources */,
+				FA5AAA0929E310530092143B /* PersonModuleBuilder.swift in Sources */,
 				FA5AA9C829DF1FF40092143B /* ReviewesModuleBuilder.swift in Sources */,
 				FA5AA99029DC91E70092143B /* AppDelegate.swift in Sources */,
 				FA5AA9D529DF369F0092143B /* CriticsRouter.swift in Sources */,
 				FA5AA9D229DF365A0092143B /* CriticsPresenter.swift in Sources */,
 				FA5AA9BF29DF1D300092143B /* ReviewesPresenter.swift in Sources */,
+				FA5AAA0029E30FFA0092143B /* PersonViewController.swift in Sources */,
 				FA5AA99229DC91E70092143B /* SceneDelegate.swift in Sources */,
 				FA5AA9AD29DDFC650092143B /* ApiCaller.swift in Sources */,
 				FA5AA9C529DF1F740092143B /* ReviewesInteractor.swift in Sources */,
+				FA5AAA0329E3100C0092143B /* PersonRouter.swift in Sources */,
 				FA5AA9C229DF1EED0092143B /* ReviewesRouter.swift in Sources */,
 				FA5AA9E129E1C97E0092143B /* DateExtension.swift in Sources */,
 				FA5AA9D829DF36D20092143B /* CriticsInteractor.swift in Sources */,
 				FA5AA9CF29DF36090092143B /* CriticsViewController.swift in Sources */,
+				FA5AAA0629E3102B0092143B /* PersonEntity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

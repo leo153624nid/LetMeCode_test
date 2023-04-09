@@ -158,14 +158,13 @@ extension CriticsViewController: CriticsViewProtocol {
 }
 
 extension CriticsViewController: UICollectionViewDelegate {
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        tableView.deselectRow(at: indexPath, animated: true)
-//        let article = articles[indexPath.row]
-//
-////        guard let url = article.linkURL else { return }
-//        let vc = UIViewController() // todo
-//        present(vc, animated: true, completion: nil)
-//    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        let article = articles[indexPath.row]
+        let personVC = PersonModuleBuilder.build()
+        personVC.title = "1111" // todo
+        present(personVC, animated: true, completion: nil)
+    }
 }
 
 extension CriticsViewController: UICollectionViewDataSource {
