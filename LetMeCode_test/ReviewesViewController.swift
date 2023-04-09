@@ -78,14 +78,37 @@ class ReviewesViewController: UIViewController {
         return textField
     }()
     private let datePicker = UIDatePicker()
+    private let buttonsBar: UIView = {
+        let view = UIView()
+        view.backgroundColor = .orange
+        
+        let buttonReviewes = UIButton()
+        buttonReviewes.addTarget(self, action: #selector(reviewesButtonTapped), for: .touchUpInside)
+        buttonReviewes.setTitle("Re", for: .normal)
+        buttonReviewes.setTitleColor(.white, for: .normal)
+        buttonReviewes.backgroundColor = .red
+        
+        let buttonCritics = UIButton()
+        buttonCritics.addTarget(self, action: #selector(criticsButtonTapped), for: .touchUpInside)
+        buttonCritics.setTitle("Cr", for: .normal)
+        buttonCritics.setTitleColor(.white, for: .normal)
+        buttonCritics.backgroundColor = .red
+        
+        view.addSubview(buttonReviewes)
+        view.addSubview(buttonCritics)
+//        buttonReviewes.frame(forAlignmentRect: CGRect(x: 0, y: 0, width: view.bounds.width / 2 - 20, height: 30))
+//        buttonCritics.frame(forAlignmentRect: CGRect(x: 0, y: 0, width: view.bounds.width / 2 - 20, height: 30))
+//
+        return view
+    }()
     
     private var articles = [ReviewesTableViewCellViewModel]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Reviewes"
-//        view.tintColor = .white
         view.backgroundColor = .lightGray
+        view.addSubview(buttonsBar)
         view.addSubview(searchField)
         view.addSubview(dateField)
         view.addSubview(tableView)
@@ -104,9 +127,10 @@ class ReviewesViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        searchField.frame = CGRect(x: 10, y: 80, width: view.bounds.width - 20, height: 40)
-        dateField.frame = CGRect(x: 10, y: 140, width: view.bounds.width - 20, height: 40)
-        tableView.frame = CGRect(x: 10, y: 200, width: view.bounds.width - 20, height: view.bounds.height - 200)
+        buttonsBar.frame = CGRect(x: 0, y: 0, width: view.bounds.width - 20, height: 40)
+        searchField.frame = CGRect(x: 10, y: 60, width: view.bounds.width - 20, height: 40)
+        dateField.frame = CGRect(x: 10, y: 120, width: view.bounds.width - 20, height: 40)
+        tableView.frame = CGRect(x: 10, y: 180, width: view.bounds.width - 20, height: view.bounds.height - 180)
     }
     
     @objc private func refresh(sender: UIRefreshControl) {
@@ -121,6 +145,8 @@ class ReviewesViewController: UIViewController {
         navBar?.barTintColor = .orange
         navBar?.titleTextAttributes = [.foregroundColor: UIColor.white]
         navBar?.tintColor = .white
+        navBar?.setBackgroundImage(UIImage(), for: .default)
+        navBar?.shadowImage = UIImage()
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Reviewes", style: .plain, target: self, action: #selector(reviewesButtonTapped))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Critics", style: .plain, target: self, action: #selector(criticsButtonTapped))
