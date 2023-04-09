@@ -52,17 +52,15 @@ class PersonViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         // setup personView
-        personView.topAnchor.constraint(equalTo: view.topAnchor, constant: 24).isActive = true
+        personView.topAnchor.constraint(equalTo: view.topAnchor, constant: 10).isActive = true
         personView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
         personView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5).isActive = true
-//        personView.heightAnchor.constraint(equalToConstant: 104).isActive = true
         
         // setup tableView
         tableView.topAnchor.constraint(equalTo: personView.bottomAnchor, constant: 10).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-//        tableView.frame = CGRect(x: 10, y: 180, width: view.bounds.width - 20, height: view.bounds.height - 180)
     }
     
     @objc private func refresh(sender: UIRefreshControl) {
@@ -90,7 +88,7 @@ extension PersonViewController: PersonViewProtocol {
             self.tableView.refreshControl?.endRefreshing()
             self.tableView.tableFooterView = nil
             self.tableView.reloadData()
-            self.title = self.person?.title ?? "222"
+            self.title = self.person?.title ?? "222" // todo
             // show person data
         }
     }
