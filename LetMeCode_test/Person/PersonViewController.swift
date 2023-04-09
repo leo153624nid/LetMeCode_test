@@ -58,7 +58,7 @@ class PersonViewController: UIViewController {
 //        personView.heightAnchor.constraint(equalToConstant: 104).isActive = true
         
         // setup tableView
-        tableView.topAnchor.constraint(equalTo: personView.bottomAnchor, constant: 24).isActive = true
+        tableView.topAnchor.constraint(equalTo: personView.bottomAnchor, constant: 10).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true

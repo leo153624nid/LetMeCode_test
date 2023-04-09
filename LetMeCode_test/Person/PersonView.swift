@@ -34,7 +34,7 @@ class PersonDetailView: UIView {
         label.numberOfLines = 0
         label.font = .systemFont(ofSize: 13, weight: .semibold)
         label.backgroundColor = .blue
-        label.tintColor = .white
+        label.textColor = .white
         label.text = "Test status" // todo
         return label
     }()
@@ -42,9 +42,10 @@ class PersonDetailView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
-        label.font = .systemFont(ofSize: 13, weight: .light)
+        label.font = .systemFont(ofSize: 11, weight: .light)
         label.textAlignment = .left
-        label.text = "Lorem Ipsum - это текст-рыба, часто используемый в печати ивэб-дизайне. Lorem Ipsum является стандартной рыбой для текстов налатинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов,используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешнопережил без заметных изменений пять веков, но и перешагнул в электронныйдизайн. Его популяризации в новое время послужили публикация листовLetraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время,программы электронной вёрстки типа Aldus PageMaker, в шаблонах которыхиспользуется Lorem Ipsum."
+        label.text = "Lorem Ipsum - это текст-рыба, часто используемый в печати ивэб-дизайне. Lorem Ipsum является стандартной рыбой для текстов налатинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов,используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только "
+        label.textColor = .brown
         return label
     }()
 
@@ -70,18 +71,18 @@ class PersonDetailView: UIView {
         imageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10).isActive = true
         imageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.33).isActive = true
         imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
-        imageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+//        imageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
         
         // setup title
         title.topAnchor.constraint(equalTo: self.topAnchor, constant: 10).isActive = true
         title.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 20).isActive = true
         title.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.66).isActive = true
-        title.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        title.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
         // setup status
         status.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 10).isActive = true
-        status.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 20).isActive = true
-        status.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.66).isActive = true
+        status.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: -20).isActive = true
+        status.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10).isActive = true
         status.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
         // setup bio
