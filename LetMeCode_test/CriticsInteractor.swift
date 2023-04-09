@@ -17,7 +17,9 @@ class CriticsInteractor: CriticsInteractorProtocol {
     weak var presenter: CriticsPresenterProtocol?
     private var apiCaller: APICallerProtocol
     
-    private var critics = [Critic]() 
+    private var critics = [Critic]()
+    private var page = 1
+    private var limit = 10
     private var query = ""
     
     init(with service: APICallerProtocol) {
@@ -27,21 +29,27 @@ class CriticsInteractor: CriticsInteractorProtocol {
     }
     
     func loadCritics(pagination: Bool) {
-        apiCaller.getCritics() { [weak self] result in
-            switch result {
-                case .success(let data):
-                    if pagination {
-                        self?.critics.append(contentsOf: data)
-                    } else {
-                        self?.critics = data
+        switch pagination {
+            case true:
+                self.presenter?.isPaginating = false
+                let criticsPageArray = self.getSubArray(page: self.page, limit: self.limit)
+                self.presenter?.didLoad(critics: criticsPageArray)
+                self.page += 1
+            case false:
+                apiCaller.getCritics() { [weak self] result in
+                    switch result {
+                        case .success(let data):
+                            self?.critics = data
+                            self?.presenter?.isPaginating = false
+                            let criticsPageArray = self?.getSubArray(page: self?.page ?? 1, limit: self?.limit ?? 10)
+                            self?.presenter?.didLoad(critics: criticsPageArray ?? [Critic]())
+                            self?.page += 1
+                        case .failure(let error):
+                            print(error.localizedDescription)
+                            self?.presenter?.isPaginating = false
+                            self?.presenter?.didLoad(critics: self?.critics ?? [Critic]())
                     }
-                    self?.presenter?.isPaginating = false
-                    self?.presenter?.didLoad(critics: self?.critics ?? [Critic]())
-                case .failure(let error):
-                    print(error.localizedDescription)
-                    self?.presenter?.isPaginating = false
-                    self?.presenter?.didLoad(critics: self?.critics ?? [Critic]())
-            }
+                }
         }
     }
     
@@ -63,5 +71,24 @@ class CriticsInteractor: CriticsInteractorProtocol {
                     self?.presenter?.didLoad(critics: [Critic]())
             }
         }
+    }
+    
+//    private func getSubArray<T>(array: [T], page: Int, limit: Int) -> [T] {
+//        var newArray = [T]()
+//        for (index, value) in array.enumerated() {
+//            if index >= (page * limit - limit) && index < (page * limit) {
+//                newArray.append(value)
+//            }
+//        }
+//        return newArray
+//    }
+    private func getSubArray(page: Int, limit: Int) -> [Critic] {
+        var newArray = [Critic]()
+        for (index, value) in self.critics.enumerated() {
+            if index >= (page * limit - limit) && index < (page * limit) {
+                newArray.append(value)
+            }
+        }
+        return newArray
     }
 }
