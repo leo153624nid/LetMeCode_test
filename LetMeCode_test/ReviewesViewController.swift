@@ -78,28 +78,57 @@ class ReviewesViewController: UIViewController {
         return textField
     }()
     private let datePicker = UIDatePicker()
-    private let buttonsBar: UIView = {
-        let view = UIView()
-        view.backgroundColor = .orange
+//    private let buttonReviewes: UIButton = {
+//        let button = UIButton()
+//        button.addTarget(self, action: #selector(reviewesButtonTapped), for: .touchUpInside)
+//        button.setTitle("Reviewes", for: .normal)
+//        button.setTitleColor(.white, for: .normal)
+//        button.backgroundColor = .green
+//
+//        return button
+//    }()
+//    private let buttonCritics: UIButton = {
+//        let button = UIButton()
+//        button.addTarget(self, action: #selector(criticsButtonTapped), for: .touchUpInside)
+//        button.setTitle("Critics", for: .normal)
+//        button.setTitleColor(.white, for: .normal)
+//        button.backgroundColor = .red
+//
+//        return button
+//    }()
+    private let bar: UIView = {
+        let bar = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 40))
+        bar.backgroundColor = .orange
         
-        let buttonReviewes = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 30))
-        buttonReviewes.addTarget(self, action: #selector(reviewesButtonTapped), for: .touchUpInside)
-        buttonReviewes.setTitle("Re", for: .normal)
-        buttonReviewes.setTitleColor(.white, for: .normal)
-        buttonReviewes.backgroundColor = .green
-        
-        let buttonCritics = UIButton(frame: CGRect(x: 50, y: 0, width: 50, height: 30))
-        buttonCritics.addTarget(self, action: #selector(criticsButtonTapped), for: .touchUpInside)
-        buttonCritics.setTitle("Cr", for: .normal)
-        buttonCritics.setTitleColor(.white, for: .normal)
-        buttonCritics.backgroundColor = .red
-        
-        view.addSubview(buttonReviewes)
-        view.addSubview(buttonCritics)
-//        buttonReviewes.frame(forAlignmentRect: CGRect(x: 0, y: 0, width: view.bounds.width / 2 - 20, height: 30))
-//        buttonCritics.frame(forAlignmentRect: CGRect(x: 0, y: 0, width: view.bounds.width / 2 - 20, height: 30))
+        let buttonReviewes: UIButton = {
+            let button = UIButton(frame: CGRect(x: 10,
+                                                y: 0,
+                                                width: bar.frame.size.width / 2 - 10,
+                                                height: 30))
+            button.addTarget(self, action: #selector(reviewesButtonTapped), for: .touchUpInside)
+            button.setTitle("Reviewes", for: .normal)
+            button.setTitleColor(.white, for: .normal)
+            button.backgroundColor = .green
+            
+            return button
+        }()
+        let buttonCritics: UIButton = {
+            let button = UIButton(frame: CGRect(x: bar.frame.size.width / 2,
+                                                y: 0,
+                                                width: bar.frame.size.width / 2 - 10,
+                                                height: 30))
+            button.addTarget(self, action: #selector(criticsButtonTapped), for: .touchUpInside)
+            button.setTitle("Critics", for: .normal)
+            button.setTitleColor(.white, for: .normal)
+            button.backgroundColor = .red
 
-        return view
+            return button
+        }()
+        
+        bar.addSubview(buttonReviewes)
+        bar.addSubview(buttonCritics)
+
+        return bar
     }()
     
     private var articles = [ReviewesTableViewCellViewModel]()
@@ -108,7 +137,9 @@ class ReviewesViewController: UIViewController {
         super.viewDidLoad()
         title = "Reviewes"
         view.backgroundColor = .lightGray
-        view.addSubview(buttonsBar)
+        view.addSubview(bar)
+//        view.addSubview(buttonReviewes)
+//        view.addSubview(buttonCritics)
         view.addSubview(searchField)
         view.addSubview(dateField)
         view.addSubview(tableView)
@@ -127,7 +158,15 @@ class ReviewesViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        buttonsBar.frame = CGRect(x: 0, y: 0, width: view.bounds.width - 20, height: 40)
+//        buttonReviewes.frame = CGRect(x: 10,
+//                                      y: 0,
+//                                      width: view.bounds.width / 2 - 10,
+//                                      height: 30)
+//        buttonCritics.frame = CGRect(x: view.bounds.width / 2,
+//                                     y: 0,
+//                                     width: view.bounds.width / 2 - 10,
+//                                     height: 30)
+//        bar.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 40)
         searchField.frame = CGRect(x: 10, y: 60, width: view.bounds.width - 20, height: 40)
         dateField.frame = CGRect(x: 10, y: 120, width: view.bounds.width - 20, height: 40)
         tableView.frame = CGRect(x: 10, y: 180, width: view.bounds.width - 20, height: view.bounds.height - 180)
