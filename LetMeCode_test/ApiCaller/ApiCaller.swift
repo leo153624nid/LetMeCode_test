@@ -27,7 +27,8 @@ protocol UrlInfoProtocol {
 }
 
 final class UrlInfo: UrlInfoProtocol {
-    static let reviewesPicks = "https://api.nytimes.com/svc/movies/v2/reviews/picks.json"
+//    static let reviewesPicks = "https://api.nytimes.com/svc/movies/v2/reviews/picks.json"
+    static let reviewesPicks = "https://"
     static let searchReviewes = "https://api.nytimes.com/svc/movies/v2/reviews/search.json?query="
     var currentURL: URL?
     var searchURL: URL?
