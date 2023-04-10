@@ -21,7 +21,7 @@ class PersonViewController: UIViewController {
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.backgroundColor = .green
+        scrollView.backgroundColor = .lightGray
         scrollView.isDirectionalLockEnabled = true
         scrollView.showsVerticalScrollIndicator = false
         return scrollView
@@ -29,7 +29,7 @@ class PersonViewController: UIViewController {
     private lazy var contentView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .yellow
+        view.backgroundColor = .lightGray
         return view
     }()
     
