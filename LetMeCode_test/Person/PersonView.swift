@@ -39,7 +39,7 @@ class PersonDetailView: UIView {
     let bio: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 6 // todo
+        label.numberOfLines = 0 // todo
         label.font = .systemFont(ofSize: 11, weight: .light)
         label.textAlignment = .left
         return label

@@ -16,9 +16,27 @@ protocol PersonViewProtocol: AnyObject {
 class PersonViewController: UIViewController {
     var presenter: PersonPresenterProtocol?
     var person: CriticsCollectionViewCellViewModel?
+    private var articles = [ReviewesTableViewCellViewModel]()
     
-    private let scrollView = UIScrollView()
-    private let contentView = UIView()
+    private lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.backgroundColor = .green
+        scrollView.frame = view.bounds
+        scrollView.contentSize = contenSize
+        return scrollView
+    }()
+    private var contenSize: CGSize {
+        CGSize(width: view.frame.width, height: view.frame.height + 400)
+    }
+    private lazy var contentView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .green
+        view.frame.size = contenSize
+        return view
+    }()
+    
     private let tableView: UITableView = {
         let table = UITableView(frame: .zero)
         table.translatesAutoresizingMaskIntoConstraints = false
@@ -32,47 +50,41 @@ class PersonViewController: UIViewController {
     }()
     private let personView = PersonDetailView()
 
-    private var articles = [ReviewesTableViewCellViewModel]()
+    private func setupScrollView() {
+        scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        scrollView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
 
-//    private func setupScrollView() {
-//        scrollView.translatesAutoresizingMaskIntoConstraints = false
-//        contentView.translatesAutoresizingMaskIntoConstraints = false
-//        view.addSubview(scrollView)
-//        scrollView.addSubview(contentView)
-//        scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-//        scrollView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-//        scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-//        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-//
-//        contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
-//        contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
-//        contentView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
-//        contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
-//    }
-//    private func setupViews() {
-//        contentView.addSubview(personView)
-//        // setup personView
-//        personView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
-//        personView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5).isActive = true
-//        personView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5).isActive = true
-//
-//        contentView.addSubview(tableView)
-//        // setup tableView
-//        tableView.topAnchor.constraint(equalTo: personView.bottomAnchor, constant: 10).isActive = true
-//        tableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5).isActive = true
-//        tableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5).isActive = true
-//        tableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-//    }
+        contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
+        contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
+        contentView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+    }
+    private func setupViews() {
+        // setup personView
+        personView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
+        personView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5).isActive = true
+        personView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5).isActive = true
+
+        // setup tableView
+        tableView.topAnchor.constraint(equalTo: personView.bottomAnchor, constant: 10).isActive = true
+        tableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5).isActive = true
+        tableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .lightGray
-//        setupScrollView()
-//        setupViews()
-
-//        view.addSubview(scrollView)
-        view.addSubview(personView)
-        view.addSubview(tableView)
+        
+        contentView.addSubview(personView)
+        contentView.addSubview(tableView)
+        scrollView.addSubview(contentView)
+        view.addSubview(scrollView)
+        
+//        view.addSubview(personView)
+//        view.addSubview(tableView)
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -86,16 +98,18 @@ class PersonViewController: UIViewController {
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        setupScrollView()
+        setupViews()
         // setup personView
-        personView.topAnchor.constraint(equalTo: view.topAnchor, constant: 10).isActive = true
-        personView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
-        personView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5).isActive = true
+//        personView.topAnchor.constraint(equalTo: view.topAnchor, constant: 10).isActive = true
+//        personView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
+//        personView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5).isActive = true
 
         // setup tableView
-        tableView.topAnchor.constraint(equalTo: personView.bottomAnchor, constant: 10).isActive = true
-        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
-        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+//        tableView.topAnchor.constraint(equalTo: personView.bottomAnchor, constant: 10).isActive = true
+//        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
+//        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5).isActive = true
+//        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     
     @objc private func refresh(sender: UIRefreshControl) {
