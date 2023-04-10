@@ -26,8 +26,10 @@ class PersonInteractor: PersonInteractorProtocol {
         self.apiCaller.urlInfo.page = 1
     }
     
+    // MARK: - loadCriticReviewes
     func loadCriticReviewes(pagination: Bool) {
         presenter?.person = person
+        
         apiCaller.getCriticReviewes() { [weak self] result in
             switch result {
                 case .success(let data):
@@ -46,7 +48,8 @@ class PersonInteractor: PersonInteractorProtocol {
         }
     }
     
-    func refreshCriticReviewes() { // todo
+    // MARK: - refreshCriticReviewes
+    func refreshCriticReviewes() {
         apiCaller.urlInfo.offset = 0
         apiCaller.urlInfo.page = 1
         loadCriticReviewes(pagination: false)

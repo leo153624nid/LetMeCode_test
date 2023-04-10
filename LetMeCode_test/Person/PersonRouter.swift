@@ -13,7 +13,6 @@ protocol PersonRouterProtocol: AnyObject {
 }
 
 class PersonRouter: PersonRouterProtocol {
-    
     weak var viewController: PersonViewController?
     
     func openCritics() {

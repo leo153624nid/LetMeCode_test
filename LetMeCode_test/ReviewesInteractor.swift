@@ -24,6 +24,7 @@ class ReviewesInteractor: ReviewesInteractorProtocol {
         self.apiCaller = service
     }
     
+    // MARK: - loadReviewes
     func loadReviewes(pagination: Bool) {
         apiCaller.getReviewes() { [weak self] result in
             switch result {
@@ -43,12 +44,14 @@ class ReviewesInteractor: ReviewesInteractorProtocol {
         }
     }
     
+    // MARK: - refreshReviewes
     func refreshReviewes() {
         apiCaller.urlInfo.offset = 0
         apiCaller.urlInfo.page = 1
         loadReviewes(pagination: false)
     }
     
+    // MARK: - searchReviewes
     func searchReviewes(with query: String) {
         apiCaller.searchReviewes(with: query) { [weak self] result in
             self?.query = query

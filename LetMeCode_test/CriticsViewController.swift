@@ -14,13 +14,13 @@ protocol CriticsViewProtocol: AnyObject {
 class CriticsViewController: UIViewController {
     var presenter: CriticsPresenterProtocol?
     
+    // MARK: - UIElements
     private var collectionView: UICollectionView!
     private let refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         return refreshControl
     }()
-    
     private let searchField: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .white
@@ -106,7 +106,6 @@ class CriticsViewController: UIViewController {
         presenter?.viewDidLoaded()
         collectionView.refreshControl?.beginRefreshing()
     }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         searchField.frame = CGRect(x: 10,
@@ -120,27 +119,6 @@ class CriticsViewController: UIViewController {
         searchField.text = nil
     }
     
-    private func setupCollectionView() {
-        collectionView = UICollectionView(frame: CGRect(x: 10,
-                                                        y: 130,
-                                                        width: view.bounds.width - 20,
-                                                        height: view.bounds.height - 130),
-                                          collectionViewLayout: UICollectionViewFlowLayout())
-        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        collectionView.backgroundColor = .lightGray
-        collectionView.register(CriticsCollectionViewCell.self,
-                                forCellWithReuseIdentifier: CriticsCollectionViewCell.identifier)
-    }
-    private func setupNavigationBar() {
-        let navBar = self.navigationController?.navigationBar
-        navBar?.isTranslucent = false
-        navBar?.barTintColor = .blue
-        navBar?.titleTextAttributes = [.foregroundColor: UIColor.white]
-        navBar?.tintColor = .white
-        navBar?.setBackgroundImage(UIImage(), for: .default)
-        navBar?.shadowImage = UIImage()
-    }
-    
     @objc private func reviewesButtonTapped(_ sender: Any) {
         presenter?.reviewesButtonTapped()
     }
@@ -149,6 +127,7 @@ class CriticsViewController: UIViewController {
     }
 }
 
+// MARK: - CriticsViewProtocol
 extension CriticsViewController: CriticsViewProtocol {
     func showCritics(articles: [CriticsCollectionViewCellViewModel]) {
         self.articles = articles
@@ -160,6 +139,7 @@ extension CriticsViewController: CriticsViewProtocol {
     }
 }
 
+// MARK: - UICollectionViewDelegate
 extension CriticsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
@@ -169,6 +149,7 @@ extension CriticsViewController: UICollectionViewDelegate {
     }
 }
 
+// MARK: - UICollectionViewDataSource
 extension CriticsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
@@ -186,12 +167,14 @@ extension CriticsViewController: UICollectionViewDataSource {
     }
 }
 
+// MARK: - UICollectionViewDelegateFlowLayout
 extension CriticsViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize.init(width: view.frame.size.width / 2 - 20, height: 200)
     }
 }
 
+// MARK: - UIScrollViewDelegate
 extension CriticsViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let position = scrollView.contentOffset.y
@@ -205,6 +188,7 @@ extension CriticsViewController: UIScrollViewDelegate {
     }
 }
 
+// MARK: - UITextFieldDelegate
 extension CriticsViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == searchField {
@@ -225,3 +209,28 @@ extension CriticsViewController: UITextFieldDelegate {
         return true
     }
 }
+
+// MARK: - SetupUI
+extension CriticsViewController {
+    private func setupCollectionView() {
+        collectionView = UICollectionView(frame: CGRect(x: 10,
+                                                        y: 130,
+                                                        width: view.bounds.width - 20,
+                                                        height: view.bounds.height - 130),
+                                          collectionViewLayout: UICollectionViewFlowLayout())
+        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        collectionView.backgroundColor = .lightGray
+        collectionView.register(CriticsCollectionViewCell.self,
+                                forCellWithReuseIdentifier: CriticsCollectionViewCell.identifier)
+    }
+    private func setupNavigationBar() {
+        let navBar = self.navigationController?.navigationBar
+        navBar?.isTranslucent = false
+        navBar?.barTintColor = .blue
+        navBar?.titleTextAttributes = [.foregroundColor: UIColor.white]
+        navBar?.tintColor = .white
+        navBar?.setBackgroundImage(UIImage(), for: .default)
+        navBar?.shadowImage = UIImage()
+    }
+}
+

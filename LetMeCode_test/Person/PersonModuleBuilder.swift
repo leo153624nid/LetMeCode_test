@@ -10,6 +10,7 @@ import UIKit
 
 class PersonModuleBuilder {
     static func build(with data: CriticsCollectionViewCellViewModel) -> PersonViewController {
+        
         let interactor = PersonInteractor(with: APICaller.shared, person: data)
         let router = PersonRouter()
         let presenter = PersonPresenter(router: router, interactor: interactor)

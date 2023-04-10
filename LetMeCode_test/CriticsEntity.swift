@@ -56,7 +56,7 @@ enum Status: String, Codable {
 }
 
 // MARK: - CriticsCollectionViewCellViewModel
-class CriticsCollectionViewCellViewModel { // todo
+class CriticsCollectionViewCellViewModel { 
     let title: String
     let status: String?
     let imageURL: URL?

@@ -15,6 +15,7 @@ protocol ReviewesViewProtocol: AnyObject {
 class ReviewesViewController: UIViewController {
     var presenter: ReviewesPresenterProtocol?
     
+    // MARK: - UIElements
     private let tableView: UITableView = {
         let table = UITableView()
         table.register(ReviewesTableViewCell.self, forCellReuseIdentifier: ReviewesTableViewCell.identifier)
@@ -139,7 +140,6 @@ class ReviewesViewController: UIViewController {
         presenter?.viewDidLoaded()
         tableView.refreshControl?.beginRefreshing()
     }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         searchField.frame = CGRect(x: 10, y: 60, width: view.bounds.width - 20, height: 40)
@@ -153,53 +153,12 @@ class ReviewesViewController: UIViewController {
         dateField.text = nil
     }
     
-    private func setupNavigationBar() {
-        let navBar = self.navigationController?.navigationBar
-        navBar?.isTranslucent = false
-        navBar?.barTintColor = .orange
-        navBar?.titleTextAttributes = [.foregroundColor: UIColor.white]
-        navBar?.tintColor = .white
-        navBar?.setBackgroundImage(UIImage(), for: .default)
-        navBar?.shadowImage = UIImage()
-        
-//        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Reviewes", style: .plain, target: self, action: #selector(reviewesButtonTapped))
-//        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Critics", style: .plain, target: self, action: #selector(criticsButtonTapped))
-    }
-    
     @objc private func reviewesButtonTapped(_ sender: Any) {
-        
+        //
     }
-    
     @objc private func criticsButtonTapped(_ sender: Any) {
         presenter?.criticsButtonTapped()
     }
-    
-    private func createSpinnerFooter() -> UIView {
-        let footerView = UIView(frame: CGRect(x: 0,
-                                              y: 0,
-                                              width: view.frame.size.width,
-                                              height: 100))
-        let spinner = UIActivityIndicatorView()
-        spinner.center = footerView.center
-        footerView.addSubview(spinner)
-        spinner.startAnimating()
-        return footerView
-    }
-    
-    private func createDatePicker() {
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .done,
-                                         target: nil,
-                                         action: #selector(doneButtonPressed))
-        toolbar.setItems([doneButton], animated: true)
-        
-        dateField.inputAccessoryView = toolbar
-        dateField.inputView = datePicker
-        datePicker.datePickerMode = .date
-    }
-    
     @objc private func doneButtonPressed() {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
@@ -208,9 +167,9 @@ class ReviewesViewController: UIViewController {
         dateField.text = datePicker.date.toMyFormat
         self.view.endEditing(true)
     }
-    
 }
 
+// MARK: - ReviewesViewProtocol
 extension ReviewesViewController: ReviewesViewProtocol {
     func showReviewes(articles: [ReviewesTableViewCellViewModel]) {
         self.articles = articles
@@ -223,6 +182,7 @@ extension ReviewesViewController: ReviewesViewProtocol {
     }
 }
 
+// MARK: - UITableViewDelegate
 extension ReviewesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -234,6 +194,7 @@ extension ReviewesViewController: UITableViewDelegate {
     }
 }
 
+// MARK: - UITableViewDataSource
 extension ReviewesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return articles.count
@@ -254,6 +215,7 @@ extension ReviewesViewController: UITableViewDataSource {
     }
 }
 
+// MARK: - UIScrollViewDelegate
 extension ReviewesViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard !(presenter?.isFilter ?? true) else { return }
@@ -270,6 +232,7 @@ extension ReviewesViewController: UIScrollViewDelegate {
     }
 }
 
+// MARK: - UITextFieldDelegate
 extension ReviewesViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == searchField {
@@ -297,4 +260,40 @@ extension ReviewesViewController: UITextFieldDelegate {
     }
 }
 
+// MARK: - setupUI
+extension ReviewesViewController {
+    private func setupNavigationBar() {
+        let navBar = self.navigationController?.navigationBar
+        navBar?.isTranslucent = false
+        navBar?.barTintColor = .orange
+        navBar?.titleTextAttributes = [.foregroundColor: UIColor.white]
+        navBar?.tintColor = .white
+        navBar?.setBackgroundImage(UIImage(), for: .default)
+        navBar?.shadowImage = UIImage()
+    }
+    private func createSpinnerFooter() -> UIView {
+        let footerView = UIView(frame: CGRect(x: 0,
+                                              y: 0,
+                                              width: view.frame.size.width,
+                                              height: 100))
+        let spinner = UIActivityIndicatorView()
+        spinner.center = footerView.center
+        footerView.addSubview(spinner)
+        spinner.startAnimating()
+        return footerView
+    }
+    private func createDatePicker() {
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done,
+                                         target: nil,
+                                         action: #selector(doneButtonPressed))
+        toolbar.setItems([doneButton], animated: true)
+        
+        dateField.inputAccessoryView = toolbar
+        dateField.inputView = datePicker
+        datePicker.datePickerMode = .date
+    }
+}
 

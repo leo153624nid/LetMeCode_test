@@ -36,6 +36,7 @@ class CriticsPresenter {
     }
 }
 
+// MARK: - CriticsPresenterProtocol
 extension CriticsPresenter: CriticsPresenterProtocol {
     func viewDidLoaded() {
         interactor.loadCritics(pagination: isPaginating)
@@ -81,6 +82,7 @@ extension CriticsPresenter: CriticsPresenterProtocol {
         interactor.searchCritics(with: queryString)
     }
     
+    // MARK: - Вспомогательная функция для преобразования строки запроса
     private func toQueryString(query: String) -> String {
         return query.replacingOccurrences(of: " ", with: "%20")
     }

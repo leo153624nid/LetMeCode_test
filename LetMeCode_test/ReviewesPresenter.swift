@@ -37,17 +37,21 @@ class ReviewesPresenter {
     }
 }
 
+// MARK: - loadCriticReviewes
 extension ReviewesPresenter: ReviewesPresenterProtocol {
+    // MARK: - viewDidLoaded
     func viewDidLoaded() {
         interactor.loadReviewes(pagination: isPaginating)
     }
     
+    // MARK: - refresh
     func refresh() {
         isPaginating = false
         isFilter = false
         interactor.refreshReviewes()
     }
     
+    // MARK: - didLoad
     func didLoad(reviewes: [Review]) {
         if !isPaginating {
             articles = [ReviewesTableViewCellViewModel]() // !!!!! обнуление данных
@@ -63,22 +67,26 @@ extension ReviewesPresenter: ReviewesPresenterProtocol {
         view?.showReviewes(articles: articles)
     }
     
+    // MARK: - loadMore
     func loadMore() {
         isPaginating = true
         isFilter = false
         interactor.loadReviewes(pagination: isPaginating) 
     }
     
+    // MARK: - criticsButtonTapped
     func criticsButtonTapped() {
         router.openCritics()
     }
     
+    // MARK: - search
     func search(with query: String) {
         isPaginating = false
         isFilter = false
         interactor.searchReviewes(with: query)
     }
     
+    // MARK: - filter
     func filter(by textDate: String) {
         isFilter = true
         let filterArray = articles.filter { $0.publicationDate == textDate } 

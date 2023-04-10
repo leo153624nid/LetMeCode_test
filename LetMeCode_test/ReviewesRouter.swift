@@ -22,7 +22,6 @@ class ReviewesRouter: ReviewesRouterProtocol {
         navController.modalPresentationStyle = .fullScreen
         viewController?.present(navController, animated: false, completion: nil)
     }
-    
 }
 
 

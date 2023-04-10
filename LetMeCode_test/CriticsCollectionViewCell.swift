@@ -10,6 +10,7 @@ import UIKit
 class CriticsCollectionViewCell: UICollectionViewCell {
     static let identifier = "CriticsCollectionViewCell"
     
+    // MARK: - UIElements
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 6
@@ -32,7 +33,6 @@ class CriticsCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(imageView)
         contentView.addSubview(titleLabel)
     }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -51,13 +51,13 @@ class CriticsCollectionViewCell: UICollectionViewCell {
             height: 30)
         contentView.backgroundColor = .white
     }
-    
     override func prepareForReuse() {
         super.prepareForReuse()
         titleLabel.text = nil
         imageView.image = nil
     }
     
+    // MARK: - configure cell
     func configure(with viewModel: CriticsCollectionViewCellViewModel) {
         titleLabel.text = viewModel.title
         

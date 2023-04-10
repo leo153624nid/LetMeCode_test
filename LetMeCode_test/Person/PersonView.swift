@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 class PersonDetailView: UIView {
+    // MARK: - Elements
     let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -57,17 +58,16 @@ class PersonDetailView: UIView {
         
         setup()
     }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - setup constraits
     func setup() {
         // setup imageView
         imageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10).isActive = true
         imageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.44).isActive = true
         imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
-//        imageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
         
         // setup title
         title.topAnchor.constraint(equalTo: self.topAnchor, constant: 10).isActive = true

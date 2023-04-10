@@ -34,6 +34,7 @@ class PersonPresenter {
     }
 }
 
+// MARK: - PersonPresenterProtocol
 extension PersonPresenter: PersonPresenterProtocol {
     func viewDidLoaded() {
         interactor.loadCriticReviewes(pagination: isPaginating)

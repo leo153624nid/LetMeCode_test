@@ -45,7 +45,108 @@ class PersonViewController: UIViewController {
         return refreshControl
     }()
     private let personView = PersonDetailView()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .lightGray
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.refreshControl = self.refreshControl
+        
+        presenter?.viewDidLoaded()
+        tableView.refreshControl?.beginRefreshing()
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        title = person?.title ?? "Person"
+    }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        setupUI()
+    }
+    
+    @objc private func refresh(sender: UIRefreshControl) {
+        presenter?.refresh()
+    }
+}
 
+// MARK: - PersonViewProtocol
+extension PersonViewController: PersonViewProtocol {
+    func showReviewes(articles: [ReviewesTableViewCellViewModel]) {
+        self.articles = articles
+        print("reviewes: \(String(describing: self.articles.count))")
+        DispatchQueue.main.async {
+            self.tableView.refreshControl?.endRefreshing()
+            self.tableView.tableFooterView = nil
+            self.tableView.reloadData()
+            
+            self.title = self.person?.title ?? "Person"
+            self.personView.title.text = self.person?.title
+            self.personView.status.text = self.person?.status == "" ? "no status" : self.person?.status
+            self.personView.bio.text = self.person?.bio
+            
+            var img : UIImage
+            if self.person?.imageData == nil {
+                img = UIImage(named: "no photo.png")!
+            } else {
+                img = UIImage(data: (self.person?.imageData)!)!
+            }
+            self.personView.imageView.image = img
+        }
+    }
+}
+
+// MARK: - UITableViewDelegate
+extension PersonViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let article = articles[indexPath.row]
+        
+        guard let url = article.linkURL else { return }
+        let vc = SFSafariViewController(url: url)
+        present(vc, animated: true, completion: nil)
+    }
+}
+
+// MARK: - UITableViewDataSource
+extension PersonViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return articles.count
+    }
+    
+    func tableView(_ tableView: UITableView,
+                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ReviewesTableViewCell.identifier,
+                                                       for: indexPath)
+                as? ReviewesTableViewCell else { fatalError() }
+        
+        cell.configure(with: articles[indexPath.row])
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 200
+    }
+}
+
+// MARK: - UIScrollViewDelegate
+extension PersonViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let position = scrollView.contentOffset.y
+        let barrier = tableView.contentSize.height - 100 - scrollView.frame.size.height
+        
+        if position > barrier && position > 0 {
+            guard !(presenter?.isPaginating ?? true) else { return }
+            print("fetch more")
+            
+            tableView.tableFooterView = createSpinnerFooter()
+            presenter?.loadMore()
+        }
+    }
+}
+
+// MARK: - SetupUI
+extension PersonViewController {
     private func setupUI() {
         view.addSubview(scrollView)
         scrollView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
@@ -77,30 +178,6 @@ class PersonViewController: UIViewController {
         tableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         tableView.heightAnchor.constraint(greaterThanOrEqualToConstant: 1200).isActive = true
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .lightGray
-        
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.refreshControl = self.refreshControl
-        
-        presenter?.viewDidLoaded()
-        tableView.refreshControl?.beginRefreshing()
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        title = person?.title ?? "Person"
-    }
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        setupUI()
-    }
-    
-    @objc private func refresh(sender: UIRefreshControl) {
-        presenter?.refresh()
-    }
-    
     private func createSpinnerFooter() -> UIView {
         let footerView = UIView(frame: CGRect(x: 0,
                                               y: 0,
@@ -114,74 +191,5 @@ class PersonViewController: UIViewController {
     }
 }
 
-extension PersonViewController: PersonViewProtocol {
-    func showReviewes(articles: [ReviewesTableViewCellViewModel]) {
-        self.articles = articles
-        print("reviewes: \(String(describing: self.articles.count))")
-        DispatchQueue.main.async {
-            self.tableView.refreshControl?.endRefreshing()
-            self.tableView.tableFooterView = nil
-            self.tableView.reloadData()
-            
-            self.title = self.person?.title ?? "Person"
-            self.personView.title.text = self.person?.title
-            self.personView.status.text = self.person?.status == "" ? "no status" : self.person?.status
-            self.personView.bio.text = self.person?.bio
-            
-            var img : UIImage
-            if self.person?.imageData == nil {
-                img = UIImage(named: "no photo.png")!
-            } else {
-                img = UIImage(data: (self.person?.imageData)!)!
-            }
-            self.personView.imageView.image = img
-        }
-    }
-}
 
-extension PersonViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        let article = articles[indexPath.row]
-        
-        guard let url = article.linkURL else { return }
-        let vc = SFSafariViewController(url: url)
-        present(vc, animated: true, completion: nil)
-    }
-}
-
-extension PersonViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return articles.count
-    }
-    
-    func tableView(_ tableView: UITableView,
-                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: ReviewesTableViewCell.identifier,
-                                                       for: indexPath)
-                as? ReviewesTableViewCell else { fatalError() }
-        
-        cell.configure(with: articles[indexPath.row])
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200
-    }
-}
-
-extension PersonViewController: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let position = scrollView.contentOffset.y
-        let barrier = tableView.contentSize.height - 100 - scrollView.frame.size.height
-        
-        if position > barrier && position > 0 {
-            guard !(presenter?.isPaginating ?? true) else { return }
-            print("fetch more")
-            
-            tableView.tableFooterView = createSpinnerFooter()
-            presenter?.loadMore()
-        }
-    }
-}
 

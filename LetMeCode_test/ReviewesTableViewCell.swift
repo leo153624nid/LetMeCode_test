@@ -8,9 +8,9 @@
 import UIKit
 
 class ReviewesTableViewCell: UITableViewCell {
-
     static let identifier = "ReviewesTableViewCell"
     
+    // MARK: - UIElements
     private let reviewesTitleLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
@@ -54,7 +54,6 @@ class ReviewesTableViewCell: UITableViewCell {
         contentView.addSubview(reviewesBylineLabel)
         contentView.addSubview(reviewesDateLabel)
     }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -88,7 +87,6 @@ class ReviewesTableViewCell: UITableViewCell {
             height: contentView.frame.size.height - 10)
         contentView.backgroundColor = .white
     }
-    
     override func prepareForReuse() {
         super.prepareForReuse()
         reviewesTitleLabel.text = nil
@@ -98,6 +96,7 @@ class ReviewesTableViewCell: UITableViewCell {
         reviewesDateLabel.text = nil
     }
     
+    // MARK: - configure cell
     func configure(with viewModel: ReviewesTableViewCellViewModel) {
         reviewesTitleLabel.text = viewModel.title
         reviewesSubTitleLabel.text = viewModel.subtitle

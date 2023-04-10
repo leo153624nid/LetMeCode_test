@@ -28,6 +28,7 @@ class CriticsInteractor: CriticsInteractorProtocol {
         self.apiCaller.urlInfo.page = 1
     }
     
+    // MARK: - loadCritics
     func loadCritics(pagination: Bool) {
         switch pagination {
             case true:
@@ -41,9 +42,11 @@ class CriticsInteractor: CriticsInteractorProtocol {
                         case .success(let data):
                             self?.critics = data
                             self?.presenter?.isPaginating = false
+                            
                             let criticsPageArray = self?.getCriticsPageArray(
                                 page: self?.page ?? 1,
                                 limit: self?.limit ?? 10)
+                            
                             self?.presenter?.didLoad(critics: criticsPageArray ?? [Critic]())
                             self?.page += 1
                         case .failure(let error):
@@ -55,18 +58,19 @@ class CriticsInteractor: CriticsInteractorProtocol {
         }
     }
     
+    // MARK: - refreshCritics
     func refreshCritics() {
         limit = 10
         page = 1
         loadCritics(pagination: false)
     }
     
+    // MARK: - searchCritics
     func searchCritics(with query: String) {
         apiCaller.searchCritics(with: query) { [weak self] result in
             self?.query = query
             switch result {
                 case .success(let data):
-//                    self?.critics = data
                     self?.presenter?.didLoad(critics: data)
                 case .failure(let error):
                     print(error.localizedDescription)
@@ -75,15 +79,7 @@ class CriticsInteractor: CriticsInteractorProtocol {
         }
     }
     
-//    private func getSubArray<T>(array: [T], page: Int, limit: Int) -> [T] {
-//        var newArray = [T]()
-//        for (index, value) in array.enumerated() {
-//            if index >= (page * limit - limit) && index < (page * limit) {
-//                newArray.append(value)
-//            }
-//        }
-//        return newArray
-//    }
+    // MARK: - Вспомогательная функция для получения подмассива (постранично)
     private func getCriticsPageArray(page: Int, limit: Int) -> [Critic] {
         var newArray = [Critic]()
         for (index, value) in self.critics.enumerated() {

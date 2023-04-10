@@ -7,6 +7,7 @@
 
 import Foundation
 
+// MARK: - APICallerProtocol
 protocol APICallerProtocol {
     var urlInfo: UrlInfoProtocol { get set }
     
@@ -21,6 +22,7 @@ protocol APICallerProtocol {
     func getCriticReviewes(completion: @escaping (Result<[Review], Error>) -> Void)
 }
 
+// MARK: - UrlInfoProtocol
 protocol UrlInfoProtocol {
     var currentURL: URL? { get set }
     var limit: Int { get set }
@@ -37,13 +39,17 @@ protocol UrlInfoProtocol {
     func getCriticReviewesNextPageURL() -> URL?
 }
 
+// MARK: - UrlInfo
 final class UrlInfo: UrlInfoProtocol {
+    // MARK: - Reviewes base urls
     static let reviewesPicks = "https://api.nytimes.com/svc/movies/v2/reviews/picks.json"
     static let searchReviewes = "https://api.nytimes.com/svc/movies/v2/reviews/search.json?query="
     
+    // MARK: - Critics base urls
     static let criticsAll = "https://api.nytimes.com/svc/movies/v2/critics/all.json"
     static let searchCritics = "https://api.nytimes.com/svc/movies/v2/critics/"
     
+    // MARK: - params
     var currentURL: URL?
     var searchURL: URL?
     var limit = 20
@@ -56,6 +62,7 @@ final class UrlInfo: UrlInfoProtocol {
         self.apiKey = apiKey
     }
     
+    // MARK: - Reviewes Module
     func getReviewesNextPageURL() -> URL? {
         guard let url = URL(string:  "\(UrlInfo.reviewesPicks)?api-key=\(apiKey)&offset=\(offset)") else { return nil }
         self.currentURL = url
@@ -71,6 +78,7 @@ final class UrlInfo: UrlInfoProtocol {
         return self.searchURL
     }
     
+    // MARK: - Critics Module
     func getCriticsURL() -> URL? {
         guard let url = URL(string: "\(UrlInfo.criticsAll)?api-key=\(apiKey)") else { return nil }
         self.currentURL = url
@@ -84,7 +92,8 @@ final class UrlInfo: UrlInfoProtocol {
         return self.searchURL
     }
     
-    func getCriticReviewesNextPageURL() -> URL? { // todo
+    // MARK: - Person Module
+    func getCriticReviewesNextPageURL() -> URL? {
         guard let url = URL(string:  "\(UrlInfo.reviewesPicks)?api-key=\(apiKey)&offset=\(offset)") else { return nil }
         self.currentURL = url
         self.page += 1
@@ -94,12 +103,14 @@ final class UrlInfo: UrlInfoProtocol {
     }
 }
 
+// MARK: - APICaller
 final class APICaller: APICallerProtocol {
     static let shared: APICallerProtocol = APICaller()
     var urlInfo: UrlInfoProtocol = UrlInfo(apiKey: "2hdD7Tro9byozENHGHJ8YukOw7W5lZCt")
     
     private init() {}
     
+    // MARK: - Reviewes Module
     public func getReviewes(completion: @escaping (Result<[Review], Error>) -> Void) {
         guard let url = urlInfo.getReviewesNextPageURL() else { return }
         print("next page = \(urlInfo.page)")
@@ -140,6 +151,7 @@ final class APICaller: APICallerProtocol {
         task.resume()
     }
     
+    // MARK: - Critics Module
     public func getCritics(completion: @escaping (Result<[Critic], Error>) -> Void) {
         guard let url = urlInfo.getCriticsURL() else { return }
         
@@ -179,6 +191,7 @@ final class APICaller: APICallerProtocol {
         task.resume()
     }
     
+    // MARK: - Person Module
     public func getCriticReviewes(completion: @escaping (Result<[Review], Error>) -> Void) {
         guard let url = urlInfo.getCriticReviewesNextPageURL() else { return }
         print("next page = \(urlInfo.page)")
