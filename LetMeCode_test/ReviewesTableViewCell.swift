@@ -8,6 +8,7 @@
 import UIKit
 
 class ReviewesTableViewCell: UITableViewCell {
+    
     static let identifier = "ReviewesTableViewCell"
     
     // MARK: - UIElements
