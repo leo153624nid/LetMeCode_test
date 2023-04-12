@@ -10,6 +10,7 @@ import UIKit
 
 class CriticsModuleBuilder {
     static func build() -> UIViewController {
+        
         let interactor = CriticsInteractor(with: APICaller.shared)
         let router = CriticsRouter()
         let presenter = CriticsPresenter(router: router, interactor: interactor)
