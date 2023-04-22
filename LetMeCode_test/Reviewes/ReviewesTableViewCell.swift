@@ -114,7 +114,7 @@ class ReviewesTableViewCell: UITableViewCell {
             // fetching image
             DispatchQueue.global(qos: .utility).async { [weak self] in
                 if let data = try? Data(contentsOf: url) {
-//                    viewModel.imageData = data
+                    viewModel.imageData = data
                     DispatchQueue.main.async {
                         self?.reviewesImageView.image = UIImage(data: data)
                     }
