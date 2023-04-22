@@ -73,7 +73,7 @@ enum MultimediaType: String, Codable {
 }
 
 // MARK: - ReviewesTableViewCellViewModel
-struct ReviewesTableViewCellViewModel {
+class ReviewesTableViewCellViewModel {
     let title: String
     let subtitle: String?
     let imageURL: URL?
